@@ -25,7 +25,7 @@ def boot():
     if res.boot == False:
         res.boot = True
         session = open("sessions/sessions.PandoOS-session", "w+")
-        session.write("session=" + str(random.randint(1, 1000)))
+        session.write("session=user")
         session.close()
         mb.showinfo("PandoOS","Boot successful, press ENTER for continue.")
         root.destroy()
