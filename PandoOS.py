@@ -41,7 +41,6 @@ def pandoshopapp():
 	# -->
 
 	principalmenu = Menu(shopnav, tearoff=0)
-	principalmenu.add_command(label="")
 
 	shopnav.add_cascade(label="Outils", menu=principalmenu)
 
@@ -58,6 +57,7 @@ def clock():
 	clockapp.maxsize(450, 120)
 	clockapp.minsize(450, 120)
 	clockapp.geometry("300x200")
+	clockapp.iconbitmap("img/information.ico")
 
 	def time():
 		string=strftime('%H:%M:%S')
@@ -288,10 +288,14 @@ def settings():
 	settingsGui.title("PandoOS - Paramètres")
 	settingsGui.geometry("950x500")
 	settingsGui.iconbitmap("img/information.ico")
+	Label(settingsGui, text="\n").pack()
 	changebackground = Label(settingsGui, text="Changez le fond d'écran:").pack()
-	Label(settingsGui, text="\n")
+	Label(settingsGui, text="-------------------------------").pack()
 	cbtogray = Button(settingsGui, text="Gris", command=cbg).pack()
 	cbtodefault = Button(settingsGui, text="Défaut (Blanc)", command=cbd).pack()
+	Label(settingsGui, text="-------------------------------").pack()
+	Label(settingsGui, text="\n").pack()
+
 
 # Toolbar
 

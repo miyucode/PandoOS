@@ -43,7 +43,7 @@ res.boot = False
 # UI
 
 boot = Button(root, text="Boot PandoOS", command=boot)
-boot.pack(anchor="center")
+boot.pack(anchor='center')
 # boot.grid()
 
 root.mainloop()
