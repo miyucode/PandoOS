@@ -9,6 +9,7 @@ root.geometry("1020x500")
 root.iconbitmap("img/logo.ico")
 root.bind("<Escape>", lambda e: root.destroy())
 
+
 # Ressources
 
 class res(object):
@@ -19,6 +20,14 @@ class res(object):
     version = "1.2"
 
 # Boot (start)
+
+try:
+    if res.boot == "yes":
+        print("PandoOS are already launched.")
+        os.system('ping localhost>nul')
+        os.system('exit')
+    else:
+        pass
 
 def boot():
     if res.boot == "no":
