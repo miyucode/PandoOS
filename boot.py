@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter.ttk import *
 import tkinter.messagebox as mb
 import os
-import random
 
 root = Tk()
 root.title("Welcome To PandoOS")
@@ -16,14 +15,14 @@ class res(object):
     def __init__(res, arg):
         super(res, self).__init__()
         self.arg = arg
-    boot = False
+    boot = "no"
     version = "1.2"
 
 # Boot (start)
 
 def boot():
-    if res.boot == False:
-        res.boot = True
+    if res.boot == "no":
+        res.boot = "yes"
         session = open("sessions/sessions.PandoOS-session", "w+")
         session.write("session=user")
         session.close()
@@ -33,12 +32,12 @@ def boot():
         print("PandoOS> Boot...")
         print(f"PandoOS> Latest version: {res.version}")
         os.system('py PandoOS.py')
-    else:
+    elif res.boot == "yes":
         os.system('exit')
 
 # Run
 
-res.boot = False
+res.boot = "no"
 
 # UI
 
