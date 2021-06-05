@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter.ttk import *
+import subprocess as sp
 import tkinter.messagebox as mb
 import os
 
@@ -9,14 +10,7 @@ root.geometry("1020x500")
 root.iconbitmap("img/logo.ico")
 root.bind("<Escape>", lambda e: root.destroy())
 
-
-# Ressources
-
-class res(object):
-    def __init__(res, arg):
-        super(res, self).__init__()
-        self.arg = arg
-    version = "1.2"
+version = '1.2'
 
 # Boot (start)
 
@@ -28,8 +22,9 @@ def boot():
     root.destroy()
     os.system('cls')
     print("PandoOS> Boot...")
-    print(f"PandoOS> Latest version: {res.version}")
-    os.system('py PandoOS.py')
+    print(f"PandoOS> Latest version: {version}")
+    pandoos = "PandoOS.py"
+    os.system(pandoos)
 
 # UI
 
