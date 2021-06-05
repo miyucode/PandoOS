@@ -11,3 +11,7 @@ For use **PandoOS**, you need:
 ## Informations 📜
 
 **PandoOS** are not finished, the first version are not finished too.
+
+# Notes 📚
+
+Thanks for everyone who help me in the developement of **PandoOS** ! :P
