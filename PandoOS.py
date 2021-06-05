@@ -181,8 +181,7 @@ def fileexplorer():
 
 			def no():
 				folder = "Desktop"
-				file = open(folder
-				 + "/" + name, 'w+')
+				file = open(folder + "/" + name, 'w+')
 				file.write("*")
 				file.close()
 				confirmation.destroy()
@@ -253,11 +252,6 @@ def fileexplorer():
 
 # <-- end
 
-# First time (Discover PandoOS)
-
-def discoverPandoOS():
-	mb.showerror("PandoOS","Vous ne pouvez pas accéder à ça !")
-
 # Restart
 
 def restart():
@@ -318,14 +312,10 @@ ToolsMenu.add_command(label="Gestionnaire de sessions", command=sessionsmanager)
 # Start Menu
 
 Start = Menu(menu, tearoff=0)
-Start.add_separator()
-Start.add_command(label="Découvrir PandoOS !", command=discoverPandoOS)
-Start.add_separator()
 Start.add_command(label="Éteindre", command=shutdown)
 Start.add_command(label="Redémarrer", command=restart)
 Start.add_separator()
 Start.add_command(label="Paramètres", command=settings)
-Start.add_separator()
 
 # Add menu(s) in menu
 
