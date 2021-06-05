@@ -265,7 +265,7 @@ def shutdown():
 	mb.showinfo("PandoOS","Shutdown successful, press ENTER for continue.")
 	os.system('cls')
 	print("PandoOS> Shutdown...")
-	sleep(1)
+	sleep(0.5)
 	mb.showinfo('PandoOS','See you a next time !')
 	PandoOS.destroy()
 	sleep(1)
@@ -273,7 +273,7 @@ def shutdown():
 # Settings
 
 
-# --> background # 
+# --> 
 
 def cbg():
 	PandoOS.config(bg="gray")
@@ -281,7 +281,7 @@ def cbg():
 def cbd():
 	PandoOS.config(bg="white")
 
-# --> end #
+# <-- end
 
 def settings():
 	settingsGui = Toplevel()
