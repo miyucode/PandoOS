@@ -25,30 +25,30 @@ PandoOS.config(bg="white")
 
 # --> App(s) and Tool(s)
 
-def pandoshopapp():
-	shop = Toplevel()
-	shop.title("PandoShop - Accueil")
-	shop.geometry("1000x500")
-	shop.minsize(1000, 500)
-	shop.maxsize(1000, 500)
-	shop.iconbitmap("img/information.ico")
-	shop.config(bg="white")
+# def pandoshopapp():
+# 	shop = Toplevel()
+# 	shop.title("PandoShop - Accueil")
+# 	shop.geometry("1000x500")
+# 	shop.minsize(1000, 500)
+# 	shop.maxsize(1000, 500)
+# 	shop.iconbitmap("img/information.ico")
+# 	shop.config(bg="white")
 
-	# Menu(s)
+# 	# Menu(s)
 
-	shopnav = Menu(shop)
+# 	shopnav = Menu(shop)
 
-	# -->
+# 	# -->
 
-	principalmenu = Menu(shopnav, tearoff=0)
+# 	principalmenu = Menu(shopnav, tearoff=0)
 
-	shopnav.add_cascade(label="Outils", menu=principalmenu)
+# 	shopnav.add_cascade(label="Outils", menu=principalmenu)
 
-	# <--
+# 	# <--
 
-	# print("PandoOS> An error occured. Error #1: PandoShop is not found in PandoOS.py !")
-	# Menu config
-	shop.config(menu=shopnav)
+# 	# print("PandoOS> An error occured. Error #1: PandoShop is not found in PandoOS.py !")
+# 	# Menu config
+# 	shop.config(menu=shopnav)
 
 
 def clock():
@@ -305,7 +305,7 @@ menu = Menu(PandoOS)
 
 appsMenu = Menu(menu, tearoff=0)
 appsMenu.add_command(label="Horloge", command=clock)
-appsMenu.add_command(label="PandoShop", command=pandoshopapp)
+# appsMenu.add_command(label="PandoShop", command=pandoshopapp)
 
 # Tools Menu
 
