@@ -7,7 +7,8 @@ import random
 
 root = Tk()
 root.title("Welcome To PandoOS")
-root.geometry("300x200")
+root.geometry("300x100")
+root.resizable(False, False)
 root.iconbitmap("img/logo.ico")
 root.bind("<Escape>", lambda e: root.destroy())
 
@@ -29,7 +30,8 @@ def boot():
 
 # UI
 
-boot = Button(root, text="Boot PandoOS", command=boot)
+Label(root, text="\n").pack()
+boot = Button(root, text="Boot PandoOS", command=boot, width=30)
 boot.pack(anchor='center')
 # boot.grid()
 
