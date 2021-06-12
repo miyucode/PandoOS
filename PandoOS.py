@@ -37,7 +37,6 @@ class sys(object):
 		else:
 			os.system('dir ' + directory)
 
-
 # --> App(s) and Tool(s)
 
 # def pandoshopapp():
