@@ -3,6 +3,7 @@ from tkinter import filedialog
 from tkinter.ttk import *
 from time import *
 from time import strftime
+from SessionsManager import *
 import tkinter.messagebox as mb
 import os
 
@@ -22,6 +23,21 @@ PandoOS.minsize(1000, 500)
 PandoOS.maxsize(1000, 500)
 PandoOS.bind('<Escape>', lambda e: shutdown())
 PandoOS.config(bg="white")
+
+class sys(object):
+	"""docstring for sys"""
+	def __init__(self, arg):
+		super(sys, self).__init__()
+		self.arg = arg
+	def exec_(command):
+		os.system(command)
+
+	def ls(directory):
+		if directory == "":
+			os.system('dir')
+		else:
+			os.system('dir ' + directory)
+
 
 # --> App(s) and Tool(s)
 

@@ -3,6 +3,7 @@ from tkinter.ttk import *
 import subprocess as sp
 import tkinter.messagebox as mb
 import os
+import random
 
 root = Tk()
 root.title("Welcome To PandoOS")
@@ -16,7 +17,7 @@ version = '1.2'
 
 def boot():
     session = open("sessions/sessions.PandoOS-session", "w+")
-    session.write("session=user")
+    session.write("session=" + str(random.randint(6000, 100000)))
     session.close()
     mb.showinfo("PandoOS","Boot successful, press ENTER for continue.")
     root.destroy()
