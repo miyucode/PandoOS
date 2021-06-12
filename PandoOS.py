@@ -3,7 +3,6 @@ from tkinter import filedialog
 from tkinter.ttk import *
 from time import *
 from time import strftime
-from SessionsManager import *
 import tkinter.messagebox as mb
 import os
 
@@ -83,40 +82,6 @@ def clock():
 	label = Label(clockapp, font=('arial', 80))
 	label.pack(anchor='center')
 	time()
-
-def sessionsmanager():
-	def closeSession():
-		def yes():
-			PandoOS.destroy()
-			os.system('boot.py')
-		def no():
-			confirmation.destroy()
-		confirmation = Toplevel()
-		confirmation.maxsize(300, 100)
-		confirmation.minsize(300, 100)
-		confirmation.title("PandoOS - Attention !")
-		confirmation.iconbitmap("img/warning.ico")
-		Label(confirmation, text="Etes-vous sûr de fermer votre session ?").pack()
-		Button(confirmation, text="Oui.", command=yes).pack()
-		Button(confirmation, text="Non.", command=no).pack()
-
-	session_file = open('sessions/sessions.PandoOS-session', "r")
-	session_id = session_file.readlines(0)
-	# print(session_id)
-	session_file.close()
-	sm = Toplevel()
-	sm.title("PandoOS - Gestionnaire de sessions")
-	sm.geometry("800x500")
-	sm.iconbitmap("img/information.ico")
-	sm.maxsize(800, 500)
-	sm.minsize(800, 500)
-	# sm.config(bg="white")
-	nbsessions = Label(sm, text="Sessions: 1")
-	nbsessions.grid()
-	session_name = Label(sm, text="session1 (ID: " + str(session_id) + ")")
-	session_name.grid()
-	closesession = Button(sm, text="Close Session", command=closeSession)
-	closesession.grid()
 
 def fileexplorer():
 	# (Func) Open a file
@@ -327,7 +292,6 @@ appsMenu.add_command(label="Horloge", command=clock)
 
 ToolsMenu = Menu(menu, tearoff=0)
 ToolsMenu.add_command(label="Explorateur de fichiers", command=fileexplorer)
-ToolsMenu.add_command(label="Gestionnaire de sessions", command=sessionsmanager)
 
 # Start Menu
 
