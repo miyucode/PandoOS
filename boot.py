@@ -7,7 +7,7 @@ import random
 
 root = Tk()
 root.title("Welcome To PandoOS")
-root.geometry("1020x500")
+root.geometry("300x200")
 root.iconbitmap("img/logo.ico")
 root.bind("<Escape>", lambda e: root.destroy())
 
