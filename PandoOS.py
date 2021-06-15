@@ -39,6 +39,22 @@ class sys(object):
 
 # --> App(s) and Tool(s)
 
+def notepad():
+    def savefile():
+        t = text.get("1.0", "end-1c")
+        npgui.destroy()
+        
+
+    npgui = Toplevel()
+    npgui.title('PandoPad')
+    npgui.geometry('850x500')
+    ngui.resizable(False, False)
+    npgui.iconbitmap('img/information.ico')
+    text = Text(npgui)
+    text.pack()
+    button = Button(npgui, text="Créer le fichier texte", command=savefile)
+    button.pack()
+
 # def pandoshopapp():
 # 	shop = Toplevel()
 # 	shop.title("PandoShop - Accueil")
@@ -86,15 +102,27 @@ def fileexplorer():
 	# (Func) Open a file
 
 	def openfile():
+		fe.destroy()
+		FileRequest1.pack_forget()
+		FileRequest2.pack_forget()
+		Name.pack_forget()
+		print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
 		file = filedialog.askopenfilename(title="Sélectionner un fichier", initialdir="C:/Users/")
-		os.system('start ' + file)
-		mb.showinfo('PandoOS','Vous avez ouvert avec succès "' + file + '" !')
+		if file == "":
+			mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer !")
+			fileexplorer()
+		else:
+			fileexplorer()
+			os.system('start ' + file)
+			mb.showinfo('PandoOS','Vous avez ouvert avec succès "' + file + '" !')
 
 	# (Func) Create Folder
 
 	def folder():
 		Name.pack()
 		FileRequest2.pack()
+		FileRequest1.pack_forget()
+		print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
 
 	def createFolder():
 		name = Name.get()
@@ -117,15 +145,16 @@ def fileexplorer():
 	def file():
 		Name.pack()
 		FileRequest1.pack()
+		FileRequest2.pack_forget()
+		print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
 
 	def createFile():
 		name = Name.get()
 		if name == "":
 			mb.showerror("PandoOS","Veuillez donner un nom à votre fichier !")
-			fe.destroy()
 		else:
-			# --> Button "Oui"
 
+			# --> Button "Oui"
 
 			def yes():
 				def requestfilewithfolder():
@@ -168,6 +197,7 @@ def fileexplorer():
 				mb.showinfo("PandoOS","Fichier crée avec succès !")
 
 			# <-- end
+
 			fe.destroy()
 			confirmation = Toplevel()
 			confirmation.maxsize(300, 100)
@@ -177,6 +207,7 @@ def fileexplorer():
 			Label(confirmation, text="Souhaitez-vous le sauvegarder \ndans un dossier en particulier ?").pack()
 			Button(confirmation, text="Oui.", command=yes).pack()
 			Button(confirmation, text="Non.", command=no).pack()
+		
 		# name = Name.get()
 		# file = open(name, 'w+')
 		# file.write("*")
@@ -211,7 +242,7 @@ def fileexplorer():
 	File.add_command(label="Créer un nouveau fichier", command=file)
 	File.add_command(label="Créer un nouveau dossier", command=folder)
 	File.add_separator()
-	File.add_command(label="Ouvrir un ficher", command=openfile)
+	File.add_command(label="Ouvrir un fichier", command=openfile)
 
 	# <-- end Menu(s)
 
@@ -285,6 +316,7 @@ menu = Menu(PandoOS)
 
 appsMenu = Menu(menu, tearoff=0)
 appsMenu.add_command(label="Horloge", command=clock)
+appsMenu.add_command(label="Bloc-Notes", command=notepad)
 # appsMenu.add_command(label="PandoShop", command=pandoshopapp)
 
 # Tools Menu
