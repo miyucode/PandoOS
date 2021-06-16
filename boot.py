@@ -11,6 +11,7 @@ root.geometry("300x100")
 root.resizable(False, False)
 root.iconbitmap("img/logo.ico")
 root.bind("<Escape>", lambda e: root.destroy())
+root.resizable(False, False)
 
 version = '1.2'
 
