@@ -7,10 +7,10 @@ import tkinter.messagebox as mb
 import os
 
 try:
-	os.mkdir("Desktop")
+    os.mkdir("Desktop")
 except FileExistsError:
-	# if "Desktop/" already exist
-	pass
+    # if "Desktop/" already exist
+    pass
 
 # UI Config
 
@@ -24,262 +24,319 @@ PandoOS.bind('<Escape>', lambda e: shutdown())
 PandoOS.config(bg="white")
 
 class sys(object):
-	"""docstring for sys"""
-	def __init__(self, arg):
-		super(sys, self).__init__()
-		self.arg = arg
-	def exec_(command):
-		os.system(command)
+    """docstring for sys"""
+    def __init__(self, arg):
+        super(sys, self).__init__()
+        self.arg = arg
+    def exec_(command):
+        os.system(command)
 
-	def ls(directory):
-		if directory == "":
-			os.system('dir')
-		else:
-			os.system('dir ' + directory)
+    def ls(directory):
+        if directory == "":
+            os.system('dir')
+        else:
+            os.system('dir ' + directory)
 
 # --> App(s) and Tool(s)
 
 def notepad():
     def savefile():
-        t = text.get("1.0", "end-1c")
-        npgui.destroy()
-        
+        i = l.get()
+        if i == "":
+            npgui.destroy()
+            mb.showerror("PandoPad","Merci d'entrer un nom correct pour votre fichier !")
+            notepad()
+        else:
+            t = text.get("1.0", "end-1c")
+            npgui.destroy()
+            confirmation3 = Toplevel()
+            confirmation3.title("PandoPad - Attention !")
+            confirmation3.geometry("300x100")
+            confirmation3.resizable(False, False)
+            confirmation3.iconbitmap("img/warning.ico")
+
+            def yes():
+                confirmation3.destroy()
+                def requesttextfile():
+                    foldername = folderName.get()
+                    m.destroy()
+                    try:
+                        os.mkdir("Desktop/" + foldername)
+                        file = open("Desktop/" + foldername + "/" + i, "w+")
+                        file.write(t)
+                        file.close()
+                        mb.showinfo("PandoPad","Vous avez créer un fichier texte avec succès !")
+                    except FileExistsError:
+                        # directory already exists
+                        file = open("Desktop/" + foldername + "/" + i, "w+")
+                        file.write(t)
+                        file.close()
+                        mb.showinfo("PandoPad","Vous avez créer un fichier texte avec succès !")
+
+                m = Toplevel()
+                m.title("PandoPad - Information")
+                m.geometry("300x100")
+                m.resizable(False, False)
+                m.iconbitmap("img/warning.ico")
+
+                Label(m, text="Entrez le nom du dossier:").pack()
+
+                folderName = Entry(m)
+                folderName.pack()
+
+                Button(m, text="Continuer", command=requesttextfile).pack()
+
+            def no():
+                confirmation3.destroy()
+                file = open('Desktop/' + i, 'w+')
+                file.write(t)
+                file.close()
+                mb.showinfo("PandoPad","Vous avez créer un fichier texte avec succès !")
+                
+
+            Label(confirmation3, text="Souhaitez-vous le sauvegarder \ndans un dossier en particulier ?").pack()
+            Button(confirmation3, text="Oui.", command=yes).pack()
+            Button(confirmation3, text="Non.", command=no).pack()
+
 
     npgui = Toplevel()
     npgui.title('PandoPad')
     npgui.geometry('850x500')
-    ngui.resizable(False, False)
+    npgui.resizable(False, False)
     npgui.iconbitmap('img/information.ico')
     text = Text(npgui)
     text.pack()
+    Label(npgui, text="Donnez un nom au fichier:").pack()
+    l = Entry(npgui)
+    l.pack()
     button = Button(npgui, text="Créer le fichier texte", command=savefile)
     button.pack()
 
 # def pandoshopapp():
-# 	shop = Toplevel()
-# 	shop.title("PandoShop - Accueil")
-# 	shop.geometry("1000x500")
-# 	shop.minsize(1000, 500)
-# 	shop.maxsize(1000, 500)
-# 	shop.iconbitmap("img/information.ico")
-# 	shop.config(bg="white")
+#   shop = Toplevel()
+#   shop.title("PandoShop - Accueil")
+#   shop.geometry("1000x500")
+#   shop.minsize(1000, 500)
+#   shop.maxsize(1000, 500)
+#   shop.iconbitmap("img/information.ico")
+#   shop.config(bg="white")
 
-# 	# Menu(s)
+#   # Menu(s)
 
-# 	shopnav = Menu(shop)
+#   shopnav = Menu(shop)
 
-# 	# -->
+#   # -->
 
-# 	principalmenu = Menu(shopnav, tearoff=0)
+#   principalmenu = Menu(shopnav, tearoff=0)
 
-# 	shopnav.add_cascade(label="Outils", menu=principalmenu)
+#   shopnav.add_cascade(label="Outils", menu=principalmenu)
 
-# 	# <--
+#   # <--
 
-# 	# print("PandoOS> An error occured. Error #1: PandoShop is not found in PandoOS.py !")
-# 	# Menu config
-# 	shop.config(menu=shopnav)
+#   # print("PandoOS> An error occured. Error #1: PandoShop is not found in PandoOS.py !")
+#   # Menu config
+#   shop.config(menu=shopnav)
 
 
 def clock():
-	clockapp = Toplevel()
-	clockapp.title("PandoOS - Horloge")
-	clockapp.maxsize(450, 120)
-	clockapp.minsize(450, 120)
-	clockapp.geometry("300x200")
-	clockapp.iconbitmap("img/information.ico")
+    clockapp = Toplevel()
+    clockapp.title("PandoOS - Horloge")
+    clockapp.maxsize(450, 120)
+    clockapp.minsize(450, 120)
+    clockapp.geometry("300x200")
+    clockapp.iconbitmap("img/information.ico")
 
-	def time():
-		string=strftime('%H:%M:%S')
-		label.config(text=string)
-		label.after(1000,time)
+    def time():
+        string=strftime('%H:%M:%S')
+        label.config(text=string)
+        label.after(1000,time)
 
-	label = Label(clockapp, font=('arial', 80))
-	label.pack(anchor='center')
-	time()
+    label = Label(clockapp, font=('arial', 80))
+    label.pack(anchor='center')
+    time()
 
 def fileexplorer():
-	# (Func) Open a file
+    # (Func) Open a file
 
-	def openfile():
-		fe.destroy()
-		FileRequest1.pack_forget()
-		FileRequest2.pack_forget()
-		Name.pack_forget()
-		print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
-		file = filedialog.askopenfilename(title="Sélectionner un fichier", initialdir="C:/Users/")
-		if file == "":
-			mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer !")
-			fileexplorer()
-		else:
-			fileexplorer()
-			os.system('start ' + file)
-			mb.showinfo('PandoOS','Vous avez ouvert avec succès "' + file + '" !')
+    def openfile():
+        fe.destroy()
+        FileRequest1.pack_forget()
+        FileRequest2.pack_forget()
+        Name.pack_forget()
+        # print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
+        file = filedialog.askopenfilename(title="Sélectionner un fichier", initialdir="C:/Users/")
+        if file == "":
+            mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer !")
+            fileexplorer()
+        else:
+            fileexplorer()
+            os.system('start ' + file)
+            mb.showinfo('PandoOS','Vous avez ouvert avec succès "' + file + '" !')
 
-	# (Func) Create Folder
+    # (Func) Create Folder
 
-	def folder():
-		Name.pack()
-		FileRequest2.pack()
-		FileRequest1.pack_forget()
-		print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
+    def folder():
+        Name.pack()
+        FileRequest2.pack()
+        FileRequest1.pack_forget()
+        # print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
 
-	def createFolder():
-		name = Name.get()
-		if name == "default" or name == "":
-			mb.showerror("PandoOS","Veuillez donner un nom correct à votre dossier !")
-		else:
-			userprofile = os.system('%userprofile%')
-			os.system('cls')
-			print('PandoOS> %userprofile% not found.')
-			name = Name.get()
-			os.mkdir(f"Desktop/{name}")
-			fe.destroy()
-			mb.showinfo("PandoOS","Dossier crée avec succès !")
+    def createFolder():
+        name = Name.get()
+        if name == "default" or name == "":
+            mb.showerror("PandoOS","Veuillez donner un nom correct à votre dossier !")
+        else:
+            userprofile = os.system('%userprofile%')
+            os.system('cls')
+            print('PandoOS> %userprofile% not found.')
+            name = Name.get()
+            os.mkdir(f"Desktop/{name}")
+            fe.destroy()
+            mb.showinfo("PandoOS","Dossier crée avec succès !")
 
-	def RequestFolder():
-		createFolder()
+    def RequestFolder():
+        createFolder()
 
-	# (Func) Create File
+    # (Func) Create File
 
-	def file():
-		Name.pack()
-		FileRequest1.pack()
-		FileRequest2.pack_forget()
-		print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
+    def file():
+        Name.pack()
+        FileRequest1.pack()
+        FileRequest2.pack_forget()
+        # print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
 
-	def createFile():
-		name = Name.get()
-		if name == "":
-			mb.showerror("PandoOS","Veuillez donner un nom à votre fichier !")
-		else:
+    def createFile():
+        name = Name.get()
+        if name == "":
+            mb.showerror("PandoOS","Veuillez donner un nom à votre fichier !")
+        else:
 
-			# --> Button "Oui"
+            # --> Button "Oui"
 
-			def yes():
-				def requestfilewithfolder():
-					nameFolder = namefolder.get()
-					confirmation2.destroy()
-					try:
-					    os.mkdir("Desktop/" + nameFolder)
-					    file = open("Desktop/" + nameFolder + "/" + name, 'w+')
-					    file.write(".")
-					    file.close()
-					    mb.showinfo("PandoOS","Fichier crée avec succès !")
-					except FileExistsError:
-					    # directory already exists
-					    file = open("Desktop/" + nameFolder + "/" + name, 'w+')
-					    file.write(".")
-					    file.close()
-					    mb.showinfo("PandoOS","Fichier crée avec succès !")
-				confirmation.destroy()
-				fe.destroy()
-				confirmation2 = Toplevel()
-				confirmation2.maxsize(300, 100)
-				confirmation2.minsize(300, 100)
-				confirmation2.title("PandoOS - Information")
-				confirmation2.iconbitmap("img/warning.ico")
-				Label(confirmation2, text="Entrez le nom du dossier:").pack()
-				namefolder = Entry(confirmation2, text="")
-				namefolder.pack()
-				Button(confirmation2, text="Continuer", command=requestfilewithfolder).pack()
+            def yes():
+                def requestfilewithfolder():
+                    nameFolder = namefolder.get()
+                    confirmation2.destroy()
+                    try:
+                        os.mkdir("Desktop/" + nameFolder)
+                        file = open("Desktop/" + nameFolder + "/" + name, 'w+')
+                        file.write(".")
+                        file.close()
+                        mb.showinfo("PandoOS","Fichier crée avec succès !")
+                    except FileExistsError:
+                        # directory already exists
+                        file = open("Desktop/" + nameFolder + "/" + name, 'w+')
+                        file.write(".")
+                        file.close()
+                        mb.showinfo("PandoOS","Fichier crée avec succès !")
+                confirmation.destroy()
+                fe.destroy()
+                confirmation2 = Toplevel()
+                confirmation2.maxsize(300, 100)
+                confirmation2.minsize(300, 100)
+                confirmation2.title("PandoOS - Information")
+                confirmation2.iconbitmap("img/warning.ico")
+                Label(confirmation2, text="Entrez le nom du dossier:").pack()
+                namefolder = Entry(confirmation2, text="")
+                namefolder.pack()
+                Button(confirmation2, text="Continuer", command=requestfilewithfolder).pack()
 
-			# <-- end
-			# --------------------- #
-			# --> Button "Non"
+            # <-- end
+            # --------------------- #
+            # --> Button "Non"
 
-			def no():
-				folder = "Desktop"
-				file = open(folder + "/" + name, 'w+')
-				file.write("*")
-				file.close()
-				confirmation.destroy()
-				mb.showinfo("PandoOS","Fichier crée avec succès !")
+            def no():
+                folder = "Desktop"
+                file = open(folder + "/" + name, 'w+')
+                file.write("*")
+                file.close()
+                confirmation.destroy()
+                mb.showinfo("PandoOS","Fichier crée avec succès !")
 
-			# <-- end
+            # <-- end
 
-			fe.destroy()
-			confirmation = Toplevel()
-			confirmation.maxsize(300, 100)
-			confirmation.minsize(300, 100)
-			confirmation.title("PandoOS - Attention !")
-			confirmation.iconbitmap("img/warning.ico")
-			Label(confirmation, text="Souhaitez-vous le sauvegarder \ndans un dossier en particulier ?").pack()
-			Button(confirmation, text="Oui.", command=yes).pack()
-			Button(confirmation, text="Non.", command=no).pack()
-		
-		# name = Name.get()
-		# file = open(name, 'w+')
-		# file.write("*")
-		# file.close()
-		# fe.destroy()
-		# mb.showinfo("PandoOS","File created with successful !")
+            fe.destroy()
+            confirmation = Toplevel()
+            confirmation.maxsize(300, 100)
+            confirmation.minsize(300, 100)
+            confirmation.title("PandoOS - Attention !")
+            confirmation.iconbitmap("img/warning.ico")
+            Label(confirmation, text="Souhaitez-vous le sauvegarder \ndans un dossier en particulier ?").pack()
+            Button(confirmation, text="Oui.", command=yes).pack()
+            Button(confirmation, text="Non.", command=no).pack()
+        
+        # name = Name.get()
+        # file = open(name, 'w+')
+        # file.write("*")
+        # file.close()
+        # fe.destroy()
+        # mb.showinfo("PandoOS","File created with successful !")
 
-	def RequestFile():
-		createFile()
+    def RequestFile():
+        createFile()
 
-	# <-- end
+    # <-- end
 
 
-	fe = Toplevel()
-	fe.title("PandoOS - Explorateur de fichiers")
-	fe.geometry("800x500")
-	fe.minsize(800, 500)
-	fe.maxsize(800, 500)
-	fe.iconbitmap("img/information.ico")
+    fe = Toplevel()
+    fe.title("PandoOS - Explorateur de fichiers")
+    fe.geometry("800x500")
+    fe.minsize(800, 500)
+    fe.maxsize(800, 500)
+    fe.iconbitmap("img/information.ico")
 
-	# File Explorer (UI)
+    # File Explorer (UI)
 
-	menuFe = Menu(fe)
+    menuFe = Menu(fe)
 
-	Name = Entry(fe, text="")
-	FileRequest1 = Button(fe, text="Créer le fichier", command=RequestFile)
-	FileRequest2 = Button(fe, text="Créer le dossier", command=RequestFolder)
+    Name = Entry(fe, text="")
+    FileRequest1 = Button(fe, text="Créer le fichier", command=RequestFile)
+    FileRequest2 = Button(fe, text="Créer le dossier", command=RequestFolder)
 
-	# Menu(s)
+    # Menu(s)
 
-	File = Menu(menuFe, tearoff=0)
-	File.add_command(label="Créer un nouveau fichier", command=file)
-	File.add_command(label="Créer un nouveau dossier", command=folder)
-	File.add_separator()
-	File.add_command(label="Ouvrir un fichier", command=openfile)
+    File = Menu(menuFe, tearoff=0)
+    File.add_command(label="Créer un nouveau fichier", command=file)
+    File.add_command(label="Créer un nouveau dossier", command=folder)
+    File.add_separator()
+    File.add_command(label="Ouvrir un fichier", command=openfile)
 
-	# <-- end Menu(s)
+    # <-- end Menu(s)
 
-	l = 0
+    l = 0
 
-	# Config UI
+    # Config UI
 
-	fe.config(menu=menuFe, bg="white")
-	Name.pack_forget()
-	FileRequest1.pack_forget()
-	FileRequest2.pack_forget()
+    fe.config(menu=menuFe, bg="white")
+    Name.pack_forget()
+    FileRequest1.pack_forget()
+    FileRequest2.pack_forget()
 
-	# Config menu
+    # Config menu
 
-	menuFe.add_cascade(label="Fichier", menu=File)
+    menuFe.add_cascade(label="Fichier", menu=File)
 
-	# <-- end
+    # <-- end
 
 # <-- end
 
 # Restart
 
 def restart():
-	PandoOS.destroy()
-	os.system('py boot.py')
+    PandoOS.destroy()
+    os.system('py boot.py')
 
 # Shutdown
 
 def shutdown():
-	sleep(0.5)
-	mb.showinfo("PandoOS","Shutdown successful, press ENTER for continue.")
-	os.system('cls')
-	print("PandoOS> Shutdown...")
-	sleep(0.5)
-	mb.showinfo('PandoOS','See you a next time !')
-	PandoOS.destroy()
-	sleep(1)
+    sleep(0.5)
+    mb.showinfo("PandoOS","Shutdown successful, press ENTER for continue.")
+    os.system('cls')
+    print("PandoOS> Shutdown...")
+    sleep(0.5)
+    mb.showinfo('PandoOS','See you a next time !')
+    PandoOS.destroy()
+    sleep(1)
 
 # Settings
 
@@ -287,25 +344,25 @@ def shutdown():
 # --> 
 
 def cbg():
-	PandoOS.config(bg="gray")
+    PandoOS.config(bg="gray")
 
 def cbd():
-	PandoOS.config(bg="white")
+    PandoOS.config(bg="white")
 
 # <-- end
 
 def settings():
-	settingsGui = Toplevel()
-	settingsGui.title("PandoOS - Paramètres")
-	settingsGui.geometry("950x500")
-	settingsGui.iconbitmap("img/information.ico")
-	Label(settingsGui, text="\n").pack()
-	changebackground = Label(settingsGui, text="Changez le fond d'écran:").pack()
-	Label(settingsGui, text="-------------------------------").pack()
-	cbtogray = Button(settingsGui, text="Gris", command=cbg).pack()
-	cbtodefault = Button(settingsGui, text="Défaut (Blanc)", command=cbd).pack()
-	Label(settingsGui, text="-------------------------------").pack()
-	Label(settingsGui, text="\n").pack()
+    settingsGui = Toplevel()
+    settingsGui.title("PandoOS - Paramètres")
+    settingsGui.geometry("950x500")
+    settingsGui.iconbitmap("img/information.ico")
+    Label(settingsGui, text="\n").pack()
+    changebackground = Label(settingsGui, text="Changez le fond d'écran:").pack()
+    Label(settingsGui, text="-------------------------------").pack()
+    cbtogray = Button(settingsGui, text="Gris", command=cbg).pack()
+    cbtodefault = Button(settingsGui, text="Défaut (Blanc)", command=cbd).pack()
+    Label(settingsGui, text="-------------------------------").pack()
+    Label(settingsGui, text="\n").pack()
 
 
 # Toolbar
@@ -341,13 +398,13 @@ menu.add_cascade(label="Applications", menu=appsMenu)
 # UI
 
 def currentTime():
-	def t():
-		string = strftime('%H:%M:%S')
-		currenttime.config(text=string)
-		currenttime.after(1000, t)
-	currenttime = Label(PandoOS)
-	currenttime.pack(side="bottom")
-	t()
+    def t():
+        string = strftime('%H:%M:%S')
+        currenttime.config(text=string)
+        currenttime.after(1000, t)
+    currenttime = Label(PandoOS)
+    currenttime.pack(side="bottom")
+    t()
 
 currentTime()
 
