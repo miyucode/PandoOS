@@ -186,9 +186,9 @@ def fileexplorer():
         if name == "default" or name == "":
             mb.showerror("PandoOS","Veuillez donner un nom correct à votre dossier !")
         else:
-            userprofile = os.system('%userprofile%')
+            # userprofile = os.system('%userprofile%')
+            # print('PandoOS> %userprofile% not found.')
             os.system('cls')
-            print('PandoOS> %userprofile% not found.')
             name = Name.get()
             os.mkdir(f"Desktop/{name}")
             fe.destroy()
@@ -246,8 +246,7 @@ def fileexplorer():
             # --> Button "Non"
 
             def no():
-                folder = "Desktop"
-                file = open(folder + "/" + name, 'w+')
+                file = open("Desktop/" + name, 'w+')
                 file.write("*")
                 file.close()
                 confirmation.destroy()
