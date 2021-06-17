@@ -60,18 +60,22 @@ def notepad():
                 def requesttextfile():
                     foldername = folderName.get()
                     m.destroy()
-                    try:
-                        os.mkdir("Desktop/" + foldername)
-                        file = open("Desktop/" + foldername + "/" + i, "w+")
-                        file.write(t)
-                        file.close()
-                        mb.showinfo("PandoPad","Vous avez créer un fichier texte avec succès !")
-                    except FileExistsError:
-                        # directory already exists
-                        file = open("Desktop/" + foldername + "/" + i, "w+")
-                        file.write(t)
-                        file.close()
-                        mb.showinfo("PandoPad","Vous avez créer un fichier texte avec succès !")
+                    if foldername == "":
+                        mb.showerror("PandoPad","Entrez un nom correct d'un dossier existant ou non !")
+                        yes()
+                    else:
+                        try:
+                            os.mkdir("Desktop/" + foldername)
+                            file = open("Desktop/" + foldername + "/" + i, "w+")
+                            file.write(t)
+                            file.close()
+                            mb.showinfo("PandoPad","Vous avez créer un fichier texte avec succès !")
+                        except FileExistsError:
+                            # directory already exists
+                            file = open("Desktop/" + foldername + "/" + i, "w+")
+                            file.write(t)
+                            file.close()
+                            mb.showinfo("PandoPad","Vous avez créer un fichier texte avec succès !")
 
                 m = Toplevel()
                 m.title("PandoPad - Information")
@@ -217,18 +221,22 @@ def fileexplorer():
                 def requestfilewithfolder():
                     nameFolder = namefolder.get()
                     confirmation2.destroy()
-                    try:
-                        os.mkdir("Desktop/" + nameFolder)
-                        file = open("Desktop/" + nameFolder + "/" + name, 'w+')
-                        file.write(".")
-                        file.close()
-                        mb.showinfo("PandoOS","Fichier crée avec succès !")
-                    except FileExistsError:
-                        # directory already exists
-                        file = open("Desktop/" + nameFolder + "/" + name, 'w+')
-                        file.write(".")
-                        file.close()
-                        mb.showinfo("PandoOS","Fichier crée avec succès !")
+                    if nameFolder == "":
+                        mb.showerror("PandoPad","Entrez un nom correct d'un dossier existant ou non !")
+                        yes()
+                    else:
+                        try:
+                            os.mkdir("Desktop/" + nameFolder)
+                            file = open("Desktop/" + nameFolder + "/" + name, 'w+')
+                            file.write(".")
+                            file.close()
+                            mb.showinfo("PandoOS","Fichier crée avec succès !")
+                        except FileExistsError:
+                            # directory already exists
+                            file = open("Desktop/" + nameFolder + "/" + name, 'w+')
+                            file.write(".")
+                            file.close()
+                            mb.showinfo("PandoOS","Fichier crée avec succès !")
                 confirmation.destroy()
                 fe.destroy()
                 confirmation2 = Toplevel()
@@ -322,6 +330,7 @@ def fileexplorer():
 # Restart
 
 def restart():
+    os.system('cls')
     PandoOS.destroy()
     os.system('py boot.py')
 
@@ -396,16 +405,16 @@ menu.add_cascade(label="Applications", menu=appsMenu)
 
 # UI
 
-def currentTime():
-    def t():
-        string = strftime('%H:%M:%S')
-        currenttime.config(text=string)
-        currenttime.after(1000, t)
-    currenttime = Label(PandoOS)
-    currenttime.pack(side="bottom")
-    t()
+# def currentTime():
+#     def t():
+#         string = strftime('%H:%M:%S')
+#         currenttime.config(text=string)
+#         currenttime.after(1000, t)
+#     currenttime = Label(PandoOS)
+#     currenttime.pack(side="bottom")
+#     t()
 
-currentTime()
+# currentTime()
 
 # Show menu
 
