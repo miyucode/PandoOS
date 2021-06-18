@@ -364,13 +364,35 @@ def settings():
     settingsGui.title("PandoOS - Paramètres")
     settingsGui.geometry("950x500")
     settingsGui.iconbitmap("img/information.ico")
+    def changebackgroundFunction():
+        changebackground.pack()
+        cbtogray.pack()
+        cbtodefault.pack()
+    
     Label(settingsGui, text="\n").pack()
-    changebackground = Label(settingsGui, text="Changez le fond d'écran:").pack()
-    Label(settingsGui, text="-------------------------------").pack()
-    cbtogray = Button(settingsGui, text="Gris", command=cbg).pack()
-    cbtodefault = Button(settingsGui, text="Défaut (Blanc)", command=cbd).pack()
-    Label(settingsGui, text="-------------------------------").pack()
+    changebackground = Label(settingsGui, text="Changez le fond d'écran:").pack_forget()
+    cbtogray = Button(settingsGui, text="Gris", command=cbg).pack_forget()
+    cbtodefault = Button(settingsGui, text="Défaut (Blanc)", command=cbd).pack_forget()
     Label(settingsGui, text="\n").pack()
+
+    # -----------------------------
+    #
+    #           [Option Menu]
+    #
+    # -----------------------------
+
+    toolbar = Menu(settingsGui)
+
+    e = Menu(toolbar, tearoff=0)
+    e.add_command(label="Personalisation", command=changebackgroundFunction)
+
+    toolbar.add_cascade(label="Paramètres", menu=e)
+
+    # -------------
+    # [GUI Config]
+    # -------------
+
+    settingsGui.config(menu=toolbar)
 
 
 # Toolbar
