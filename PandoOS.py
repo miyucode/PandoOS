@@ -370,9 +370,9 @@ def settings():
         cbtodefault.pack()
     
     Label(settingsGui, text="\n").pack()
-    changebackground = Label(settingsGui, text="Changez le fond d'écran:").pack_forget()
-    cbtogray = Button(settingsGui, text="Gris", command=cbg).pack_forget()
-    cbtodefault = Button(settingsGui, text="Défaut (Blanc)", command=cbd).pack_forget()
+    changebackground = Label(settingsGui, text="Changez le fond d'écran:")
+    cbtogray = Button(settingsGui, text="Gris", command=cbg)
+    cbtodefault = Button(settingsGui, text="Défaut (Blanc)", command=cbd)
     Label(settingsGui, text="\n").pack()
 
     # -----------------------------
@@ -394,6 +394,9 @@ def settings():
 
     settingsGui.config(menu=toolbar)
 
+    changebackground.pack_forget()
+    cbtogray.pack_forget()
+    cbtodefault.pack_forget()
 
 # Toolbar
 
