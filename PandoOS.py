@@ -30,7 +30,6 @@ class sys(object):
         self.arg = arg
     def exec_(command):
         os.system(command)
- k:
     def ls(directory):
         if directory == "":
             os.system('dir')
