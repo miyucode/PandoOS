@@ -38,6 +38,13 @@ class sys(object):
 
 # --> App(s) and Tool(s)
 
+def appmaker():
+    am = Toplevel()
+    am.title("App Maker - Accueil")
+    am.geometry("800x500")
+    am.resizable(False, False)
+    am.iconbitmap("img/appmaker/logo.ico")
+
 def notepad():
     def savefile():
         i = l.get()
@@ -106,7 +113,7 @@ def notepad():
     npgui.title('PandoPad')
     npgui.geometry('850x500')
     npgui.resizable(False, False)
-    npgui.iconbitmap('img/information.ico')
+    npgui.iconbitmap('img/notepad-icon.ico')
     text = Text(npgui)
     text.pack()
     Label(npgui, text="Donnez un nom au fichier:").pack()
@@ -172,9 +179,27 @@ def fileexplorer():
             mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer !")
             fileexplorer()
         else:
-            fileexplorer()
-            os.system('start ' + file)
-            mb.showinfo('PandoOS','Vous avez ouvert avec succès "' + file + '" !')
+            def yes():
+                demande1.destroy()
+                mb.showinfo('PandoOS','Vous avez ouvert avec succès "' + file + '" !')
+                os.system("notepad " + file)
+                fileexplorer()
+
+            def no():
+                demande1.destroy()
+                mb.showinfo('PandoOS','Vous avez ouvert avec succès "' + file + '" !')
+                os.system("start " + file)
+                fileexplorer()
+
+            demande1 = Toplevel()
+            demande1.title("PandoOS - Attention !")
+            demande1.resizable(False, False)
+            demande1.geometry("300x100")
+            demande1.iconbitmap("img/warning.ico")
+
+            Label(demande1, text="Est-ce que le fichier sélectionner est un fichier texte ?\n Si oui, souhaitez-vous l'offrir avec le Bloc-Notes?").pack()
+            Button(demande1, text="Oui.", command=yes).pack()
+            Button(demande1, text="Non.", command=no).pack()
 
     # (Func) Create Folder
 
@@ -289,7 +314,7 @@ def fileexplorer():
     fe.geometry("800x500")
     fe.minsize(800, 500)
     fe.maxsize(800, 500)
-    fe.iconbitmap("img/information.ico")
+    fe.iconbitmap("img/fileexplorer-icon.ico")
 
     # File Explorer (UI)
 
@@ -361,7 +386,7 @@ def settings():
     settingsGui = Toplevel()
     settingsGui.title("PandoOS - Paramètres")
     settingsGui.geometry("950x500")
-    settingsGui.iconbitmap("img/information.ico")
+    settingsGui.iconbitmap("img/settings.ico")
     settingsGui.destroy()
     mb.showinfo("PandoOS","Application indisponible pour le moment.")
 
@@ -374,7 +399,8 @@ menu = Menu(PandoOS)
 appsMenu = Menu(menu, tearoff=0)
 appsMenu.add_command(label="Horloge", command=clock)
 appsMenu.add_command(label="Bloc-Notes", command=notepad)
-# appsMenu.add_command(label="PandoShop", command=pandoshopapp)
+appsMenu.add_command(label="AppMaker", command=appmaker)
+# appsMenu.add_command(label="PandoShop", command=pandoshopap)
 
 # Tools Menu
 
