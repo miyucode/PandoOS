@@ -8,9 +8,13 @@ For use **PandoOS**, you need:
 - Tkinter 🖥
 - Windows 7/8.1/10
 
-## Informations 📜
+## Usage 📜
 
-**PandoOS** are not finished, the first version are not finished too.
+In a CMD, enter this:
+```batch
+py -m pip install tkinter
+```
+and after this, close CMD and open "**boot.py**" !
 
 # Notes 📚
 
