@@ -7,7 +7,7 @@ import tkinter.messagebox as mb
 import os
 
 try:
-    os.mkdir("Desktop")
+    os.mkdir("root/Desktop")
 except FileExistsError:
     # if "Desktop/" already exist
     pass
@@ -39,11 +39,80 @@ class sys(object):
 # --> App(s) and Tool(s)
 
 def appmaker():
-    am = Toplevel()
-    am.title("App Maker - Accueil")
-    am.geometry("800x500")
-    am.resizable(False, False)
-    am.iconbitmap("img/appmaker/logo.ico")
+    amMenu = Toplevel()
+    amMenu.title("App Maker - Accueil")
+    amMenu.geometry("800x500")
+    amMenu.resizable(False, False)
+    amMenu.iconbitmap("img/appmaker/logo.ico")
+
+    # --> Create App(s)
+
+    def createapplication():    
+        class app(object):
+            """docstring for app"""
+            def __init__(self, arg):
+                super(app, self).__init__()
+                self.arg = arg
+            
+            # App Info
+
+            name = ""
+
+            # <-- end
+
+        def continue1():
+            def createapprequest():
+                amCreateAppWindow.destroy()
+                mb.showinfo("AppMaker",f'{app.name} à été créer avec succès ! Regardez dans le dossier Desktop ou ouvrez-la avec l\'explorateur de fichiers !')
+                approot = open(f"root/Desktop/{app.name}.pando-app", "w+")
+                approot.write("")
+                approot.close()
+
+            app.name = nameapp.get()
+            mb.showinfo("AppMaker",f"Vous avez nommé votre application \"{app.name}\" avec succès !")
+            a.pack_forget()
+            a1.pack_forget()
+            nameapp.pack_forget()
+            continueButton.pack_forget()
+            amCreateAppWindow.geometry("300x100")
+            Label(amCreateAppWindow, text="Créer l'application en\n cliquant sur le bouton !").pack()
+            Button(amCreateAppWindow, text="Ok", command=createapprequest).pack()
+
+        amMenu.destroy()
+        amCreateAppWindow = Toplevel()
+        amCreateAppWindow.title("App Maker - Créer une application")
+        amCreateAppWindow.geometry("300x100")
+        amCreateAppWindow.resizable(False, False)
+        amCreateAppWindow.iconbitmap("img/appmaker/logo.ico")
+        a = Label(amCreateAppWindow, text="\n\n")
+        a1 = Label(amCreateAppWindow, text="Entrez le nom de\n votre application.")
+        nameapp = Entry(amCreateAppWindow)
+        continueButton = Button(amCreateAppWindow, text="Continuer", command=continue1)
+        a.pack()
+        a1.pack()
+        nameapp.pack()
+        continueButton.pack()
+              
+    # <-- end
+
+    Label(amMenu, text="App Maker", font=("Arial", 30)).pack()
+
+    # --> Toolbar AM
+
+    menuam = Menu(amMenu)
+
+    toolbar1 = Menu(menuam, tearoff=0)
+    toolbar1.add_command(label="Créer une application", command=createapplication)
+
+    aide = Menu(menuam, tearoff=0)
+    # aide.add_command(label="Documentation", command=docAM)
+
+    menuam.add_cascade(label="Commencer", menu=toolbar1)
+    menuam.add_cascade(label="Aide", menu=aide)
+
+    amMenu.config(menu=menuam)
+
+    # <-- end
 
 def notepad():
     def savefile():
@@ -71,14 +140,14 @@ def notepad():
                         yes()
                     else:
                         try:
-                            os.mkdir("Desktop/" + foldername)
-                            file = open("Desktop/" + foldername + "/" + i, "w+")
+                            os.mkdir("root/Desktop/" + foldername)
+                            file = open("root/Desktop/" + foldername + "/" + i, "w+")
                             file.write(t)
                             file.close()
                             mb.showinfo("PandoPad","Vous avez créer un fichier texte avec succès !")
                         except FileExistsError:
                             # directory already exists
-                            file = open("Desktop/" + foldername + "/" + i, "w+")
+                            file = open("root/Desktop/" + foldername + "/" + i, "w+")
                             file.write(t)
                             file.close()
                             mb.showinfo("PandoPad","Vous avez créer un fichier texte avec succès !")
@@ -98,7 +167,7 @@ def notepad():
 
             def no():
                 confirmation3.destroy()
-                file = open('Desktop/' + i, 'w+')
+                file = open('root/Desktop/' + i, 'w+')
                 file.write(t)
                 file.close()
                 mb.showinfo("PandoPad","Vous avez créer un fichier texte avec succès !")
@@ -188,7 +257,7 @@ def fileexplorer():
             def no():
                 demande1.destroy()
                 mb.showinfo('PandoOS','Vous avez ouvert avec succès "' + file + '" !')
-                os.system("start " + file)
+                os.system(file)
                 fileexplorer()
 
             demande1 = Toplevel()
@@ -218,7 +287,7 @@ def fileexplorer():
             # print('PandoOS> %userprofile% not found.')
             os.system('cls')
             name = Name.get()
-            os.mkdir(f"Desktop/{name}")
+            os.mkdir(f"root/Desktop/{name}")
             fe.destroy()
             mb.showinfo("PandoOS","Dossier crée avec succès !")
 
@@ -250,14 +319,14 @@ def fileexplorer():
                         yes()
                     else:
                         try:
-                            os.mkdir("Desktop/" + nameFolder)
-                            file = open("Desktop/" + nameFolder + "/" + name, 'w+')
+                            os.mkdir("root/Desktop/" + nameFolder)
+                            file = open("root/Desktop/" + nameFolder + "/" + name, 'w+')
                             file.write(".")
                             file.close()
                             mb.showinfo("PandoOS","Fichier crée avec succès !")
                         except FileExistsError:
                             # directory already exists
-                            file = open("Desktop/" + nameFolder + "/" + name, 'w+')
+                            file = open("root/Desktop/" + nameFolder + "/" + name, 'w+')
                             file.write(".")
                             file.close()
                             mb.showinfo("PandoOS","Fichier crée avec succès !")
@@ -278,7 +347,7 @@ def fileexplorer():
             # --> Button "Non"
 
             def no():
-                file = open("Desktop/" + name, 'w+')
+                file = open("root/Desktop/" + name, 'w+')
                 file.write("*")
                 file.close()
                 confirmation.destroy()
