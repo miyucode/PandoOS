@@ -12,7 +12,7 @@ root.iconbitmap("img/logo.ico")
 root.bind("<Escape>", lambda e: root.destroy())
 root.resizable(False, False)
 
-version = '1.3.7_dev'
+version = '1.3.7'
 
 # Boot (start)
 
