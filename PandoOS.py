@@ -403,8 +403,6 @@ def fileexplorer():
 
     # <-- end Menu(s)
 
-    l = 0
-
     # Config UI
 
     fe.config(menu=menuFe, bg="white")
@@ -425,7 +423,7 @@ def fileexplorer():
 def restart():
     os.system('cls')
     PandoOS.destroy()
-    os.system('py boot.py')
+    os.system('boot.py')
 
 # Shutdown
 
@@ -492,16 +490,16 @@ menu.add_cascade(label="Applications", menu=appsMenu)
 
 # UI
 
-# def currentTime():
-#     def t():
-#         string = strftime('%H:%M:%S')
-#         currenttime.config(text=string)
-#         currenttime.after(1000, t)
-#     currenttime = Label(PandoOS)
-#     currenttime.pack(side="bottom")
-#     t()
+def currentTime():
+    def t():
+        string = strftime('%H:%M:%S')
+        currenttime.config(text=string)
+        currenttime.after(1000, t)
+    currenttime = Label(PandoOS)
+    currenttime.pack(side="bottom")
+    t()
 
-# currentTime()
+currentTime()
 
 # Show menu
 
