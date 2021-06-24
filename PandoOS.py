@@ -38,6 +38,27 @@ class sys(object):
 
 # --> App(s) and Tool(s)
 
+def shell():
+
+    # GUI Config
+
+    shellgui = Toplevel()
+    shellgui.title("Invite de commandes (Mode Administrateur désactivée)")
+    shellgui.geometry("500x500")
+    shellgui.resizable(False, False)
+    shellgui.iconbitmap("img/shell/cmd-icon.ico")
+
+    # GUI
+    
+    cmd = Text(shellgui)
+    cmd.grid()
+
+    exec_command = Button(shellgui, text="Exécuter la commande")
+    exec_command.grid(row=5, column=1)
+
+    aide = Button(shellgui, text="Docs")
+    aide.grid(row=8, column=2)
+
 def appmaker():
     amMenu = Toplevel()
     amMenu.title("App Maker - Accueil")
@@ -493,6 +514,7 @@ appsMenu.add_command(label="AppMaker", command=appmaker)
 
 ToolsMenu = Menu(menu, tearoff=0)
 ToolsMenu.add_command(label="Explorateur de fichiers", command=fileexplorer)
+ToolsMenu.add_command(label="Invite de commandes", command=shell)
 
 # Start Menu
 
