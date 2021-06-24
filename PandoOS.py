@@ -57,6 +57,7 @@ def appmaker():
             # App Info
 
             name = ""
+            author_name = ""
 
             # <-- end
 
@@ -65,12 +66,15 @@ def appmaker():
                 amCreateAppWindow.destroy()
                 mb.showinfo("AppMaker",f'{app.name} à été créer avec succès ! Regardez dans le dossier Desktop ou ouvrez-la avec l\'explorateur de fichiers !')
                 approot = open(f"root/Desktop/{app.name}.pando-app", "w+")
-                approot.write("")
+                approot.write(f"**DON'T DELETE THIS LINE** info[author_name:\"{app.author_name}\", appname:'{app.name}']")
                 approot.close()
 
+
             app.name = nameapp.get()
+            app.author_name = nameauthor.get() + ""
             mb.showinfo("AppMaker",f"Vous avez nommé votre application \"{app.name}\" avec succès !")
-            a.pack_forget()
+            a2.pack_forget()
+            nameauthor.pack_forget()
             a1.pack_forget()
             nameapp.pack_forget()
             continueButton.pack_forget()
@@ -81,16 +85,21 @@ def appmaker():
         amMenu.destroy()
         amCreateAppWindow = Toplevel()
         amCreateAppWindow.title("App Maker - Créer une application")
-        amCreateAppWindow.geometry("300x100")
+        amCreateAppWindow.geometry("300x200")
         amCreateAppWindow.resizable(False, False)
         amCreateAppWindow.iconbitmap("img/appmaker/logo.ico")
-        a = Label(amCreateAppWindow, text="\n\n")
         a1 = Label(amCreateAppWindow, text="Entrez le nom de\n votre application.")
         nameapp = Entry(amCreateAppWindow)
+
+        a2 = Label(amCreateAppWindow, text="Entrez le nom de l'auteur.")
+        nameauthor = Entry(amCreateAppWindow)
+
         continueButton = Button(amCreateAppWindow, text="Continuer", command=continue1)
-        a.pack()
+
         a1.pack()
         nameapp.pack()
+        a2.pack()
+        nameauthor.pack()
         continueButton.pack()
               
     # <-- end
@@ -236,6 +245,16 @@ def clock():
 
 def fileexplorer():
     # (Func) Open a file
+
+    # def openpandoapp():
+    #     fe.destroy()
+    #     file = filedialog.askopenfilename(title="Sélectionner une PandoApp", defaultextension=".pando-app", filetypes=(("PandoApp Files", "*.pando-app"), ("PandoApp Files", "*.pando-app")))
+    #     files = open(file + "", "w+")
+    #     lignes = files.readlines[1]
+    #     for ligne in lignes:
+    #         t = files.readlines[1]
+    #         print(t)
+    #     file.close()
 
     def openfile():
         fe.destroy()
@@ -400,6 +419,7 @@ def fileexplorer():
     File.add_command(label="Créer un nouveau dossier", command=folder)
     File.add_separator()
     File.add_command(label="Ouvrir un fichier", command=openfile)
+    # File.add_command(label="Ouvrir une PandoApp", command=openpandoapp)
 
     # <-- end Menu(s)
 
