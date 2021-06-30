@@ -4,7 +4,7 @@
 
 For use **PandoOS**, you need:
 
-- Python 🐍 (Latest version: 3.9.4)
+- [Python](https://python.org) 🐍 (Latest version: 3.9.4)
 - Tkinter 🖥
 - Windows 7/8.1/10
 
