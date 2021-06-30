@@ -10,9 +10,9 @@ For use **PandoOS**, you need:
 
 ## Usage 📜
 
-In a CMD, enter this:
+In a CMD, enter this (if you don't have Tkinter for use __PandoOS__):
 ```batch
-py -m pip install tkinter
+python -m pip install tk
 ```
 and after this, close CMD and open "**boot.py**" !
 
