@@ -40,6 +40,19 @@ class sys(object):
 
 def shell():
 
+    # Shell
+
+    def exec_():
+        output = cmd.get("1.0", "end-1c")
+        if output == "":
+            shellgui.destroy()
+            mb.showerror("Invite de commandes", "Vous n'avez inscrit aucune commande à exécuter !")
+            shell()
+        elif output == "shutdown":
+            shutdown()
+        elif output == "restart":
+            restart()
+
     # GUI Config
 
     shellgui = Toplevel()
@@ -51,96 +64,13 @@ def shell():
     # GUI
     
     cmd = Text(shellgui)
-    cmd.grid()
+    cmd.pack()
 
-    exec_command = Button(shellgui, text="Exécuter la commande")
-    exec_command.grid(row=5, column=1)
+    exec_command = Button(shellgui, text="Exécuter la commande", command=exec_)
+    exec_command.pack()
 
     aide = Button(shellgui, text="Docs")
-    aide.grid(row=8, column=2)
-
-def appmaker():
-    amMenu = Toplevel()
-    amMenu.title("App Maker - Accueil")
-    amMenu.geometry("800x500")
-    amMenu.resizable(False, False)
-    amMenu.iconbitmap("img/appmaker/logo.ico")
-
-    # --> Create App(s)
-
-    def createapplication():    
-        class app(object):
-            """docstring for app"""
-            def __init__(self, arg):
-                super(app, self).__init__()
-                self.arg = arg
-            
-            # App Info
-
-            name = ""
-            author_name = ""
-
-            # <-- end
-
-        def continue1():
-            def createapprequest():
-                amCreateAppWindow.destroy()
-                mb.showinfo("AppMaker",f'{app.name} à été créer avec succès ! Regardez dans le dossier Desktop ou ouvrez-la avec l\'explorateur de fichiers !')
-                approot = open(f"root/Desktop/{app.name}.pando-app", "w+")
-                approot.write(f"**DON'T DELETE THIS LINE** info[author_name:\"{app.author_name}\", appname:'{app.name}']")
-                approot.close()
-
-
-            app.name = nameapp.get()
-            app.author_name = nameauthor.get() + ""
-            mb.showinfo("AppMaker",f"Vous avez nommé votre application \"{app.name}\" avec succès !")
-            a2.pack_forget()
-            nameauthor.pack_forget()
-            a1.pack_forget()
-            nameapp.pack_forget()
-            continueButton.pack_forget()
-            amCreateAppWindow.geometry("300x100")
-            Label(amCreateAppWindow, text="Créer l'application en\n cliquant sur le bouton !").pack()
-            Button(amCreateAppWindow, text="Ok", command=createapprequest).pack()
-
-        amMenu.destroy()
-        amCreateAppWindow = Toplevel()
-        amCreateAppWindow.title("App Maker - Créer une application")
-        amCreateAppWindow.geometry("300x200")
-        amCreateAppWindow.resizable(False, False)
-        amCreateAppWindow.iconbitmap("img/appmaker/logo.ico")
-        a1 = Label(amCreateAppWindow, text="Entrez le nom de\n votre application.")
-        nameapp = Entry(amCreateAppWindow)
-
-        a2 = Label(amCreateAppWindow, text="Entrez le nom de l'auteur.")
-        nameauthor = Entry(amCreateAppWindow)
-
-        continueButton = Button(amCreateAppWindow, text="Continuer", command=continue1)
-
-        a1.pack()
-        nameapp.pack()
-        a2.pack()
-        nameauthor.pack()
-        continueButton.pack()
-              
-    # <-- end
-
-    Label(amMenu, text="App Maker", font=("Arial", 30)).pack()
-
-    # --> Toolbar AM
-
-    menuam = Menu(amMenu)
-
-    toolbar1 = Menu(menuam, tearoff=0)
-    toolbar1.add_command(label="Créer une application", command=createapplication)
-
-    aide = Menu(menuam, tearoff=0)
-    # aide.add_command(label="Documentation", command=docAM)
-
-    menuam.add_cascade(label="Commencer", menu=toolbar1)
-    menuam.add_cascade(label="Aide", menu=aide)
-
-    amMenu.config(menu=menuam)
+    aide.pack()
 
     # <-- end
 
@@ -265,18 +195,6 @@ def clock():
     time()
 
 def fileexplorer():
-    # (Func) Open a file
-
-    # def openpandoapp():
-    #     fe.destroy()
-    #     file = filedialog.askopenfilename(title="Sélectionner une PandoApp", defaultextension=".pando-app", filetypes=(("PandoApp Files", "*.pando-app"), ("PandoApp Files", "*.pando-app")))
-    #     files = open(file + "", "w+")
-    #     lignes = files.readlines[1]
-    #     for ligne in lignes:
-    #         t = files.readlines[1]
-    #         print(t)
-    #     file.close()
-
     def openfile():
         fe.destroy()
         FileRequest1.pack_forget()
@@ -355,7 +273,7 @@ def fileexplorer():
                     nameFolder = namefolder.get()
                     confirmation2.destroy()
                     if nameFolder == "":
-                        mb.showerror("PandoPad","Entrez un nom correct d'un dossier existant ou non !")
+                        mb.showerror("PandoOS","Entrez un nom correct d'un dossier existant ou non !")
                         yes()
                     else:
                         try:
@@ -495,8 +413,58 @@ def settings():
     settingsGui.title("PandoOS - Paramètres")
     settingsGui.geometry("950x500")
     settingsGui.iconbitmap("img/settings.ico")
-    settingsGui.destroy()
-    mb.showinfo("PandoOS","Application indisponible pour le moment.")
+    # settingsGui.destroy()
+    # mb.showinfo("PandoOS","Application indisponible pour le moment.")
+
+    # --> Personalization Event
+
+    def cbtowhite():
+        PandoOS.config(bg="white")
+
+    def cbtogray():
+        PandoOS.config(bg="gray")
+
+    def closepersonalizationoptionswindow():
+        settings()
+
+    def personalizationevent():
+        settingsGui.destroy()
+        personalizationoptionswindow = Toplevel()
+        personalizationoptionswindow.geometry("950x500")
+        personalizationoptionswindow.resizable(False, False)
+        personalizationoptionswindow.title("PandoOS - Personalisation système")
+        personalizationoptionswindow.config(bg="white")
+        
+        changebackgroundtext = Label(personalizationoptionswindow, text="Changez la couleur du fond d'écran")
+        changebackgroundtext.pack()
+        changebackgroundbtn1 = Button(personalizationoptionswindow, text="Mettre en blanc (Par défaut)", command=cbtowhite)
+        changebackgroundbtn2 = Button(personalizationoptionswindow, text="Mettre en gris", command=cbtogray)
+
+        changebackgroundbtn1.pack()
+        changebackgroundbtn2.pack()
+
+        closebtn = Button(personalizationoptionswindow, text="Revenir au menu de sélection", command=lambda: [personalizationoptionswindow.destroy(), closepersonalizationoptionswindow()])
+        closebtn.pack(side="bottom")
+
+    # --> UI
+
+    l = 0
+
+    # --> UI Config
+
+    toolbar1 = Menu(settingsGui)
+
+    screenoptions = Menu(toolbar1, tearoff=0)
+    systeminformations = Menu(toolbar1, tearoff=0)
+    personalizationoptions = Menu(toolbar1, tearoff=0)
+
+    personalizationoptions.add_command(label="Personaliser PandoOS", command=personalizationevent)
+
+    toolbar1.add_cascade(label="Affichage", menu=screenoptions)
+    toolbar1.add_cascade(label="Infos systèmes", menu=systeminformations)
+    toolbar1.add_cascade(label="Personalisation", menu=personalizationoptions)
+
+    settingsGui.config(bg="white", menu=toolbar1)
 
 # Toolbar
 
@@ -507,7 +475,6 @@ menu = Menu(PandoOS)
 appsMenu = Menu(menu, tearoff=0)
 appsMenu.add_command(label="Horloge", command=clock)
 appsMenu.add_command(label="Bloc-Notes", command=notepad)
-appsMenu.add_command(label="AppMaker", command=appmaker)
 # appsMenu.add_command(label="PandoShop", command=pandoshopap)
 
 # Tools Menu
@@ -532,16 +499,16 @@ menu.add_cascade(label="Applications", menu=appsMenu)
 
 # UI
 
-def currentTime():
-    def t():
-        string = strftime('%H:%M:%S')
-        currenttime.config(text=string)
-        currenttime.after(1000, t)
-    currenttime = Label(PandoOS)
-    currenttime.pack(side="bottom")
-    t()
+# def currentTime():
+#     def t():
+#         string = strftime('%H:%M:%S')
+#         currenttime.config(text=string)
+#         currenttime.after(1000, t)
+#     currenttime = Label(PandoOS)
+#     currenttime.pack(side="bottom")
+#     t()
 
-currentTime()
+# currentTime()
 
 # Show menu
 
