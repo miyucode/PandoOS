@@ -5,7 +5,7 @@
 For use **PandoOS**, you need:
 
 - [Python](https://python.org) 🐍 (Latest version: 3.9.4)
-- Tkinter 🖥
+- [Tkinter](https://fr.wikipedia.org/wiki/Tkinter) 🖥
 - Windows 7/8.1/10
 
 ## Usage 📜
