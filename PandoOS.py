@@ -5,6 +5,7 @@ from time import *
 from time import strftime
 import tkinter.messagebox as mb
 import os
+import platform
 
 try:
     os.mkdir("root/Desktop")
@@ -413,6 +414,7 @@ def settings():
     settingsGui.title("PandoOS - Paramètres")
     settingsGui.geometry("950x500")
     settingsGui.iconbitmap("img/settings.ico")
+    settingsGui.resizable(False, False)
     # settingsGui.destroy()
     # mb.showinfo("PandoOS","Application indisponible pour le moment.")
 
@@ -426,6 +428,31 @@ def settings():
 
     def closepersonalizationoptionswindow():
         settings()
+
+    def closesysteminformationswindow():
+        settings()
+
+    def systeminformationsevent():
+        settingsGui.destroy()
+        systeminformationswindow = Toplevel()
+        systeminformationswindow.geometry("500x500")
+        systeminformationswindow.resizable(False, False)
+        systeminformationswindow.title("PandoOS - Informations système")
+        # systeminformations.config()
+
+        system_ = platform.uname()
+
+        versionos = Label(systeminformationswindow, text="Version: PandoOS v1.4 (Build 14)")
+        versionos.pack()
+
+        machineos = Label(systeminformationswindow, text=f"Machine: {system_.machine}")
+        machineos.pack()
+        
+        cpuinfos = Label(systeminformationswindow, text=f"Processeur: {system_.processor}")
+        cpuinfos.pack()
+
+        closebtn = Button(systeminformationswindow, text="Revenir au menu de sélection", command=lambda: [systeminformationswindow.destroy(), closesysteminformationswindow()])
+        closebtn.pack(side="bottom")
 
     def personalizationevent():
         settingsGui.destroy()
@@ -459,6 +486,7 @@ def settings():
     personalizationoptions = Menu(toolbar1, tearoff=0)
 
     personalizationoptions.add_command(label="Personaliser PandoOS", command=personalizationevent)
+    systeminformations.add_command(label="Informations système", command=systeminformationsevent)
 
     toolbar1.add_cascade(label="Affichage", menu=screenoptions)
     toolbar1.add_cascade(label="Infos systèmes", menu=systeminformations)
