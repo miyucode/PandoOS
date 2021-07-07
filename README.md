@@ -19,3 +19,4 @@ and after this, close CMD and open "**boot.py**" !
 # Notes 📚
 
 Thanks for everyone who help me in the developement of **PandoOS** ! :P
+Latest Version of PandoOS: 1.4
