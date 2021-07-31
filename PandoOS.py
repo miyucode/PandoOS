@@ -7,6 +7,8 @@ import tkinter.messagebox as mb
 import os
 import platform
 
+# Folder verification
+
 try:
     os.mkdir("root/Desktop")
 except FileExistsError:
@@ -24,19 +26,6 @@ PandoOS.maxsize(1000, 500)
 PandoOS.bind('<Escape>', lambda e: shutdown())
 PandoOS.config(bg="white")
 
-class sys(object):
-    """docstring for sys"""
-    def __init__(self, arg):
-        super(sys, self).__init__()
-        self.arg = arg
-    def exec_(command):
-        os.system(command)
-    def ls(directory):
-        if directory == "":
-            os.system('dir')
-        else:
-            os.system('dir ' + directory)
-
 # --> App(s) and Tool(s)
 
 def shell():
@@ -51,7 +40,7 @@ def shell():
             shell()
         elif output == "shutdown":
             shutdown()
-        elif output == "restart":
+        elif output == "reload":
             restart()
 
     # GUI Config
@@ -70,8 +59,8 @@ def shell():
     exec_command = Button(shellgui, text="Exécuter la commande", command=exec_)
     exec_command.pack()
 
-    aide = Button(shellgui, text="Docs")
-    aide.pack()
+    # aide = Button(shellgui, text="Docs")
+    # aide.pack()
 
     # <-- end
 
@@ -239,16 +228,64 @@ def fileexplorer():
 
     def createFolder():
         name = Name.get()
+        fe.destroy()
         if name == "default" or name == "":
             mb.showerror("PandoOS","Veuillez donner un nom correct à votre dossier !")
         else:
+            def yes():
+                def requestfolder():
+                    folder = nameoffolder.get()
+                    d.destroy()
+                    if folder == "":
+                        mb.showerror("PandoOS","Rentrer le nom du dossier correctement !")
+                        yes()
+                    else:
+                        try:
+                            os.mkdir(f"root/Desktop/{folder}")
+                            os.system(f"cd {folder}/")
+                            os.mkdir(f"{name}")
+                            os.system("cd ..")
+                            mb.showinfo("PandoOS","Dossier crée avec succès !")
+                        except FileExistsError:
+                            # os.mkdir(f"root/Desktop/{name}/{folder}")
+                            os.system(f"cd root/Desktop/{folder}")
+                            os.mkdir(f"{name}")
+                            os.system("cd ..")
+                            mb.showinfo("PandoOS","Dossier crée avec succès !")
+
+                confirmation4.destroy()
+                d = Toplevel()
+                d.title("PandoOS - Information")
+                d.geometry("300x100")
+                d.resizable(False, False)
+                d.iconbitmap("img/warning.ico")
+                Label(d, text="Entrez le nom du dossier:").pack()
+                nameoffolder = Entry(d)
+                nameoffolder.pack()
+                Button(d, text="Continuer", command=requestfolder).pack()
+
+            def no():
+                confirmation4.destroy()
+                os.mkdir(f"root/Desktop/{name}")
+                fe.destroy()
+                mb.showinfo("PandoOS","Dossier crée avec succès !")
+
             # userprofile = os.system('%userprofile%')
             # print('PandoOS> %userprofile% not found.')
-            os.system('cls')
-            name = Name.get()
-            os.mkdir(f"root/Desktop/{name}")
-            fe.destroy()
-            mb.showinfo("PandoOS","Dossier crée avec succès !")
+            confirmation4 = Toplevel()
+            confirmation4.title("PandoOS - Attention !")
+            confirmation4.geometry("300x100")
+            confirmation4.resizable(False, False)
+            confirmation4.iconbitmap("img/warning.ico")
+            Label(confirmation4, text="Souhaitez-vous le créer dans un dossier en particulier ?").pack()
+            Button(confirmation4, text="Oui.", command=yes).pack()
+            Button(confirmation4, text="Non.", command=no).pack()
+
+            # os.system('cls')
+            # name = Name.get()
+            # os.mkdir(f"root/Desktop/{name}")
+            # fe.destroy()
+            # mb.showinfo("PandoOS","Dossier crée avec succès !")
 
     def RequestFolder():
         createFolder()
@@ -438,6 +475,8 @@ def settings():
         systeminformationswindow.geometry("500x500")
         systeminformationswindow.resizable(False, False)
         systeminformationswindow.title("PandoOS - Informations système")
+        systeminformationswindow.iconbitmap("img/information.ico")
+        systeminformationswindow.protocol("WM_DELETE_WINDOW", lambda: systeminformationswindow.destroy(), closesysteminformationswindow())
         # systeminformations.config()
 
         system_ = platform.uname()
@@ -461,6 +500,7 @@ def settings():
         personalizationoptionswindow.resizable(False, False)
         personalizationoptionswindow.title("PandoOS - Personalisation système")
         personalizationoptionswindow.config(bg="white")
+        personalizationoptionswindow.iconbitmap("img/information.ico")
         
         changebackgroundtext = Label(personalizationoptionswindow, text="Changez la couleur du fond d'écran")
         changebackgroundtext.pack()
