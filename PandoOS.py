@@ -3,6 +3,8 @@ from tkinter import filedialog
 from tkinter.ttk import *
 from time import *
 from time import strftime
+import numpy as np
+import cv2
 import tkinter.messagebox as mb
 import os
 import platform
@@ -195,28 +197,11 @@ def fileexplorer():
         if file == "":
             mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer !")
             fileexplorer()
+            demande1.destroy()
         else:
-            def yes():
-                demande1.destroy()
-                mb.showinfo('PandoOS','Vous avez ouvert avec succès "' + file + '" !')
-                os.system("notepad " + file)
-                fileexplorer()
-
-            def no():
-                demande1.destroy()
-                mb.showinfo('PandoOS','Vous avez ouvert avec succès "' + file + '" !')
-                os.system(file)
-                fileexplorer()
-
-            demande1 = Toplevel()
-            demande1.title("PandoOS - Attention !")
-            demande1.resizable(False, False)
-            demande1.geometry("300x100")
-            demande1.iconbitmap("img/warning.ico")
-
-            Label(demande1, text="Est-ce que le fichier sélectionner est un fichier texte ?\n Si oui, souhaitez-vous l'offrir avec le Bloc-Notes?").pack()
-            Button(demande1, text="Oui.", command=yes).pack()
-            Button(demande1, text="Non.", command=no).pack()
+            mb.showinfo('PandoOS','Vous avez ouvert avec succès "' + file + '" !')
+            os.system(f"start {file}")
+            fileexplorer()
 
     # (Func) Create Folder
 
@@ -469,6 +454,57 @@ def settings():
     def closesysteminformationswindow():
         settings()
 
+    def closescreenoptionswindow():
+        settings()
+
+    def screenoptionsevent():
+        def recordcameraofuser():
+            def continuer1():
+                nameoffile = nameOfFile.get()
+                mb.showinfo(f"Enregistreur de caméra - Information",f"Vous avez nommé votre vidéo en \"{nameoffile}.mp4\" !")
+                confirmation_.destroy()
+                print("PandoOS> record camera --> true")
+                cap = cv2.VideoCapture(0)
+                cap.set(3,640)
+                cap.set(4,480)
+
+                fourcc = cv2.VideoWriter_fourcc(*'MP4V')
+                out = cv2.VideoWriter(f'videos/{nameoffile}.mp4', fourcc, 20.0, (640,480))
+
+                while(True):
+                    ret, frame = cap.read()
+                    out.write(frame)
+                    cv2.imshow('Votre camera - RECORD (yes)', frame)
+                    c = cv2.waitKey(1)
+                    if c & 0xFF == ord('q'):
+                        print("PandoOS> record camera --> false>")
+                        screenoptionsevent()
+                        break
+
+                cap.release()
+                out.release()
+                cv2.destroyAllWindows()
+
+            screenoptionswindow.destroy()
+            confirmation_ = Toplevel()
+            confirmation_.geometry("300x100")
+            confirmation_.title("Enregistreur de caméra - Information")
+            confirmation_.resizable(False, False)
+            confirmation_.iconbitmap("img/information.ico")
+            Label(confirmation_, text="Entrez le nom de votre fichier (Pour donner le nom à la fin de l'enregistrement):").pack()
+            nameOfFile = Entry(confirmation_)
+            nameOfFile.pack()
+            Button(confirmation_, text="Continuer", command=continuer1).pack()
+
+        settingsGui.destroy()
+        screenoptionswindow = Toplevel()
+        screenoptionswindow.geometry("500x500")
+        screenoptionswindow.resizable(False, False)
+        screenoptionswindow.title("PandoOS - Paramètres d'affichage")
+        screenoptionswindow.iconbitmap("img/information.ico")
+        screenoptionswindow.protocol("WM_DELETE_WINDOW", lambda: [screenoptionswindow.destroy(), closesysteminformationswindow()])
+        Button(screenoptionswindow, text="Enregistrer votre caméra", command=recordcameraofuser).pack()
+
     def systeminformationsevent():
         settingsGui.destroy()
         systeminformationswindow = Toplevel()
@@ -476,12 +512,12 @@ def settings():
         systeminformationswindow.resizable(False, False)
         systeminformationswindow.title("PandoOS - Informations système")
         systeminformationswindow.iconbitmap("img/information.ico")
-        systeminformationswindow.protocol("WM_DELETE_WINDOW", lambda: systeminformationswindow.destroy(), closesysteminformationswindow())
+        systeminformationswindow.protocol("WM_DELETE_WINDOW", lambda: [systeminformationswindow.destroy(), closesysteminformationswindow()])
         # systeminformations.config()
 
         system_ = platform.uname()
 
-        versionos = Label(systeminformationswindow, text="Version: PandoOS v1.4 (Build 14)")
+        versionos = Label(systeminformationswindow, text="Version: PandoOS v1.5 (Build 15.0_official)")
         versionos.pack()
 
         machineos = Label(systeminformationswindow, text=f"Machine: {system_.machine}")
@@ -527,6 +563,7 @@ def settings():
 
     personalizationoptions.add_command(label="Personaliser PandoOS", command=personalizationevent)
     systeminformations.add_command(label="Informations système", command=systeminformationsevent)
+    screenoptions.add_command(label="Paramètres d'affichage", command=screenoptionsevent)
 
     toolbar1.add_cascade(label="Affichage", menu=screenoptions)
     toolbar1.add_cascade(label="Infos systèmes", menu=systeminformations)
