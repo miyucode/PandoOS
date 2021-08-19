@@ -443,7 +443,7 @@ def settings():
                 cap.set(4,480)
 
                 fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-                out = cv2.VideoWriter(f'videos/{nameoffile}.mp4', fourcc, 20.0, (640,480))
+                out = cv2.VideoWriter(f'video/{nameoffile}.mp4', fourcc, 20.0, (640,480))
 
                 while(True):
                     ret, frame = cap.read()
