@@ -435,29 +435,35 @@ def settings():
         def recordcameraofuser():
             def continuer1():
                 nameoffile = nameOfFile.get()
-                mb.showinfo(f"Enregistreur de caméra - Information",f"Vous avez nommé votre vidéo en \"{nameoffile}.mp4\" !")
-                confirmation_.destroy()
-                print("PandoOS> record camera --> true")
-                cap = cv2.VideoCapture(0)
-                cap.set(3,640)
-                cap.set(4,480)
+                if nameoffile == "":
+                    confirmation_.destroy()
+                    mb.showerror("Enregistreur de caméra - Erreur !","Merci de donner un nom à votre fichier vidéo !")
+                    recordcameraofuser()
+                else:
+                    mb.showinfo(f"Enregistreur de caméra - Information",f"Vous avez nommé votre vidéo en \"{nameoffile}.mp4\" !")
+                    confirmation_.destroy()
+                    print("PandoOS> record camera --> true")
+                    mb.showwarning("Enregistreur de caméra - Attention !","Pressez la touche \"Q\" pour stopper l'enregistrement quand vous l'avez terminer.")
+                    cap = cv2.VideoCapture(0)
+                    cap.set(3,640)
+                    cap.set(4,480)
 
-                fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-                out = cv2.VideoWriter(f'video/{nameoffile}.mp4', fourcc, 20.0, (640,480))
+                    fourcc = cv2.VideoWriter_fourcc(*'MP4V')
+                    out = cv2.VideoWriter(f'video/{nameoffile}.mp4', fourcc, 20.0, (640,480))
 
-                while(True):
-                    ret, frame = cap.read()
-                    out.write(frame)
-                    cv2.imshow('Votre camera - RECORD (yes)', frame)
-                    c = cv2.waitKey(1)
-                    if c & 0xFF == ord('q'):
-                        print("PandoOS> record camera --> false>")
-                        screenoptionsevent()
-                        break
+                    while(True):
+                        ret, frame = cap.read()
+                        out.write(frame)
+                        cv2.imshow('Votre camera - RECORD (yes)', frame)
+                        c = cv2.waitKey(1)
+                        if c & 0xFF == ord('q'):
+                            print("PandoOS> record camera --> false")
+                            screenoptionsevent()
+                            break
 
-                cap.release()
-                out.release()
-                cv2.destroyAllWindows()
+                    cap.release()
+                    out.release()
+                    cv2.destroyAllWindows()
 
             screenoptionswindow.destroy()
             confirmation_ = Toplevel()
@@ -556,7 +562,7 @@ menu = Menu(PandoOS)
 
 appsMenu = Menu(menu, tearoff=0)
 appsMenu.add_command(label="Horloge", command=clock)
-appsMenu.add_command(label="Bloc-Notes", command=notepad)
+appsMenu.add_command(label="PandoPad", command=notepad)
 
 # Tools Menu
 
