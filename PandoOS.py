@@ -3,6 +3,7 @@ from tkinter import filedialog
 from tkinter.ttk import *
 from time import *
 from time import strftime
+from subprocess import Popen, PIPE
 import numpy as np
 import cv2
 import tkinter.messagebox as mb
@@ -143,32 +144,6 @@ def notepad():
     button = Button(npgui, text="Créer le fichier texte", command=savefile)
     button.pack()
 
-# def pandoshopapp():
-#   shop = Toplevel()
-#   shop.title("PandoShop - Accueil")
-#   shop.geometry("1000x500")
-#   shop.minsize(1000, 500)
-#   shop.maxsize(1000, 500)
-#   shop.iconbitmap("img/information.ico")
-#   shop.config(bg="white")
-
-#   # Menu(s)
-
-#   shopnav = Menu(shop)
-
-#   # -->
-
-#   principalmenu = Menu(shopnav, tearoff=0)
-
-#   shopnav.add_cascade(label="Outils", menu=principalmenu)
-
-#   # <--
-
-#   # print("PandoOS> An error occured. Error #1: PandoShop is not found in PandoOS.py !")
-#   # Menu config
-#   shop.config(menu=shopnav)
-
-
 def clock():
     clockapp = Toplevel()
     clockapp.title("PandoOS - Horloge")
@@ -197,7 +172,6 @@ def fileexplorer():
         if file == "":
             mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer !")
             fileexplorer()
-            demande1.destroy()
         else:
             mb.showinfo('PandoOS','Vous avez ouvert avec succès "' + file + '" !')
             os.system(f"start {file}")
@@ -487,11 +461,13 @@ def settings():
 
             screenoptionswindow.destroy()
             confirmation_ = Toplevel()
+            confirmation_.config(bg="white")
             confirmation_.geometry("300x100")
             confirmation_.title("Enregistreur de caméra - Information")
             confirmation_.resizable(False, False)
             confirmation_.iconbitmap("img/information.ico")
-            Label(confirmation_, text="Entrez le nom de votre fichier (Pour donner le nom à la fin de l'enregistrement):").pack()
+            i2 = Label(confirmation_, text="Entrez le nom de votre fichier \n(Pour donner le nom à la fin de l'enregistrement):")
+            i2.pack()
             nameOfFile = Entry(confirmation_)
             nameOfFile.pack()
             Button(confirmation_, text="Continuer", command=continuer1).pack()
@@ -501,6 +477,7 @@ def settings():
         screenoptionswindow.geometry("500x500")
         screenoptionswindow.resizable(False, False)
         screenoptionswindow.title("PandoOS - Paramètres d'affichage")
+        screenoptionswindow.config(bg="white")
         screenoptionswindow.iconbitmap("img/information.ico")
         screenoptionswindow.protocol("WM_DELETE_WINDOW", lambda: [screenoptionswindow.destroy(), closesysteminformationswindow()])
         Button(screenoptionswindow, text="Enregistrer votre caméra", command=recordcameraofuser).pack()
@@ -580,7 +557,6 @@ menu = Menu(PandoOS)
 appsMenu = Menu(menu, tearoff=0)
 appsMenu.add_command(label="Horloge", command=clock)
 appsMenu.add_command(label="Bloc-Notes", command=notepad)
-# appsMenu.add_command(label="PandoShop", command=pandoshopap)
 
 # Tools Menu
 

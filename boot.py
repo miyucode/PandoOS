@@ -12,13 +12,12 @@ root.iconbitmap("img/logo.ico")
 root.bind("<Escape>", lambda e: root.destroy())
 root.resizable(False, False)
 
-version = '1.5'
+version = '2.0'
 
 # Boot (start)
 
 def boot():
-    os.system('py -m pip install cv2')
-    os.system('py -m pip install numpy')
+    os.system('python -m pip install cv2')
     os.system('cls')
     mb.showinfo("PandoOS","Boot successful, press ENTER for continue.")
     root.destroy()
