@@ -165,15 +165,11 @@ def fileexplorer():
                     else:
                         try:
                             os.mkdir(f"root/Desktop/{folder}")
-                            os.system(f"cd {folder}/")
-                            os.mkdir(f"{name}")
-                            os.system("cd ..")
+                            os.mkdir(f"root/Desktop/{folder}/{name}")
                             mb.showinfo("PandoOS","Dossier crée avec succès !")
                         except FileExistsError:
                             # os.mkdir(f"root/Desktop/{name}/{folder}")
-                            os.system(f"cd root/Desktop/{folder}")
-                            os.mkdir(f"{name}")
-                            os.system("cd ..")
+                            os.mkdir(f"root/Desktop/{folder}/{name}")
                             mb.showinfo("PandoOS","Dossier crée avec succès !")
 
                 confirmation4.destroy()
@@ -532,7 +528,6 @@ appsMenu.add_command(label="PandoPad", command=notepad)
 
 ToolsMenu = Menu(menu, tearoff=0)
 ToolsMenu.add_command(label="Explorateur de fichiers", command=fileexplorer)
-ToolsMenu.add_command(label="Invite de commandes", command=shell)
 
 # Start Menu
 
