@@ -31,42 +31,6 @@ PandoOS.config(bg="white")
 
 # --> App(s) and Tool(s)
 
-def shell():
-
-    # Shell
-
-    def exec_():
-        output = cmd.get("1.0", "end-1c")
-        if output == "":
-            shellgui.destroy()
-            mb.showerror("Invite de commandes", "Vous n'avez inscrit aucune commande à exécuter !")
-            shell()
-        elif output == "shutdown":
-            shutdown()
-        elif output == "reload":
-            restart()
-
-    # GUI Config
-
-    shellgui = Toplevel()
-    shellgui.title("Invite de commandes (Mode Administrateur désactivée)")
-    shellgui.geometry("500x500")
-    shellgui.resizable(False, False)
-    shellgui.iconbitmap("img/shell/cmd-icon.ico")
-
-    # GUI
-    
-    cmd = Text(shellgui)
-    cmd.pack()
-
-    exec_command = Button(shellgui, text="Exécuter la commande", command=exec_)
-    exec_command.pack()
-
-    # aide = Button(shellgui, text="Docs")
-    # aide.pack()
-
-    # <-- end
-
 def notepad():
     def savefile():
         i = l.get()
