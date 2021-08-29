@@ -11,27 +11,30 @@ root.geometry("300x100")
 root.iconbitmap("img/logo.ico")
 root.bind("<Escape>", lambda e: root.destroy())
 root.resizable(False, False)
+root.withdraw()
 
 version = '2.0'
 
 # Boot (start)
 
 def boot():
-    os.system('python -m pip install cv2')
+    # os.system('python -m pip install cv2')
     os.system('cls')
     mb.showinfo("PandoOS","Boot successful, press ENTER for continue.")
-    root.destroy()
+    # root.destroy()
     os.system('cls')
     print("PandoOS> Boot...")
     print(f"PandoOS> Latest version: {version}")
     pandoos = "PandoOS.py"
     os.system(pandoos)
 
+boot()
+
 # UI
 
-Label(root, text="\n").pack()
-boot = Button(root, text="Boot PandoOS", command=boot, width=30)
-boot.pack(anchor='center')
+# Label(root, text="\n").pack()
+# boot = Button(root, text="Boot PandoOS", command=boot, width=30)
+# boot.pack(anchor='center')
 # boot.grid()
 
-root.mainloop()
+# root.mainloop()
