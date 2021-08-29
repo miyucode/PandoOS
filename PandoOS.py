@@ -108,6 +108,83 @@ def notepad():
     button = Button(npgui, text="Créer le fichier texte", command=savefile)
     button.pack()
 
+def codeeditor():
+    def savefile():
+        i = l.get()
+        if i == "":
+            cewindow.destroy()
+            mb.showerror("PandoCode","Merci d'entrer un nom correct pour votre fichier !")
+            notepad()
+        else:
+            t = text.get("1.0", "end-1c")
+            cewindow.destroy()
+            confirmation3 = Toplevel()
+            confirmation3.title("PandoCode - Attention !")
+            confirmation3.geometry("300x100")
+            confirmation3.resizable(False, False)
+            confirmation3.iconbitmap("img/warning.ico")
+
+            def yes():
+                confirmation3.destroy()
+                def requesttextfile():
+                    foldername = folderName.get()
+                    m.destroy()
+                    if foldername == "":
+                        mb.showerror("PandoCode","Entrez un nom correct d'un dossier existant ou non !")
+                        yes()
+                    else:
+                        try:
+                            os.mkdir("root/Desktop/" + foldername)
+                            file = open("root/Desktop/" + foldername + "/" + i, "w+")
+                            file.write(t)
+                            file.close()
+                            mb.showinfo("PandoCode","Vous avez créer un fichier avec succès !")
+                        except FileExistsError:
+                            # directory already exists
+                            file = open("root/Desktop/" + foldername + "/" + i, "w+")
+                            file.write(t)
+                            file.close()
+                            mb.showinfo("PandoCode","Vous avez créer un fichier avec succès !")
+
+                m = Toplevel()
+                m.title("PandoCode - Information")
+                m.geometry("300x100")
+                m.resizable(False, False)
+                m.iconbitmap("img/warning.ico")
+
+                Label(m, text="Entrez le nom du dossier:").pack()
+
+                folderName = Entry(m)
+                folderName.pack()
+
+                Button(m, text="Continuer", command=requesttextfile).pack()
+
+            def no():
+                confirmation3.destroy()
+                file = open('root/Desktop/' + i, 'w+')
+                file.write(t)
+                file.close()
+                mb.showinfo("PandoCode","Vous avez créer un fichier avec succès !")
+                
+
+            Label(confirmation3, text="Souhaitez-vous sauvegarder le fichier \ndans un dossier en particulier ?").pack()
+            Button(confirmation3, text="Oui.", command=yes).pack()
+            Button(confirmation3, text="Non.", command=no).pack()
+
+
+    cewindow = Toplevel()
+    cewindow.title('PandoCode')
+    cewindow.geometry('850x500')
+    cewindow.resizable(False, False)
+    cewindow.iconbitmap('img/notepad-icon.ico')
+    text = Text(cewindow)
+    text.pack()
+    Label(cewindow, text="Donnez un nom au fichier:").pack()
+    l = Entry(cewindow)
+    l.pack()
+    button = Button(cewindow, text="Sauvegarder le fichier", command=savefile)
+    button.pack()
+
 def clock():
     clockapp = Toplevel()
     clockapp.title("PandoOS - Horloge")
@@ -432,6 +509,7 @@ def settings():
             confirmation_.title("Enregistreur de caméra - Information")
             confirmation_.resizable(False, False)
             confirmation_.iconbitmap("img/information.ico")
+            confirmation_.protocol("WM_DELETE_WINDOW", lambda: screenoptionsevent())
             i2 = Label(confirmation_, text="Entrez le nom de votre fichier \n(Pour donner le nom à la fin de l'enregistrement):")
             i2.pack()
             nameOfFile = Entry(confirmation_)
@@ -460,7 +538,7 @@ def settings():
 
         system_ = platform.uname()
 
-        versionos = Label(systeminformationswindow, text="Version: PandoOS v1.5 (Build 15.0_official)")
+        versionos = Label(systeminformationswindow, text="Version: PandoOS v2.0 (Build 20.0_official)")
         versionos.pack()
 
         machineos = Label(systeminformationswindow, text=f"Machine: {system_.machine}")
@@ -523,6 +601,7 @@ menu = Menu(PandoOS)
 appsMenu = Menu(menu, tearoff=0)
 appsMenu.add_command(label="Horloge", command=clock)
 appsMenu.add_command(label="PandoPad", command=notepad)
+appsMenu.add_command(label="PandoCode", command=codeeditor)
 
 # Tools Menu
 
