@@ -4,6 +4,7 @@ from tkinter.ttk import *
 from time import *
 from time import strftime
 from subprocess import Popen, PIPE
+from pynput import keyboard
 import numpy as np
 import cv2
 import tkinter.messagebox as mb
@@ -209,7 +210,7 @@ def fileexplorer():
         FileRequest2.pack_forget()
         Name.pack_forget()
         # print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
-        file = filedialog.askopenfilename(title="Sélectionner un fichier", initialdir="C:/Users/")
+        file = filedialog.askopenfilename(defaultextension='*.*', title="Sélectionner un fichier", initialdir="C:/Users/", filetypes=[('Tout les fichiers', '*.*'), ("Fichier HTML", "*.html*"), ("Fichier Python", "*.py*")])
         if file == "":
             mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer !")
             fileexplorer()
@@ -244,10 +245,12 @@ def fileexplorer():
                             os.mkdir(f"root/Desktop/{folder}")
                             os.mkdir(f"root/Desktop/{folder}/{name}")
                             mb.showinfo("PandoOS","Dossier crée avec succès !")
+                            fileexplorer()
                         except FileExistsError:
                             # os.mkdir(f"root/Desktop/{name}/{folder}")
                             os.mkdir(f"root/Desktop/{folder}/{name}")
                             mb.showinfo("PandoOS","Dossier crée avec succès !")
+                            fileexplorer()
 
                 confirmation4.destroy()
                 d = Toplevel()
@@ -316,12 +319,14 @@ def fileexplorer():
                             file.write(".")
                             file.close()
                             mb.showinfo("PandoOS","Fichier crée avec succès !")
+                            fileexplorer()
                         except FileExistsError:
                             # directory already exists
                             file = open("root/Desktop/" + nameFolder + "/" + name, 'w+')
                             file.write(".")
                             file.close()
                             mb.showinfo("PandoOS","Fichier crée avec succès !")
+                            fileexplorer()
                 confirmation.destroy()
                 fe.destroy()
                 confirmation2 = Toplevel()
