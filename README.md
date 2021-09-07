@@ -10,7 +10,7 @@ For use **PandoOS**, you need:
 
 ## Usage 📜
 
-In a CMD, enter this (if you don't have Tkinter for use __PandoOS__):
+In a CMD, enter this (For be sure that you have Tkinter for use __PandoOS__, so it's not an obligation !):
 ```batch
 python -m pip install tk
 ```
