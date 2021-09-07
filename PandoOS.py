@@ -232,6 +232,7 @@ def fileexplorer():
         fe.destroy()
         if name == "default" or name == "":
             mb.showerror("PandoOS","Veuillez donner un nom correct à votre dossier !")
+            yes()
         else:
             def yes():
                 def requestfolder():
@@ -268,6 +269,7 @@ def fileexplorer():
                 os.mkdir(f"root/Desktop/{name}")
                 fe.destroy()
                 mb.showinfo("PandoOS","Dossier crée avec succès !")
+                fileexplorer()
 
             # userprofile = os.system('%userprofile%')
             # print('PandoOS> %userprofile% not found.')
