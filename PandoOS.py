@@ -5,6 +5,7 @@ from time import *
 from time import strftime
 from subprocess import Popen, PIPE
 from pynput import keyboard
+from tkvideo import *
 import numpy as np
 import cv2
 import tkinter.messagebox as mb
@@ -31,6 +32,21 @@ PandoOS.bind('<Escape>', lambda e: shutdown())
 PandoOS.config(bg="white")
 
 # --> App(s) and Tool(s)
+
+def videoplayer():
+    file = filedialog.askopenfilename(defaultextension='*.mp4*', title="Sélectionner un fichier", initialdir="C:/Users/", filetypes=[('Fichiers mp4', '*.mp4*'), ("Fichier GIF", "*.gif*")])
+    if file == "":
+        mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer !")
+        videoplayer()
+    else:
+        mb.showinfo('PandoOS','Vous avez sélectionner avec succès "' + file + '" !')
+
+    root = Toplevel()
+    my_label = Label(root)
+    my_label.pack()
+    player = tkvideo(file, my_label, loop = 1, size = (1280,720))
+    player.play()
+    root.mainloop()
 
 def notepad():
     def savefile():
@@ -609,6 +625,7 @@ appsMenu = Menu(menu, tearoff=0)
 appsMenu.add_command(label="Horloge", command=clock)
 appsMenu.add_command(label="PandoPad", command=notepad)
 appsMenu.add_command(label="PandoCode", command=codeeditor)
+appsMenu.add_command(label="Lecteur vidéo", command=videoplayer)
 
 # Tools Menu
 
