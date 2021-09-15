@@ -560,7 +560,7 @@ def settings():
 
         system_ = platform.uname()
 
-        versionos = Label(systeminformationswindow, text="Version: PandoOS v2.0 (Build 20.0_official)")
+        versionos = Label(systeminformationswindow, text="Version: PandoOS v2.1 (Build 20.1_official)")
         versionos.pack()
 
         machineos = Label(systeminformationswindow, text=f"Machine: {system_.machine}")
