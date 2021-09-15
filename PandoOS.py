@@ -34,19 +34,18 @@ PandoOS.config(bg="white")
 # --> App(s) and Tool(s)
 
 def videoplayer():
-    file = filedialog.askopenfilename(defaultextension='*.mp4*', title="Sélectionner un fichier", initialdir="C:/Users/", filetypes=[('Fichiers mp4', '*.mp4*'), ("Fichier GIF", "*.gif*")])
+    file = filedialog.askopenfilename(defaultextension='*.mp4*', title="Sélectionner un fichier vidéo", initialdir="C:/Users/", filetypes=[('Fichiers MP4', '*.mp4*'), ("Fichier GIF", "*.gif*")])
     if file == "":
-        mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer !")
-        videoplayer()
+        mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer ! Relancez le lecteur vidéo pour réessayer !")
     else:
         mb.showinfo('PandoOS','Vous avez sélectionner avec succès "' + file + '" !')
 
-    root = Toplevel()
-    my_label = Label(root)
+    vp = Toplevel()
+    my_label = Label(vp)
     my_label.pack()
-    player = tkvideo(file, my_label, loop = 1, size = (1280,720))
+    player = tkvideo(file, my_label, loop=1, size=(1080,720))
     player.play()
-    root.mainloop()
+    vp.mainloop()
 
 def notepad():
     def savefile():
@@ -62,7 +61,7 @@ def notepad():
             confirmation3.title("PandoPad - Attention !")
             confirmation3.geometry("300x100")
             confirmation3.resizable(False, False)
-            confirmation3.iconbitmap("img/warning.ico")
+            confirmation3.iconbitmap("img/info3.ico")
 
             def yes():
                 confirmation3.destroy()
@@ -90,7 +89,7 @@ def notepad():
                 m.title("PandoPad - Information")
                 m.geometry("300x100")
                 m.resizable(False, False)
-                m.iconbitmap("img/warning.ico")
+                m.iconbitmap("img/info3.ico")
 
                 Label(m, text="Entrez le nom du dossier:").pack()
 
@@ -139,7 +138,7 @@ def codeeditor():
             confirmation3.title("PandoCode - Attention !")
             confirmation3.geometry("300x100")
             confirmation3.resizable(False, False)
-            confirmation3.iconbitmap("img/warning.ico")
+            confirmation3.iconbitmap("img/info3.ico")
 
             def yes():
                 confirmation3.destroy()
@@ -167,7 +166,7 @@ def codeeditor():
                 m.title("PandoCode - Information")
                 m.geometry("300x100")
                 m.resizable(False, False)
-                m.iconbitmap("img/warning.ico")
+                m.iconbitmap("img/info3.ico")
 
                 Label(m, text="Entrez le nom du dossier:").pack()
 
@@ -208,7 +207,7 @@ def clock():
     clockapp.maxsize(450, 120)
     clockapp.minsize(450, 120)
     clockapp.geometry("300x200")
-    clockapp.iconbitmap("img/information.ico")
+    clockapp.iconbitmap("img/info3.ico")
 
     def time():
         string=strftime('%H:%M:%S')
@@ -274,7 +273,7 @@ def fileexplorer():
                 d.title("PandoOS - Information")
                 d.geometry("300x100")
                 d.resizable(False, False)
-                d.iconbitmap("img/warning.ico")
+                d.iconbitmap("img/info3.ico")
                 Label(d, text="Entrez le nom du dossier:").pack()
                 nameoffolder = Entry(d)
                 nameoffolder.pack()
@@ -293,7 +292,7 @@ def fileexplorer():
             confirmation4.title("PandoOS - Attention !")
             confirmation4.geometry("300x100")
             confirmation4.resizable(False, False)
-            confirmation4.iconbitmap("img/warning.ico")
+            confirmation4.iconbitmap("img/info3.ico")
             Label(confirmation4, text="Souhaitez-vous le créer dans un dossier en particulier ?").pack()
             Button(confirmation4, text="Oui.", command=yes).pack()
             Button(confirmation4, text="Non.", command=no).pack()
@@ -351,7 +350,7 @@ def fileexplorer():
                 confirmation2.maxsize(300, 100)
                 confirmation2.minsize(300, 100)
                 confirmation2.title("PandoOS - Information")
-                confirmation2.iconbitmap("img/warning.ico")
+                confirmation2.iconbitmap("img/info3.ico")
                 Label(confirmation2, text="Entrez le nom du dossier:").pack()
                 namefolder = Entry(confirmation2, text="")
                 namefolder.pack()
@@ -375,7 +374,7 @@ def fileexplorer():
             confirmation.maxsize(300, 100)
             confirmation.minsize(300, 100)
             confirmation.title("PandoOS - Attention !")
-            confirmation.iconbitmap("img/warning.ico")
+            confirmation.iconbitmap("img/info3.ico")
             Label(confirmation, text="Souhaitez-vous le sauvegarder \ndans un dossier en particulier ?").pack()
             Button(confirmation, text="Oui.", command=yes).pack()
             Button(confirmation, text="Non.", command=no).pack()
@@ -531,7 +530,7 @@ def settings():
             confirmation_.geometry("300x100")
             confirmation_.title("Enregistreur de caméra - Information")
             confirmation_.resizable(False, False)
-            confirmation_.iconbitmap("img/information.ico")
+            confirmation_.iconbitmap("img/info3.ico")
             confirmation_.protocol("WM_DELETE_WINDOW", lambda: screenoptionsevent())
             i2 = Label(confirmation_, text="Entrez le nom de votre fichier \n(Pour donner le nom à la fin de l'enregistrement):")
             i2.pack()
@@ -545,7 +544,7 @@ def settings():
         screenoptionswindow.resizable(False, False)
         screenoptionswindow.title("PandoOS - Paramètres d'affichage")
         screenoptionswindow.config(bg="white")
-        screenoptionswindow.iconbitmap("img/information.ico")
+        screenoptionswindow.iconbitmap("img/info3.ico")
         screenoptionswindow.protocol("WM_DELETE_WINDOW", lambda: [screenoptionswindow.destroy(), closesysteminformationswindow()])
         Button(screenoptionswindow, text="Enregistrer votre caméra", command=recordcameraofuser).pack()
 
@@ -555,7 +554,7 @@ def settings():
         systeminformationswindow.geometry("500x500")
         systeminformationswindow.resizable(False, False)
         systeminformationswindow.title("PandoOS - Informations système")
-        systeminformationswindow.iconbitmap("img/information.ico")
+        systeminformationswindow.iconbitmap("img/info3.ico")
         systeminformationswindow.protocol("WM_DELETE_WINDOW", lambda: [systeminformationswindow.destroy(), closesysteminformationswindow()])
         # systeminformations.config()
 
@@ -580,7 +579,7 @@ def settings():
         personalizationoptionswindow.resizable(False, False)
         personalizationoptionswindow.title("PandoOS - Personalisation système")
         personalizationoptionswindow.config(bg="white")
-        personalizationoptionswindow.iconbitmap("img/information.ico")
+        personalizationoptionswindow.iconbitmap("img/info3.ico")
         
         changebackgroundtext = Label(personalizationoptionswindow, text="Changez la couleur du fond d'écran")
         changebackgroundtext.pack()
