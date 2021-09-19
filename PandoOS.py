@@ -34,18 +34,32 @@ PandoOS.config(bg="white")
 # --> App(s) and Tool(s)
 
 def videoplayer():
-    file = filedialog.askopenfilename(defaultextension='*.mp4*', title="Sélectionner un fichier vidéo", initialdir="C:/Users/", filetypes=[('Fichiers MP4', '*.mp4*'), ("Fichier GIF", "*.gif*")])
-    if file == "":
-        mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer ! Relancez le lecteur vidéo pour réessayer !")
-    else:
-        mb.showinfo('PandoOS','Vous avez sélectionner avec succès "' + file + '" !')
-
     vp = Toplevel()
-    my_label = Label(vp)
-    my_label.pack()
-    player = tkvideo(file, my_label, loop=1, size=(1080,720))
-    player.play()
-    vp.mainloop()
+    vp.title("Lecteur vidéo")
+    vp.geometry("800x500")
+    vp.resizable(False, False)
+    vp.iconbitmap("img/videoplayer.ico")
+
+    def readvideo():
+        vp.destroy()
+        file = filedialog.askopenfilename(defaultextension='*.mp4*', title="Sélectionner un fichier vidéo", initialdir="C:/Users/", filetypes=[('Fichiers MP4', '*.mp4*'), ("Fichier GIF", "*.gif*")])
+        if file == "":
+            mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer ! Relancez le lecteur vidéo pour réessayer !")
+            vpoutput.destroy()
+        else:
+            mb.showinfo('PandoOS','Vous avez sélectionner avec succès "' + file + '" !')
+        vpoutput = Toplevel()
+        vpoutput.title(file + " - Lecteur vidéo")
+        vpoutput.iconbitmap("img/videoplayer.ico")
+        vpoutput.bind('<Escape>', lambda e: vpoutput.destroy())
+        video = Label(vpoutput)
+        video.pack()
+        player = tkvideo(file, video, loop=1, size=(800,500))
+        player.play()
+        vpoutput.mainloop()
+
+    startvideo = Button(vp, text="Lire une vidéo", command=readvideo)
+    startvideo.pack()
 
 def notepad():
     def savefile():
