@@ -6,6 +6,8 @@ from time import strftime
 from subprocess import Popen, PIPE
 from pynput import keyboard
 from tkvideo import *
+from pygame import mixer
+import mp3play
 import numpy as np
 import cv2
 import tkinter.messagebox as mb
@@ -32,6 +34,49 @@ PandoOS.bind('<Escape>', lambda e: shutdown())
 PandoOS.config(bg="white")
 
 # --> App(s) and Tool(s)
+
+def audioplayer():
+    ap = Toplevel()
+    ap.title("Lecteur audio")
+    ap.geometry("300x100")
+    ap.resizable(False, False)
+    ap.iconbitmap("img/audioplayer.ico")
+
+    def stopaudio():
+        mixer.music.stop()
+        music.configure(text="??? | Aucune musique en cours.")
+        music.pack_forget()
+        stopbutton.pack_forget()
+        startaudio.pack()
+
+    def readaudio():
+
+        mixer.init()
+    
+        def raudio():
+            mixer.music.load(file)
+            mixer.music.play()
+
+            music.configure(text=file + " | En cours...")
+            music.pack()
+            stopbutton.pack()
+            startaudio.pack_forget()
+
+        file = filedialog.askopenfilename(defaultextension='*.mp3*', title="Sélectionner un fichier audio", initialdir="C:/Users/", filetypes=[('Fichiers MP3', '*.mp3*'), ("Fichier WAW", "*.waw*")])
+        if file == "":
+            mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer ! Relancez le lecteur audio pour réessayer !")
+        else:
+            mb.showinfo('PandoOS','Vous avez sélectionner avec succès "' + file + '" !')
+            raudio()
+
+    startaudio = Button(ap, text="Lire un(e) audio/musique", command=readaudio)
+    startaudio.pack()
+
+    music = Label(ap, text="??? | Aucune musique en cours.")
+    music.pack_forget()
+
+    stopbutton = Button(ap, text="Arrêter la musique", command=stopaudio)
+    stopbutton.pack_forget()
 
 def videoplayer():
     vp = Toplevel()
@@ -639,6 +684,7 @@ appsMenu.add_command(label="Horloge", command=clock)
 appsMenu.add_command(label="PandoPad", command=notepad)
 appsMenu.add_command(label="PandoCode", command=codeeditor)
 appsMenu.add_command(label="Lecteur vidéo", command=videoplayer)
+appsMenu.add_command(label="Lecteur audio", command=audioplayer)
 
 # Tools Menu
 
