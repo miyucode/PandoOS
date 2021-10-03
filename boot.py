@@ -13,11 +13,12 @@ root.bind("<Escape>", lambda e: root.destroy())
 root.resizable(False, False)
 root.withdraw()
 
-version = '2.1'
+version = '2.3'
 
 # Boot (start)
 
 def boot():
+    os.system('python -m pip install pygame')
     os.system('python -m pip install tkvideo')
     os.system('cls')
     mb.showinfo("PandoOS","Boot successful, press ENTER for continue.")
