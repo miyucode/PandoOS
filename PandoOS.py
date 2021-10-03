@@ -36,18 +36,25 @@ PandoOS.config(bg="white")
 # --> App(s) and Tool(s)
 
 def audioplayer():
+
+    musicname = ""
+
     ap = Toplevel()
     ap.title("Lecteur audio")
-    ap.geometry("300x100")
+    ap.geometry("800x500")
     ap.resizable(False, False)
     ap.iconbitmap("img/audioplayer.ico")
+
 
     def stopaudio():
         mixer.music.stop()
         music.configure(text="??? | Aucune musique en cours.")
         music.pack_forget()
         stopbutton.pack_forget()
+        ap.title("Lecteur audio")
         startaudio.pack()
+        pausebutton1.pack_forget()
+        pausebutton2.pack_forget()
 
     def readaudio():
 
@@ -57,17 +64,36 @@ def audioplayer():
             mixer.music.load(file)
             mixer.music.play()
 
-            music.configure(text=file + " | En cours...")
+            ap.title(f"Lecteur audio - {file}")
+
+            music.configure(text="\n" + file + " - Lecture en cours...")
             music.pack()
             stopbutton.pack()
             startaudio.pack_forget()
+            pausebutton1.pack()
 
         file = filedialog.askopenfilename(defaultextension='*.mp3*', title="Sélectionner un fichier audio", initialdir="C:/Users/", filetypes=[('Fichiers MP3', '*.mp3*'), ("Fichier WAW", "*.waw*")])
         if file == "":
             mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer ! Relancez le lecteur audio pour réessayer !")
         else:
             mb.showinfo('PandoOS','Vous avez sélectionner avec succès "' + file + '" !')
+            musicname = "" + file
             raudio()
+
+    def pauseaudio2():
+        mixer.music.unpause()
+        pausebutton1.pack()
+        pausebutton2.pack_forget()
+
+    def pauseaudio1():
+        mixer.music.pause()
+        pausebutton1.pack_forget()
+        pausebutton2.pack()
+
+    def change_vol():
+        mixer.music.set_volume(vol.get())
+
+    Label(ap, text="\n").pack()
 
     startaudio = Button(ap, text="Lire un(e) audio/musique", command=readaudio)
     startaudio.pack()
@@ -75,8 +101,16 @@ def audioplayer():
     music = Label(ap, text="??? | Aucune musique en cours.")
     music.pack_forget()
 
+    Label(ap, text="\n").pack()
+
     stopbutton = Button(ap, text="Arrêter la musique", command=stopaudio)
     stopbutton.pack_forget()
+
+    pausebutton1 = Button(ap, text="Mettre en pause la musique", command=pauseaudio1)
+    pausebutton1.pack_forget()
+
+    pausebutton2 = Button(ap, text="Reprendre la musique", command=pauseaudio2)
+    pausebutton2.pack_forget()
 
 def videoplayer():
     vp = Toplevel()
@@ -86,6 +120,7 @@ def videoplayer():
     vp.iconbitmap("img/videoplayer.ico")
 
     def readvideo():
+
         vp.destroy()
         file = filedialog.askopenfilename(defaultextension='*.mp4*', title="Sélectionner un fichier vidéo", initialdir="C:/Users/", filetypes=[('Fichiers MP4', '*.mp4*'), ("Fichier GIF", "*.gif*")])
         if file == "":
@@ -94,13 +129,14 @@ def videoplayer():
         else:
             mb.showinfo('PandoOS','Vous avez sélectionner avec succès "' + file + '" !')
         vpoutput = Toplevel()
-        vpoutput.title(file + " - Lecteur vidéo")
+        vpoutput.title(f"Lecteur vidéo - {file}")
         vpoutput.iconbitmap("img/videoplayer.ico")
         vpoutput.bind('<Escape>', lambda e: vpoutput.destroy())
         video = Label(vpoutput)
         video.pack()
         player = tkvideo(file, video, loop=1, size=(800,500))
         player.play()
+
         vpoutput.mainloop()
 
     startvideo = Button(vp, text="Lire une vidéo", command=readvideo)
@@ -619,13 +655,16 @@ def settings():
 
         system_ = platform.uname()
 
-        versionos = Label(systeminformationswindow, text="Version: PandoOS v2.1 (Build 20.1_official)")
+        versionos = Label(systeminformationswindow, text="Version: PandoOS v2.3 (Build 20.3_official)")
         versionos.pack()
 
         machineos = Label(systeminformationswindow, text=f"Machine: {system_.machine}")
         machineos.pack()
         
-        cpuinfos = Label(systeminformationswindow, text=f"Processeur: {system_.processor}")
+        cpuinfos = Label(systeminformationswindow, text=f"Processeur: Non précisée.")
+
+        # {system_.processor}
+
         cpuinfos.pack()
 
         closebtn = Button(systeminformationswindow, text="Revenir au menu de sélection", command=lambda: [systeminformationswindow.destroy(), closesysteminformationswindow()])
