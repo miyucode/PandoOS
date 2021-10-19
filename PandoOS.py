@@ -35,6 +35,61 @@ PandoOS.config(bg="white")
 
 # --> App(s) and Tool(s)
 
+def camerarecorder():
+    # def continuer1():
+    #     def startrecording():
+    #         nameoffile = nameOfFile.get()
+    #         if nameoffile == "":
+    #             confirmation_.destroy()
+    #             mb.showerror("Enregistreur de caméra - Erreur !","Merci de donner un nom à votre fichier vidéo !")
+    #             continuer1()
+    #         else:
+    #             mb.showinfo(f"Enregistreur de caméra - Information",f"Vous avez nommé votre vidéo en \"{nameoffile}.mp4\" !")
+    #             confirmation_.destroy()
+    #             mb.showwarning("Enregistreur de caméra - Attention !","Pressez la touche \"Q\" pour stopper l'enregistrement quand vous l'avez terminer.")
+    #             cap = cv2.VideoCapture(0)
+    #             cap.set(3,640)
+    #             cap.set(4,480)
+
+    #             fourcc = cv2.VideoWriter_fourcc(*'MP4V')
+    #             out = cv2.VideoWriter(f'video/{nameoffile}.mp4', fourcc, 20.0, (640,480))
+
+    #             while(True):
+    #                 frame = cap.read()
+    #                 out.write(frame)
+    #                 cv2.imshow("Enregistreur de caméra - Enregistrement en cours...", frame)
+    #                 c = cv2.waitKey(1)
+    #                 if cv2.waitKey(1) & 0xFF == ord('q'):
+    #                     camerarecorder()
+    #                     break
+
+    #                 out.release()
+    #                 cv2.destroyAllWindows()
+
+    #     camerarecorderwindow.destroy()
+    #     confirmation_ = Toplevel()
+    #     confirmation_.config(bg="white")
+    #     confirmation_.geometry("300x100")
+    #     confirmation_.title("Enregistreur de caméra - Information")
+    #     confirmation_.resizable(False, False)
+    #     confirmation_.iconbitmap("img/warning2.ico")
+    #     confirmation_.protocol("WM_DELETE_WINDOW", lambda: screenoptionsevent())
+    #     i2 = Label(confirmation_, text="Entrez le nom de votre fichier \n(Pour donner le nom à la fin de l'enregistrement):")
+    #     i2.pack()
+    #     nameOfFile = Entry(confirmation_)
+    #     nameOfFile.pack()
+    #     Button(confirmation_, text="Continuer", command=startrecording).pack()
+
+    # camerarecorderwindow = Toplevel()
+    # camerarecorderwindow.geometry("500x500")
+    # camerarecorderwindow.resizable(False, False)
+    # camerarecorderwindow.title("Enregistreur de caméra")
+    # camerarecorderwindow.config(bg="white")
+    # camerarecorderwindow.iconbitmap("img/camerarecorder-icon.ico")
+    # camerarecorderwindow.protocol("WM_DELETE_WINDOW", lambda: camerarecorderwindow.destroy())
+    # Button(camerarecorderwindow, text="Enregistrer votre caméra", command=continuer1).pack()
+    mb.showerror("Enregistreur de caméra","Cette application est indisponible suite à de nombreux bugs, désolé pour cet gêne occassioné.")
+
 def audioplayer():
 
     musicname = ""
@@ -585,63 +640,63 @@ def settings():
     def closescreenoptionswindow():
         settings()
 
-    def screenoptionsevent():
-        def recordcameraofuser():
-            def continuer1():
-                nameoffile = nameOfFile.get()
-                if nameoffile == "":
-                    confirmation_.destroy()
-                    mb.showerror("Enregistreur de caméra - Erreur !","Merci de donner un nom à votre fichier vidéo !")
-                    recordcameraofuser()
-                else:
-                    mb.showinfo(f"Enregistreur de caméra - Information",f"Vous avez nommé votre vidéo en \"{nameoffile}.mp4\" !")
-                    confirmation_.destroy()
-                    print("PandoOS> record camera --> true")
-                    mb.showwarning("Enregistreur de caméra - Attention !","Pressez la touche \"Q\" pour stopper l'enregistrement quand vous l'avez terminer.")
-                    cap = cv2.VideoCapture(0)
-                    cap.set(3,640)
-                    cap.set(4,480)
+    # def screenoptionsevent():
+        # def recordcameraofuser():
+        #     def continuer1():
+        #         nameoffile = nameOfFile.get()
+        #         if nameoffile == "":
+        #             confirmation_.destroy()
+        #             mb.showerror("Enregistreur de caméra - Erreur !","Merci de donner un nom à votre fichier vidéo !")
+        #             recordcameraofuser()
+        #         else:
+        #             mb.showinfo(f"Enregistreur de caméra - Information",f"Vous avez nommé votre vidéo en \"{nameoffile}.mp4\" !")
+        #             confirmation_.destroy()
+        #             print("PandoOS> record camera --> true")
+        #             mb.showwarning("Enregistreur de caméra - Attention !","Pressez la touche \"Q\" pour stopper l'enregistrement quand vous l'avez terminer.")
+        #             cap = cv2.VideoCapture(0)
+        #             cap.set(3,640)
+        #             cap.set(4,480)
 
-                    fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-                    out = cv2.VideoWriter(f'video/{nameoffile}.mp4', fourcc, 20.0, (640,480))
+        #             fourcc = cv2.VideoWriter_fourcc(*'MP4V')
+        #             out = cv2.VideoWriter(f'video/{nameoffile}.mp4', fourcc, 20.0, (640,480))
 
-                    while(True):
-                        ret, frame = cap.read()
-                        out.write(frame)
-                        cv2.imshow('Votre camera - RECORD (yes)', frame)
-                        c = cv2.waitKey(1)
-                        if c & 0xFF == ord('q'):
-                            print("PandoOS> record camera --> false")
-                            screenoptionsevent()
-                            break
+        #             while(True):
+        #                 ret, frame = cap.read()
+        #                 out.write(frame)
+        #                 cv2.imshow('Votre camera - RECORD (yes)', frame)
+        #                 c = cv2.waitKey(1)
+        #                 if c & 0xFF == ord('q'):
+        #                     print("PandoOS> record camera --> false")
+        #                     screenoptionsevent()
+        #                     break
 
-                    cap.release()
-                    out.release()
-                    cv2.destroyAllWindows()
+        #             cap.release()
+        #             out.release()
+        #             cv2.destroyAllWindows()
 
-            screenoptionswindow.destroy()
-            confirmation_ = Toplevel()
-            confirmation_.config(bg="white")
-            confirmation_.geometry("300x100")
-            confirmation_.title("Enregistreur de caméra - Information")
-            confirmation_.resizable(False, False)
-            confirmation_.iconbitmap("img/info3.ico")
-            confirmation_.protocol("WM_DELETE_WINDOW", lambda: screenoptionsevent())
-            i2 = Label(confirmation_, text="Entrez le nom de votre fichier \n(Pour donner le nom à la fin de l'enregistrement):")
-            i2.pack()
-            nameOfFile = Entry(confirmation_)
-            nameOfFile.pack()
-            Button(confirmation_, text="Continuer", command=continuer1).pack()
+        #     screenoptionswindow.destroy()
+        #     confirmation_ = Toplevel()
+        #     confirmation_.config(bg="white")
+        #     confirmation_.geometry("300x100")
+        #     confirmation_.title("Enregistreur de caméra - Information")
+        #     confirmation_.resizable(False, False)
+        #     confirmation_.iconbitmap("img/info3.ico")
+        #     confirmation_.protocol("WM_DELETE_WINDOW", lambda: screenoptionsevent())
+        #     i2 = Label(confirmation_, text="Entrez le nom de votre fichier \n(Pour donner le nom à la fin de l'enregistrement):")
+        #     i2.pack()
+        #     nameOfFile = Entry(confirmation_)
+        #     nameOfFile.pack()
+        #     Button(confirmation_, text="Continuer", command=continuer1).pack()
 
-        settingsGui.destroy()
-        screenoptionswindow = Toplevel()
-        screenoptionswindow.geometry("500x500")
-        screenoptionswindow.resizable(False, False)
-        screenoptionswindow.title("PandoOS - Paramètres d'affichage")
-        screenoptionswindow.config(bg="white")
-        screenoptionswindow.iconbitmap("img/info3.ico")
-        screenoptionswindow.protocol("WM_DELETE_WINDOW", lambda: [screenoptionswindow.destroy(), closesysteminformationswindow()])
-        Button(screenoptionswindow, text="Enregistrer votre caméra", command=recordcameraofuser).pack()
+        # settingsGui.destroy()
+        # screenoptionswindow = Toplevel()
+        # screenoptionswindow.geometry("500x500")
+        # screenoptionswindow.resizable(False, False)
+        # screenoptionswindow.title("PandoOS - Paramètres d'affichage")
+        # screenoptionswindow.config(bg="white")
+        # screenoptionswindow.iconbitmap("img/info3.ico")
+        # screenoptionswindow.protocol("WM_DELETE_WINDOW", lambda: [screenoptionswindow.destroy(), closesysteminformationswindow()])
+        # Button(screenoptionswindow, text="Enregistrer votre caméra", command=recordcameraofuser).pack()
 
     def systeminformationsevent():
         settingsGui.destroy()
@@ -704,7 +759,7 @@ def settings():
 
     personalizationoptions.add_command(label="Personaliser PandoOS", command=personalizationevent)
     systeminformations.add_command(label="Informations système", command=systeminformationsevent)
-    screenoptions.add_command(label="Paramètres d'affichage", command=screenoptionsevent)
+    # screenoptions.add_command(label="Paramètres d'affichage", command=screenoptionsevent)
 
     toolbar1.add_cascade(label="Affichage", menu=screenoptions)
     toolbar1.add_cascade(label="Infos systèmes", menu=systeminformations)
@@ -724,6 +779,7 @@ appsMenu.add_command(label="PandoPad", command=notepad)
 appsMenu.add_command(label="PandoCode", command=codeeditor)
 appsMenu.add_command(label="Lecteur vidéo", command=videoplayer)
 appsMenu.add_command(label="Lecteur audio", command=audioplayer)
+appsMenu.add_command(label="Enregistreur de caméra", command=camerarecorder)
 
 # Tools Menu
 
