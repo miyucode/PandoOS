@@ -359,7 +359,7 @@ def clock():
     clockapp.maxsize(450, 120)
     clockapp.minsize(450, 120)
     clockapp.geometry("300x200")
-    clockapp.iconbitmap("img/info3.ico")
+    clockapp.iconbitmap("img/clock.ico")
 
     def time():
         string=strftime('%H:%M:%S')
@@ -382,8 +382,9 @@ def fileexplorer():
             mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer !")
             fileexplorer()
         else:
+            name_of_file = file
             mb.showinfo('PandoOS','Vous avez ouvert avec succès "' + file + '" !')
-            os.system(f"start {file}")
+            os.startfile(name_of_file)
             fileexplorer()
 
     # (Func) Create Folder
