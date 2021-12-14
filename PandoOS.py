@@ -9,6 +9,7 @@ from tkvideo import *
 from pygame import mixer
 import mp3play
 import numpy as np
+import pyautogui
 import cv2
 import tkinter.messagebox as mb
 import os
@@ -33,7 +34,7 @@ PandoOS.maxsize(1000, 500)
 PandoOS.bind('<Escape>', lambda e: shutdown())
 PandoOS.config(bg="white")
 
-# --> App(s) and Tool(s)
+# App(s) and Tool(s) -->
 
 def camerarecorder():
     def continuer1():
@@ -41,12 +42,12 @@ def camerarecorder():
             nameoffile = nameOfFile.get()
             if nameoffile == "":
                 confirmation_.destroy()
-                mb.showerror("Enregistreur de caméra - Erreur !","Merci de donner un nom à votre fichier vidéo !")
+                mb.showerror("Enregistreur de caméra - Erreur !","Merci de donner un nom à votre enregistrement !")
                 continuer1()
             else:
                 mb.showinfo(f"Enregistreur de caméra - Information",f"Vous avez nommé votre vidéo en \"{nameoffile}.mp4\" !")
                 confirmation_.destroy()
-                mb.showwarning("Enregistreur de caméra - Attention !","Pressez la touche \"Q\" pour stopper l'enregistrement quand vous l'avez terminer.")
+                mb.showwarning("Enregistreur de caméra - Attention !","Appuyez sur la touche \"Q\" pour stopper l'enregistrement quand vous l'avez terminer.")
                 cap = cv2.VideoCapture(0)
                 cap.set(3,640)
                 cap.set(4,480)
@@ -57,10 +58,10 @@ def camerarecorder():
                 while(True):
                     ret, frame = cap.read()
                     out.write(frame)
-                    cv2.imshow('Votre camera - RECORD (yes)', frame)
+                    cv2.imshow('Enregistreur de caméra - Enregistrement en cours...', frame)
                     c = cv2.waitKey(1)
                     if c & 0xFF == ord('q'):
-                        print("PandoOS> record camera --> false")
+                        mb.showinfo("Enregistreur de caméra - Information","l'enregistrement à été sauvergarder dans le dossier \"video\" avec succès !")
                         camerarecorder()
                         break
 
@@ -75,7 +76,7 @@ def camerarecorder():
         confirmation_.title("Enregistreur de caméra - Information")
         confirmation_.resizable(False, False)
         confirmation_.iconbitmap("img/warning2.ico")
-        confirmation_.protocol("WM_DELETE_WINDOW", lambda: screenoptionsevent())
+        confirmation_.protocol("WM_DELETE_WINDOW", lambda: confirmation_.destroy())
         i2 = Label(confirmation_, text="Entrez le nom de votre fichier \n(Pour donner le nom à la fin de l'enregistrement):")
         i2.pack()
         nameOfFile = Entry(confirmation_)
@@ -83,7 +84,7 @@ def camerarecorder():
         Button(confirmation_, text="Continuer", command=startrecording).pack()
 
     camerarecorderwindow = Toplevel()
-    camerarecorderwindow.geometry("500x500")
+    camerarecorderwindow.geometry("500x50")
     camerarecorderwindow.resizable(False, False)
     camerarecorderwindow.title("Enregistreur de caméra")
     camerarecorderwindow.config(bg="white")
@@ -105,7 +106,7 @@ def audioplayer():
 
     def stopaudio():
         mixer.music.stop()
-        music.configure(text="??? | Aucune musique en cours.")
+        music.configure(text="??? - Aucune musique en cours.")
         music.pack_forget()
         stopbutton.pack_forget()
         ap.title("Lecteur audio")
@@ -152,10 +153,10 @@ def audioplayer():
 
     Label(ap, text="\n").pack()
 
-    startaudio = Button(ap, text="Lire un(e) audio/musique", command=readaudio)
+    startaudio = Button(ap, text="Lire un fichier audio", command=readaudio)
     startaudio.pack()
 
-    music = Label(ap, text="??? | Aucune musique en cours.")
+    music = Label(ap, text="??? - Aucune musique en cours.")
     music.pack_forget()
 
     Label(ap, text="\n").pack()
@@ -181,10 +182,11 @@ def videoplayer():
         vp.destroy()
         file = filedialog.askopenfilename(defaultextension='*.mp4*', title="Sélectionner un fichier vidéo", initialdir="C:/Users/", filetypes=[('Fichiers MP4', '*.mp4*'), ("Fichier GIF", "*.gif*")])
         if file == "":
-            mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer ! Relancez le lecteur vidéo pour réessayer !")
+            mb.showerror("PandoOS","Vous avez sélectionner aucun fichier vidéo à lancer !")
             vpoutput.destroy()
+            readvideo()
         else:
-            mb.showinfo('PandoOS','Vous avez sélectionner avec succès "' + file + '" !')
+            mb.showinfo('PandoOS','Vous avez sélectionner avec succès le fichier vidéo nommé "' + file + '" !')
         vpoutput = Toplevel()
         vpoutput.title(f"Lecteur vidéo - {file}")
         vpoutput.iconbitmap("img/videoplayer.ico")
@@ -377,7 +379,8 @@ def fileexplorer():
         FileRequest2.pack_forget()
         Name.pack_forget()
         # print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
-        file = filedialog.askopenfilename(defaultextension='*.*', title="Sélectionner un fichier", initialdir="C:/Users/", filetypes=[('Tout les fichiers', '*.*'), ("Fichier HTML", "*.html*"), ("Fichier Python", "*.py*")])
+        userShell = os.getenv('username')
+        file = filedialog.askopenfilename(defaultextension='*.*', title="Sélectionner un fichier", initialdir=f"C:/Users/{userShell}/Desktop", filetypes=('Tout les fichiers', '*.*'))
         if file == "":
             mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer !")
             fileexplorer()
