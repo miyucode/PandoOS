@@ -1,21 +1,14 @@
-# PandoOS
+- 📚 Welcome on PandoOS ! -
 
-**PandoOS** is a OS in Python.
+📌 Choses que vous devez savoir sur PandoOS:
 
-For use **PandoOS**, you need:
+- PandoOS n'est qu'un simple script python qui "simule" un système d'exploitation, en aucun cas PandoOS est un réel système d'exploitation.
+- Tout personnes qui clone PandoOS doivent crédité le réel créateur de PandoOS.
+- Si une personne trouve un bug, merci de nous informer sur miyucode@gmail.com
+- PandoOS ne propose pas de jeux et ne peut pas lancer de réelles application comme sur de réels système d'exploitation mais malgré ça, PandoOS possède déjà plusieurs applications pouvant être à votre utilité personnel comme un bloc-notes.
 
-- [Python](https://python.org) 🐍 (Latest version: 3.9.4)
-- [Tkinter](https://fr.wikipedia.org/wiki/Tkinter) 🖥
-- Windows 7/8.1/10
+📢 Dernière annonce de l'équipe de PandoOS:
 
-## Usage 📜
+La nouvelle version 3.0 arrive prochainement, ceci est un spoil ! :) 
 
-In a CMD, enter this (For be sure that you have Tkinter for use __PandoOS__, so it's not an obligation !):
-```batch
-python -m pip install tk
-```
-and after this, close CMD and open "**boot.py**" !
-
-# Notes 📚
-
-Thanks for everyone who help me in the developement of **PandoOS** ! :P
+👌 Nous vous souhaitons une bonne utilisation sur notre produit "PandoOS", l'équipe de PandoOS.
