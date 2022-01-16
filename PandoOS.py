@@ -91,7 +91,6 @@ def camerarecorder():
     camerarecorderwindow.iconbitmap("img/camerarecorder-icon.ico")
     camerarecorderwindow.protocol("WM_DELETE_WINDOW", lambda: camerarecorderwindow.destroy())
     Button(camerarecorderwindow, text="Enregistrer votre caméra", command=continuer1).pack()
-    # mb.showerror("Enregistreur de caméra","Cette application est indisponible suite à de nombreux bugs, désolé pour cet gêne occassioné.")
 
 def audioplayer():
 
@@ -378,7 +377,6 @@ def fileexplorer():
         FileRequest1.pack_forget()
         FileRequest2.pack_forget()
         Name.pack_forget()
-        # print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
         userShell = os.getenv('username')
         file = filedialog.askopenfilename(defaultextension='*.*', title="Sélectionner un fichier", initialdir=f"C:/Users/{userShell}/Desktop", filetypes=[('Tout les fichiers', '*.*'),('Fichier web', '*.html*')])
         if file == "":
@@ -396,7 +394,6 @@ def fileexplorer():
         Name.pack()
         FileRequest2.pack()
         FileRequest1.pack_forget()
-        # print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
 
     def createFolder():
         name = Name.get()
@@ -442,8 +439,6 @@ def fileexplorer():
                 mb.showinfo("PandoOS","Dossier crée avec succès !")
                 fileexplorer()
 
-            # userprofile = os.system('%userprofile%')
-            # print('PandoOS> %userprofile% not found.')
             confirmation4 = Toplevel()
             confirmation4.title("PandoOS - Attention !")
             confirmation4.geometry("300x100")
@@ -452,12 +447,6 @@ def fileexplorer():
             Label(confirmation4, text="Souhaitez-vous le créer dans un dossier en particulier ?").pack()
             Button(confirmation4, text="Oui.", command=yes).pack()
             Button(confirmation4, text="Non.", command=no).pack()
-
-            # os.system('cls')
-            # name = Name.get()
-            # os.mkdir(f"root/Desktop/{name}")
-            # fe.destroy()
-            # mb.showinfo("PandoOS","Dossier crée avec succès !")
 
     def RequestFolder():
         createFolder()
@@ -468,7 +457,6 @@ def fileexplorer():
         Name.pack()
         FileRequest1.pack()
         FileRequest2.pack_forget()
-        # print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
 
     def createFile():
         name = Name.get()
@@ -534,13 +522,6 @@ def fileexplorer():
             Label(confirmation, text="Souhaitez-vous le sauvegarder \ndans un dossier en particulier ?").pack()
             Button(confirmation, text="Oui.", command=yes).pack()
             Button(confirmation, text="Non.", command=no).pack()
-        
-        # name = Name.get()
-        # file = open(name, 'w+')
-        # file.write("*")
-        # file.close()
-        # fe.destroy()
-        # mb.showinfo("PandoOS","File created with successful !")
 
     def RequestFile():
         createFile()
@@ -570,7 +551,6 @@ def fileexplorer():
     File.add_command(label="Créer un nouveau dossier", command=folder)
     File.add_separator()
     File.add_command(label="Ouvrir un fichier", command=openfile)
-    # File.add_command(label="Ouvrir une PandoApp", command=openpandoapp)
 
     # <-- end Menu(s)
 
@@ -626,8 +606,6 @@ def settings():
     settingsGui.geometry("950x500")
     settingsGui.iconbitmap("img/settings.ico")
     settingsGui.resizable(False, False)
-    # settingsGui.destroy()
-    # mb.showinfo("PandoOS","Application indisponible pour le moment.")
 
     # --> Personalization Event
 
@@ -646,64 +624,6 @@ def settings():
     def closescreenoptionswindow():
         settings()
 
-    # def screenoptionsevent():
-        # def recordcameraofuser():
-        #     def continuer1():
-        #         nameoffile = nameOfFile.get()
-        #         if nameoffile == "":
-        #             confirmation_.destroy()
-        #             mb.showerror("Enregistreur de caméra - Erreur !","Merci de donner un nom à votre fichier vidéo !")
-        #             recordcameraofuser()
-        #         else:
-        #             mb.showinfo(f"Enregistreur de caméra - Information",f"Vous avez nommé votre vidéo en \"{nameoffile}.mp4\" !")
-        #             confirmation_.destroy()
-        #             print("PandoOS> record camera --> true")
-        #             mb.showwarning("Enregistreur de caméra - Attention !","Pressez la touche \"Q\" pour stopper l'enregistrement quand vous l'avez terminer.")
-        #             cap = cv2.VideoCapture(0)
-        #             cap.set(3,640)
-        #             cap.set(4,480)
-
-        #             fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-        #             out = cv2.VideoWriter(f'video/{nameoffile}.mp4', fourcc, 20.0, (640,480))
-
-        #             while(True):
-        #                 ret, frame = cap.read()
-        #                 out.write(frame)
-        #                 cv2.imshow('Votre camera - RECORD (yes)', frame)
-        #                 c = cv2.waitKey(1)
-        #                 if c & 0xFF == ord('q'):
-        #                     print("PandoOS> record camera --> false")
-        #                     screenoptionsevent()
-        #                     break
-
-        #             cap.release()
-        #             out.release()
-        #             cv2.destroyAllWindows()
-
-        #     screenoptionswindow.destroy()
-        #     confirmation_ = Toplevel()
-        #     confirmation_.config(bg="white")
-        #     confirmation_.geometry("300x100")
-        #     confirmation_.title("Enregistreur de caméra - Information")
-        #     confirmation_.resizable(False, False)
-        #     confirmation_.iconbitmap("img/info3.ico")
-        #     confirmation_.protocol("WM_DELETE_WINDOW", lambda: screenoptionsevent())
-        #     i2 = Label(confirmation_, text="Entrez le nom de votre fichier \n(Pour donner le nom à la fin de l'enregistrement):")
-        #     i2.pack()
-        #     nameOfFile = Entry(confirmation_)
-        #     nameOfFile.pack()
-        #     Button(confirmation_, text="Continuer", command=continuer1).pack()
-
-        # settingsGui.destroy()
-        # screenoptionswindow = Toplevel()
-        # screenoptionswindow.geometry("500x500")
-        # screenoptionswindow.resizable(False, False)
-        # screenoptionswindow.title("PandoOS - Paramètres d'affichage")
-        # screenoptionswindow.config(bg="white")
-        # screenoptionswindow.iconbitmap("img/info3.ico")
-        # screenoptionswindow.protocol("WM_DELETE_WINDOW", lambda: [screenoptionswindow.destroy(), closesysteminformationswindow()])
-        # Button(screenoptionswindow, text="Enregistrer votre caméra", command=recordcameraofuser).pack()
-
     def systeminformationsevent():
         settingsGui.destroy()
         systeminformationswindow = Toplevel()
@@ -712,7 +632,6 @@ def settings():
         systeminformationswindow.title("PandoOS - Informations système")
         systeminformationswindow.iconbitmap("img/info3.ico")
         systeminformationswindow.protocol("WM_DELETE_WINDOW", lambda: [systeminformationswindow.destroy(), closesysteminformationswindow()])
-        # systeminformations.config()
 
         system_ = platform.uname()
 
