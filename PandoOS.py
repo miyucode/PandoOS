@@ -71,7 +71,6 @@ def camerarecorder():
 
         camerarecorderwindow.destroy()
         confirmation_ = Toplevel()
-        confirmation_.config(bg="white")
         confirmation_.geometry("300x100")
         confirmation_.title("Enregistreur de caméra - Information")
         confirmation_.resizable(False, False)
@@ -84,12 +83,12 @@ def camerarecorder():
         Button(confirmation_, text="Continuer", command=startrecording).pack()
 
     camerarecorderwindow = Toplevel()
-    camerarecorderwindow.geometry("500x50")
+    camerarecorderwindow.geometry("300x100")
     camerarecorderwindow.resizable(False, False)
     camerarecorderwindow.title("Enregistreur de caméra")
-    camerarecorderwindow.config(bg="white")
     camerarecorderwindow.iconbitmap("img/camerarecorder-icon.ico")
     camerarecorderwindow.protocol("WM_DELETE_WINDOW", lambda: camerarecorderwindow.destroy())
+    Label(camerarecorderwindow, text="\n").pack()
     Button(camerarecorderwindow, text="Enregistrer votre caméra", command=continuer1).pack()
 
 def audioplayer():
@@ -637,14 +636,17 @@ def settings():
 
         versionos = Label(systeminformationswindow, text="Version: PandoOS v3.0")
         versionos.pack()
-
-        machineos = Label(systeminformationswindow, text=f"Machine: {system_.machine}")
-        machineos.pack()
         
-        cpuinfos = Label(systeminformationswindow, text=f"Processeur: Non précisée.")
+        author = Label(systeminformationswindow, text="Auteur: MiyuCode (https://github.com/miyucode/PandoOS)")
+        author.pack()
 
-        # {system_.processor}
+        latestversion = Label(systeminformationswindow, text="Dernière version de PandoOS: 3.0_official")
+        latestversion.pack()
 
+        build = Label(systeminformationswindow, text="Build: build_3100")
+        build.pack()
+
+        cpuinfos = Label(systeminformationswindow, text=f"Processeur: Non reconnu.")
         cpuinfos.pack()
 
         closebtn = Button(systeminformationswindow, text="Revenir au menu de sélection", command=lambda: [systeminformationswindow.destroy(), closesysteminformationswindow()])
