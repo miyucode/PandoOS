@@ -58,7 +58,7 @@ def camerarecorder():
                 while(True):
                     ret, frame = cap.read()
                     out.write(frame)
-                    cv2.imshow('Enregistreur de caméra - Enregistrement en cours...', frame)
+                    cv2.imshow('Enregistrement en cours...', frame)
                     c = cv2.waitKey(1)
                     if c & 0xFF == ord('q'):
                         mb.showinfo("Enregistreur de caméra - Information","l'enregistrement à été sauvergarder dans le dossier \"video\" avec succès !")
@@ -380,7 +380,7 @@ def fileexplorer():
         Name.pack_forget()
         # print("Alerte> Si un message bizarre apparaît ici, cela est normal et si il ne s'affiche pas, ignorer cet alerte.")
         userShell = os.getenv('username')
-        file = filedialog.askopenfilename(defaultextension='*.*', title="Sélectionner un fichier", initialdir=f"C:/Users/{userShell}/Desktop", filetypes=('Tout les fichiers', '*.*'))
+        file = filedialog.askopenfilename(defaultextension='*.*', title="Sélectionner un fichier", initialdir=f"C:/Users/{userShell}/Desktop", filetypes=[('Tout les fichiers', '*.*'),('Fichier web', '*.html*')])
         if file == "":
             mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer !")
             fileexplorer()
