@@ -7,6 +7,7 @@ from subprocess import Popen, PIPE
 from pynput import keyboard
 from tkvideo import *
 from pygame import mixer
+from tkinterweb import HtmlFrame
 import mp3play
 import numpy as np
 import pyautogui
@@ -35,6 +36,73 @@ PandoOS.bind('<Escape>', lambda e: shutdown())
 PandoOS.config(bg="white")
 
 # App(s) and Tool(s) -->
+
+def pandoweb():
+    pandowebapp = Toplevel()
+    pandowebapp.title("PandoWeb - Bienvenue !")
+    pandowebapp.geometry("1000x500")
+    pandowebapp.resizable(False, False)
+    pandowebapp.iconbitmap("img/navigator/logo.ico")
+
+    # "startwebsiteevent" func
+
+    def startwebsiteevent():
+        websitenameget = websitename.get()
+        if websitenameget == "":
+            mb.showerror("PandoWeb","Merci de rentrer une URL correcte !")
+        else: 
+            pandowebapp.destroy()
+            websitewindow = Toplevel()
+            websitewindow.title("PandoWeb - " + websitenameget)
+            websitewindow.geometry("1000x500")
+            websitewindow.resizable(False, False)
+            websitewindow.iconbitmap("img/navigator/logo.ico")
+
+            def goonpandooswebsite():
+                frame.load_website("https://statswarstv.wixsite.com/pandoos")
+
+            def gobackongoogle():
+                frame.load_website("google.com")
+
+            backongoogle = Button(websitewindow, text="Aller sur Google", command=gobackongoogle)
+            backongoogle.pack(side="left")
+
+            goonpandoos = Button(websitewindow, text="Aller sur le site de PandoOS", command=goonpandooswebsite)
+            goonpandoos.pack(side="right")
+
+            frame = HtmlFrame(websitewindow)
+            frame.load_website(websitenameget)
+            frame.pack(fill="both", expand=True)
+
+    # GUI
+
+    Label(pandowebapp, text="\n").pack()
+    websitename = Entry(pandowebapp)
+    websitename.pack()
+    startwebsite = Button(pandowebapp, text="Ouvrir l'URL", command=startwebsiteevent)
+    startwebsite.pack()
+
+    # Close PandoWeb
+
+    def quitpandoweb():
+        pandowebapp.destroy()
+
+    # Menu(s)
+
+    menuPandoWebApp = Menu(pandowebapp)
+
+    menu1 = Menu(menuPandoWebApp, tearoff=0)
+    menu1.add_command(label="Quitter", command=quitpandoweb)
+
+    # <-- end Menu(s)
+
+    # Config UI
+
+    pandowebapp.config(menu=menuPandoWebApp)
+
+    # Config menu
+
+    menuPandoWebApp.add_cascade(label="Menu", menu=menu1)
 
 def camerarecorder():
     def continuer1():
@@ -97,10 +165,9 @@ def audioplayer():
 
     ap = Toplevel()
     ap.title("Lecteur audio")
-    ap.geometry("800x500")
+    ap.geometry("500x200")
     ap.resizable(False, False)
     ap.iconbitmap("img/audioplayer.ico")
-
 
     def stopaudio():
         mixer.music.stop()
@@ -571,9 +638,9 @@ def fileexplorer():
 # Restart
 
 def restart():
-    os.system('cls')
+    os.system("cls")
     PandoOS.destroy()
-    os.system('boot.py')
+    os.system("python boot.py")
 
 # Shutdown
 
@@ -707,6 +774,7 @@ appsMenu.add_command(label="PandoCode", command=codeeditor)
 appsMenu.add_command(label="Lecteur vidéo", command=videoplayer)
 appsMenu.add_command(label="Lecteur audio", command=audioplayer)
 appsMenu.add_command(label="Enregistreur de caméra", command=camerarecorder)
+appsMenu.add_command(label="PandoWeb", command=pandoweb)
 
 # Tools Menu
 
