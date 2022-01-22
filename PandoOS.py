@@ -53,7 +53,7 @@ def pandoweb():
         else: 
             pandowebapp.destroy()
             websitewindow = Toplevel()
-            websitewindow.title("PandoWeb - " + websitenameget)
+            websitewindow.title("PandoWeb - 0")
             websitewindow.geometry("1000x500")
             websitewindow.resizable(False, False)
             websitewindow.iconbitmap("img/navigator/logo.ico")
@@ -65,10 +65,10 @@ def pandoweb():
                 frame.load_website("google.com")
 
             backongoogle = Button(websitewindow, text="Aller sur Google", command=gobackongoogle)
-            backongoogle.pack(side="left")
+            backongoogle.pack()
 
             goonpandoos = Button(websitewindow, text="Aller sur le site de PandoOS", command=goonpandooswebsite)
-            goonpandoos.pack(side="right")
+            goonpandoos.pack()
 
             frame = HtmlFrame(websitewindow)
             frame.load_website(websitenameget)
