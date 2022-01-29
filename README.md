@@ -1,4 +1,4 @@
-- 📚 Welcome on PandoOS ! -
+- 📚 Welcome on PandoOS !
 
 📌 Choses que vous devez savoir sur PandoOS:
 
