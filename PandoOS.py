@@ -4,13 +4,12 @@ from tkinter.ttk import *
 from time import *
 from time import strftime
 from subprocess import Popen, PIPE
-from pynput import keyboard
 from tkvideo import *
 from pygame import mixer
 from tkinterweb import HtmlFrame
 import mp3play
+import tkinter as tk
 import numpy as np
-import pyautogui
 import cv2
 import tkinter.messagebox as mb
 import os
@@ -37,6 +36,112 @@ PandoOS.config(bg="white")
 
 # App(s) and Tool(s) -->
 
+def calculator():
+    calculatorapp = Toplevel()
+    calculatorapp.title("Calculatrice - Accueil")
+    calculatorapp.iconbitmap("img/calculator/calculator-icon.ico")
+    calculatorapp.geometry("500x500")
+    calculatorapp.resizable(False, False)
+
+    def getResultAdditionfunc():
+        addition.pack()
+        soustraction.pack()
+        text1.pack_forget()
+        operation1.pack_forget()
+        text2.pack_forget()
+        text3.pack_forget()
+        operation2.pack_forget()
+        getResultAddition.pack_forget()
+        getResultSoustraction.pack_forget()
+        operationget1 = int(operation1.get())
+        operationget2 = int(operation2.get())
+        operation = str(operationget1 + operationget2)
+
+        # print(operationget1 + " - " + operationget2)
+        resultofadditionwindow = Toplevel()
+        resultofadditionwindow.geometry("300x100")
+        resultofadditionwindow.title("Calculatrice - Résultat")
+        resultofadditionwindow.iconbitmap("img/calculator/calculator-icon.ico")
+        resultofadditionwindow.resizable(False, False)
+
+        result = Label(resultofadditionwindow, text="Le résultat est: " + operation)
+        result.pack()
+
+        continue1 = Button(resultofadditionwindow, text="Fermer", command=resultofadditionwindow.destroy)
+        continue1.pack()
+
+    def getResultSoustractionfunc():
+        addition.pack()
+        soustraction.pack()
+        text1.pack_forget()
+        operation1.pack_forget()
+        text2.pack_forget()
+        text3.pack_forget()
+        operation2.pack_forget()
+        getResultAddition.pack_forget()
+        getResultSoustraction.pack_forget()
+        operationget1 = int(operation1.get())
+        operationget2 = int(operation2.get())
+        operation = str(operationget1 - operationget2)
+        # print(operationget1 + " - " + operationget2)
+        resultofsoustractionwindow = Toplevel()
+        resultofsoustractionwindow.geometry("300x100")
+        resultofsoustractionwindow.title("Calculatrice - Résultat")
+        resultofsoustractionwindow.iconbitmap("img/calculator/calculator-icon.ico")
+        resultofsoustractionwindow.resizable(False, False)
+
+        result = Label(resultofsoustractionwindow, text="Le résultat est: " + operation)
+        result.pack()
+
+        continue1 = Button(resultofsoustractionwindow, text="Fermer", command=resultofsoustractionwindow.destroy)
+        continue1.pack()
+
+    def soustractfunc():
+        addition.pack_forget()
+        soustraction.pack_forget()
+        text1.pack()
+        operation1.pack()
+        text2.pack()
+        text3.pack()
+        operation2.pack()
+        getResultAddition.pack_forget()
+        getResultSoustraction.pack()
+
+    def additionfunc():
+        addition.pack_forget()
+        soustraction.pack_forget()
+        text1.pack()
+        operation1.pack()
+        text2.pack()
+        text3.pack()
+        operation2.pack()
+        getResultSoustraction.pack_forget()
+        getResultAddition.pack()
+
+    text1 = Label(calculatorapp, text="Entrez le premier chiffre:")
+    operation1 = Entry(calculatorapp)
+    text2 = Label(calculatorapp, text="")
+    text3 = Label(calculatorapp, text="Entrez le deuxième chiffre:")
+    operation2 = Entry(calculatorapp)
+
+    text1.pack_forget()
+    text2.pack_forget()
+    text3.pack_forget()
+
+    operation1.pack_forget()
+    operation2.pack_forget()
+
+    getResultAddition = Button(calculatorapp, text="Voir le résultat", command=getResultAdditionfunc)
+    getResultAddition.pack_forget()
+    getResultSoustraction = Button(calculatorapp, text="Voir le résultat", command=getResultSoustractionfunc)
+    getResultSoustraction.pack_forget()
+
+    addition = Button(calculatorapp, text="Additioner 2 nombres.", command=additionfunc)
+    addition.pack()
+
+    soustraction = Button(calculatorapp, text="Soustraire 2 nombres.", command=soustractfunc)
+    soustraction.pack()
+
 def pandoweb():
     pandowebapp = Toplevel()
     pandowebapp.title("PandoWeb - Bienvenue !")
@@ -53,15 +158,17 @@ def pandoweb():
         else: 
             pandowebapp.destroy()
             websitewindow = Toplevel()
-            websitewindow.title("PandoWeb - 0")
+            websitewindow.title("PandoWeb - Nouvel onglet")
             websitewindow.geometry("1000x500")
             websitewindow.resizable(False, False)
             websitewindow.iconbitmap("img/navigator/logo.ico")
 
             def goonpandooswebsite():
+                websitewindow.title("PandoWeb - PandoOS")
                 frame.load_website("https://statswarstv.wixsite.com/pandoos")
 
             def gobackongoogle():
+                websitewindow.title("PandoWeb - Google")
                 frame.load_website("google.com")
 
             backongoogle = Button(websitewindow, text="Aller sur Google", command=gobackongoogle)
@@ -775,6 +882,7 @@ appsMenu.add_command(label="Lecteur vidéo", command=videoplayer)
 appsMenu.add_command(label="Lecteur audio", command=audioplayer)
 appsMenu.add_command(label="Enregistreur de caméra", command=camerarecorder)
 appsMenu.add_command(label="PandoWeb", command=pandoweb)
+appsMenu.add_command(label="Calculatrice", command=calculator)
 
 # Tools Menu
 
