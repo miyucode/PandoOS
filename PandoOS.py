@@ -808,16 +808,16 @@ def settings():
 
         system_ = platform.uname()
 
-        versionos = Label(systeminformationswindow, text="Version: PandoOS v3.0")
+        versionos = Label(systeminformationswindow, text="Version: PandoOS v4.0")
         versionos.pack()
         
         author = Label(systeminformationswindow, text="Auteur: MiyuCode (https://github.com/miyucode/PandoOS)")
         author.pack()
 
-        latestversion = Label(systeminformationswindow, text="Dernière version de PandoOS: 3.0_official")
+        latestversion = Label(systeminformationswindow, text="Dernière version de PandoOS: 4.0_official")
         latestversion.pack()
 
-        build = Label(systeminformationswindow, text="Build: build_3100")
+        build = Label(systeminformationswindow, text="Build: build_4550")
         build.pack()
 
         cpuinfos = Label(systeminformationswindow, text=f"Processeur: Non reconnu.")
