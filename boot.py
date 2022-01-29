@@ -18,8 +18,6 @@ version = '3.0'
 # Boot (start)
 
 def boot():
-    os.system('python -m pip install pygame')
-    os.system('python -m pip install tkvideo')
     os.system('cls')
     mb.showinfo("PandoOS","Boot successful, press ENTER for continue.")
     # root.destroy()
