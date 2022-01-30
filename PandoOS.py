@@ -343,7 +343,6 @@ def videoplayer():
     vp.iconbitmap("img/videoplayer.ico")
 
     def readvideo():
-
         vp.destroy()
         file = filedialog.askopenfilename(defaultextension='*.mp4*', title="Sélectionner un fichier vidéo", initialdir="C:/Users/", filetypes=[('Fichiers MP4', '*.mp4*'), ("Fichier GIF", "*.gif*")])
         if file == "":
@@ -360,8 +359,6 @@ def videoplayer():
         video.pack()
         player = tkvideo(file, video, loop=1, size=(800,500))
         player.play()
-
-        vpoutput.mainloop()
 
     startvideo = Button(vp, text="Lire une vidéo", command=readvideo)
     startvideo.pack()
