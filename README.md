@@ -9,6 +9,6 @@
 
 📢 Dernière annonce de l'équipe de PandoOS:
 
-La nouvelle version 3.0 arrive prochainement, ceci est un spoil ! :) 
+Aucune.
 
 👌 Nous vous souhaitons une bonne utilisation sur notre produit "PandoOS", l'équipe de PandoOS.
