@@ -650,6 +650,19 @@ def clock():
     time()
 
 def fileexplorer():
+    def deletefile():
+        fe.destroy()
+        userShell = os.getenv('username')
+        file = filedialog.askopenfilename(defaultextension='*.*', title="Sélectionner un fichier", initialdir=f"C:/Users/{userShell}/Desktop", filetypes=[('Tout les fichiers', '*.*'),('Fichier web', '*.html*')])
+        if file == "":
+            mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à supprimer !")
+            fileexplorer()
+        else:
+            name_of_file = file
+            os.remove(file)
+            mb.showinfo("PandoOS","Vous avez supprimé avec succès " + file + " !")
+            fileexplorer()
+
     def openfile():
         fe.destroy()
         FileRequest1.pack_forget()
@@ -662,7 +675,7 @@ def fileexplorer():
             fileexplorer()
         else:
             name_of_file = file
-            mb.showinfo('PandoOS','Vous avez ouvert avec succès "' + file + '" !')
+            mb.showinfo("PandoOS","Vous avez ouvert avec succès " + file + " !")
             os.startfile(name_of_file)
             fileexplorer()
 
@@ -826,6 +839,8 @@ def fileexplorer():
     File = Menu(menuFe, tearoff=0)
     File.add_command(label="Créer un nouveau fichier", command=file)
     File.add_command(label="Créer un nouveau dossier", command=folder)
+    File.add_separator()
+    File.add_command(label="Supprimer un fichier", command=deletefile)
     File.add_separator()
     File.add_command(label="Ouvrir un fichier", command=openfile)
 
