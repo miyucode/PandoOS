@@ -6,12 +6,14 @@ from subprocess import Popen, PIPE
 from tkvideo import *
 from pygame import mixer
 from tkinterweb import HtmlFrame
+from tkinter import ttk
 import tkinter as tk
 import numpy as np
 import cv2
 import tkinter.messagebox as mb
 import os
 import platform
+import shutil
 
 # Folder verification
 
@@ -650,6 +652,36 @@ def clock():
     time()
 
 def fileexplorer():
+    def deletefolder():
+        def continue2():
+            NameOfFolder = nameoffolder.get()
+            confirmation4.destroy()
+            if NameOfFolder == "":
+                mb.showerror("PandoOS","Veuillez mettre le nom d'un dossier correct !")
+                deletefolder()
+            else:
+                shutil.rmtree("root/Desktop/" + NameOfFolder)
+                mb.showinfo("PandoOS","Vous avez supprimé le dossier " + NameOfFolder + " avec succès !")
+                fileexplorer()
+
+        fe.destroy()
+        confirmation4 = Toplevel()
+        confirmation4.title("PandoOS - Information")
+        confirmation4.iconbitmap("img/info3.ico")
+        confirmation4.geometry("300x100")
+        confirmation4.resizable(False, False)
+        confirmation4.protocol("WM_DELETE_WINDOW", lambda: [confirmation4.destroy(), fileexplorer()])
+        Label(confirmation4, text="Entrez le nom du dossier:").pack()
+        nameoffolder = Entry(confirmation4)
+        nameoffolder.pack()
+        Button(confirmation4, text="Continuer", command=continue2).pack()
+
+    def showfilesandfolder():
+        dir_list = os.listdir("root/Desktop")
+        Label(fe, text="Fichiers et dossiers dans \"root/Desktop\" :").pack()
+        Label(fe, text=dir_list).pack()
+        Label(fe, text="\n\n").pack()
+
     def deletefile():
         fe.destroy()
         userShell = os.getenv('username')
@@ -841,14 +873,16 @@ def fileexplorer():
     File.add_command(label="Créer un nouveau dossier", command=folder)
     File.add_separator()
     File.add_command(label="Supprimer un fichier", command=deletefile)
+    File.add_command(label="Supprimer un dossier", command=deletefolder)
     File.add_separator()
     File.add_command(label="Ouvrir un fichier", command=openfile)
+    File.add_command(label="Voir tout les fichiers et dossiers", command=showfilesandfolder)
 
     # <-- end Menu(s)
 
     # Config UI
 
-    fe.config(menu=menuFe, bg="white")
+    fe.config(menu=menuFe)
     Name.pack_forget()
     FileRequest1.pack_forget()
     FileRequest2.pack_forget()
