@@ -13,7 +13,7 @@ root.bind("<Escape>", lambda e: root.destroy())
 root.resizable(False, False)
 root.withdraw()
 
-version = '4.5'
+version = '5.0'
 
 # Boot (start)
 

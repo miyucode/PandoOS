@@ -38,7 +38,7 @@ def calculator():
     calculatorapp = Toplevel()
     calculatorapp.title("Calculatrice - Accueil")
     calculatorapp.iconbitmap("img/calculator/calculator-icon.ico")
-    calculatorapp.geometry("500x500")
+    calculatorapp.geometry("300x300")
     calculatorapp.resizable(False, False)
 
     def getResultMultiplicationfunc():
@@ -847,16 +847,16 @@ def settings():
 
         system_ = platform.uname()
 
-        versionos = Label(systeminformationswindow, text="Version: PandoOS v4.0")
+        versionos = Label(systeminformationswindow, text="Version: PandoOS v5.0")
         versionos.pack()
         
         author = Label(systeminformationswindow, text="Auteur: MiyuCode (https://github.com/miyucode/PandoOS)")
         author.pack()
 
-        latestversion = Label(systeminformationswindow, text="Dernière version de PandoOS: 4.0_official")
+        latestversion = Label(systeminformationswindow, text="Dernière version de PandoOS: 5.0_official")
         latestversion.pack()
 
-        build = Label(systeminformationswindow, text="Build: build_4500")
+        build = Label(systeminformationswindow, text="Build: build_5000")
         build.pack()
 
         cpuinfos = Label(systeminformationswindow, text=f"Processeur: Non reconnu.")
