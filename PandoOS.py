@@ -267,9 +267,6 @@ def camerarecorder():
     Button(camerarecorderwindow, text="Enregistrer votre caméra", command=continuer1).pack()
 
 def audioplayer():
-
-    musicname = ""
-
     ap = Toplevel()
     ap.title("Lecteur audio")
     ap.geometry("500x200")
@@ -307,7 +304,6 @@ def audioplayer():
             mb.showerror("PandoOS","Vous avez sélectionner aucun fichier à lancer ! Relancez le lecteur audio pour réessayer !")
         else:
             mb.showinfo('PandoOS','Vous avez sélectionner avec succès "' + file + '" !')
-            musicname = "" + file
             raudio()
 
     def pauseaudio2():
@@ -319,9 +315,6 @@ def audioplayer():
         mixer.music.pause()
         pausebutton1.pack_forget()
         pausebutton2.pack()
-
-    def change_vol():
-        mixer.music.set_volume(vol.get())
 
     Label(ap, text="\n").pack()
 
