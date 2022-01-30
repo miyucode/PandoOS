@@ -8,3 +8,4 @@ Modules que vous avez besoin:
 	- tkinterweb
 	- cv2
 	- platform
+	- shutil
