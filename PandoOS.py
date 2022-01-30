@@ -7,7 +7,6 @@ from subprocess import Popen, PIPE
 from tkvideo import *
 from pygame import mixer
 from tkinterweb import HtmlFrame
-import mp3play
 import tkinter as tk
 import numpy as np
 import cv2
@@ -559,11 +558,10 @@ def fileexplorer():
 
     def createFolder():
         name = Name.get()
-        fe.destroy()
         if name == "default" or name == "":
             mb.showerror("PandoOS","Veuillez donner un nom correct à votre dossier !")
-            yes()
         else:
+            fe.destroy()
             def yes():
                 def requestfolder():
                     folder = nameoffolder.get()
