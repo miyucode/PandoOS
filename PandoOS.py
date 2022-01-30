@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import filedialog
-from tkinter.ttk import *
 from time import *
 from time import strftime
 from subprocess import Popen, PIPE
@@ -42,9 +41,39 @@ def calculator():
     calculatorapp.geometry("500x500")
     calculatorapp.resizable(False, False)
 
+    def getResultMultiplicationfunc():
+        addition.pack()
+        soustraction.pack()
+        multiplication.pack()
+        text1.pack_forget()
+        operation1.pack_forget()
+        text2.pack_forget()
+        text3.pack_forget()
+        operation2.pack_forget()
+        getResultAddition.pack_forget()
+        getResultSoustraction.pack_forget()
+        getResultMultiplication.pack_forget()
+        operationget1 = int(operation1.get())
+        operationget2 = int(operation2.get())
+        operation = str(operationget1 * operationget2)
+
+        # print(operationget1 + " - " + operationget2)
+        resultofmultiplicationwindow = Toplevel()
+        resultofmultiplicationwindow.geometry("300x100")
+        resultofmultiplicationwindow.title("Calculatrice - Résultat")
+        resultofmultiplicationwindow.iconbitmap("img/calculator/calculator-icon.ico")
+        resultofmultiplicationwindow.resizable(False, False)
+
+        result = Label(resultofmultiplicationwindow, text="Le résultat est: " + operation)
+        result.pack()
+
+        continue1 = Button(resultofmultiplicationwindow, text="Fermer", command=resultofmultiplicationwindow.destroy)
+        continue1.pack()
+
     def getResultAdditionfunc():
         addition.pack()
         soustraction.pack()
+        multiplication.pack()
         text1.pack_forget()
         operation1.pack_forget()
         text2.pack_forget()
@@ -72,6 +101,7 @@ def calculator():
     def getResultSoustractionfunc():
         addition.pack()
         soustraction.pack()
+        multiplication.pack()
         text1.pack_forget()
         operation1.pack_forget()
         text2.pack_forget()
@@ -95,7 +125,21 @@ def calculator():
         continue1 = Button(resultofsoustractionwindow, text="Fermer", command=resultofsoustractionwindow.destroy)
         continue1.pack()
 
+    def multiplicationfunc():
+        multiplication.pack_forget()
+        addition.pack_forget()
+        soustraction.pack_forget()
+        text1.pack()
+        operation1.pack()
+        text2.pack()
+        text3.pack()
+        operation2.pack()
+        getResultAddition.pack_forget()
+        getResultSoustraction.pack_forget()
+        getResultMultiplication.pack()
+
     def soustractfunc():
+        multiplication.pack_forget()
         addition.pack_forget()
         soustraction.pack_forget()
         text1.pack()
@@ -105,8 +149,10 @@ def calculator():
         operation2.pack()
         getResultAddition.pack_forget()
         getResultSoustraction.pack()
+        getResultMultiplication.pack_forget()
 
     def additionfunc():
+        multiplication.pack_forget()
         addition.pack_forget()
         soustraction.pack_forget()
         text1.pack()
@@ -114,8 +160,9 @@ def calculator():
         text2.pack()
         text3.pack()
         operation2.pack()
-        getResultSoustraction.pack_forget()
         getResultAddition.pack()
+        getResultSoustraction.pack_forget()
+        getResultMultiplication.pack_forget()
 
     text1 = Label(calculatorapp, text="Entrez le premier chiffre:")
     operation1 = Entry(calculatorapp)
@@ -134,12 +181,17 @@ def calculator():
     getResultAddition.pack_forget()
     getResultSoustraction = Button(calculatorapp, text="Voir le résultat", command=getResultSoustractionfunc)
     getResultSoustraction.pack_forget()
+    getResultMultiplication = Button(calculatorapp, text="Voir le résultat", command=getResultMultiplicationfunc)
+    getResultMultiplication.pack_forget()
 
     addition = Button(calculatorapp, text="Additioner 2 nombres.", command=additionfunc)
     addition.pack()
 
     soustraction = Button(calculatorapp, text="Soustraire 2 nombres.", command=soustractfunc)
     soustraction.pack()
+
+    multiplication = Button(calculatorapp, text="Multiplier 2 nombres.", command=multiplicationfunc)
+    multiplication.pack()
 
 def pandoweb():
     pandowebapp = Toplevel()
@@ -804,7 +856,7 @@ def settings():
         latestversion = Label(systeminformationswindow, text="Dernière version de PandoOS: 4.0_official")
         latestversion.pack()
 
-        build = Label(systeminformationswindow, text="Build: build_4550")
+        build = Label(systeminformationswindow, text="Build: build_4500")
         build.pack()
 
         cpuinfos = Label(systeminformationswindow, text=f"Processeur: Non reconnu.")
