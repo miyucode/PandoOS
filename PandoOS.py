@@ -347,7 +347,6 @@ def videoplayer():
         file = filedialog.askopenfilename(defaultextension='*.mp4*', title="Sélectionner un fichier vidéo", initialdir="C:/Users/", filetypes=[('Fichiers MP4', '*.mp4*'), ("Fichier GIF", "*.gif*")])
         if file == "":
             mb.showerror("PandoOS","Vous avez sélectionner aucun fichier vidéo à lancer !")
-            vpoutput.destroy()
             readvideo()
         else:
             mb.showinfo('PandoOS','Vous avez sélectionner avec succès le fichier vidéo nommé "' + file + '" !')
