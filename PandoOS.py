@@ -660,9 +660,13 @@ def fileexplorer():
                 mb.showerror("PandoOS","Veuillez mettre le nom d'un dossier correct !")
                 deletefolder()
             else:
-                shutil.rmtree("root/Desktop/" + NameOfFolder)
-                mb.showinfo("PandoOS","Vous avez supprimé le dossier " + NameOfFolder + " avec succès !")
-                fileexplorer()
+                if not os.path.isdir("root/Desktop/" + NameOfFolder):
+                    mb.showerror("PandoOS","Ce dossier n'existe pas, veuillez réesayer.")
+                    fileexplorer()
+                else:
+                    shutil.rmtree("root/Desktop/" + NameOfFolder)
+                    mb.showinfo("PandoOS","Vous avez supprimé le dossier " + NameOfFolder + " avec succès !")
+                    fileexplorer()
 
         fe.destroy()
         confirmation4 = Toplevel()
