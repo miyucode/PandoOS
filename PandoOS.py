@@ -637,18 +637,16 @@ def codeeditor():
 def clock():
     clockapp = Toplevel()
     clockapp.title("PandoOS - Horloge")
-    clockapp.maxsize(450, 120)
-    clockapp.minsize(450, 120)
-    clockapp.geometry("300x200")
+    clockapp.geometry("600x300")
     clockapp.iconbitmap("img/clock.ico")
 
     def time():
         string=strftime('%H:%M:%S')
         label.config(text=string)
-        label.after(1000,time)
+        label.after(1000, time)
 
     label = Label(clockapp, font=('arial', 80))
-    label.pack(anchor='center')
+    label.pack(anchor='center', fill="both", expand=True)
     time()
 
 def fileexplorer():
