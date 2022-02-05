@@ -647,7 +647,7 @@ def clock():
         label.after(1000, time)
 
     label = Label(clockapp, font=('arial', 80))
-    label.pack(anchor='center', fill="both", expand=True)
+    label.pack(anchor='center', expand=True)
     time()
 
 def fileexplorer():
