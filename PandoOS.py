@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import filedialog
+from tkinter.ttk import *
 from time import *
 from time import strftime
 from subprocess import Popen, PIPE
