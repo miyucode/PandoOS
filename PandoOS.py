@@ -661,7 +661,7 @@ def fileexplorer():
             else:
                 if not os.path.isdir("root/Desktop/" + NameOfFolder):
                     mb.showerror("PandoOS","Ce dossier n'existe pas, veuillez réesayer.")
-                    fileexplorer()
+                    continue2()
                 else:
                     shutil.rmtree("root/Desktop/" + NameOfFolder)
                     mb.showinfo("PandoOS","Vous avez supprimé le dossier " + NameOfFolder + " avec succès !")
