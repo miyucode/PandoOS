@@ -404,6 +404,7 @@ def audioplayer():
 
     def readaudio():
 
+        startaudio.pack_forget()
         mixer.init()
     
         def raudio():
@@ -661,7 +662,7 @@ def fileexplorer():
             else:
                 if not os.path.isdir("root/Desktop/" + NameOfFolder):
                     mb.showerror("PandoOS","Ce dossier n'existe pas, veuillez réesayer.")
-                    continue2()
+                    fileexplorer()
                 else:
                     shutil.rmtree("root/Desktop/" + NameOfFolder)
                     mb.showinfo("PandoOS","Vous avez supprimé le dossier " + NameOfFolder + " avec succès !")
