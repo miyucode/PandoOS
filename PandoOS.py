@@ -386,11 +386,13 @@ def camerarecorder():
     Button(camerarecorderwindow, text="Enregistrer votre caméra", command=continuer1).pack()
 
 def audioplayer():
+
     ap = Toplevel()
     ap.title("Lecteur audio")
-    ap.geometry("500x200")
+    ap.geometry("500x400")
     ap.resizable(False, False)
     ap.iconbitmap("img/audioplayer.ico")
+    ap.protocol("WM_DELETE_WINDOW", lambda: [mixer.music.stop(), ap.destroy()])
 
     def stopaudio():
         mixer.music.stop()
@@ -403,7 +405,6 @@ def audioplayer():
         pausebutton2.pack_forget()
 
     def readaudio():
-
         startaudio.pack_forget()
         mixer.init()
     
@@ -467,7 +468,7 @@ def videoplayer():
         file = filedialog.askopenfilename(defaultextension='*.mp4*', title="Sélectionner un fichier vidéo", initialdir="C:/Users/", filetypes=[('Fichiers MP4', '*.mp4*'), ("Fichier GIF", "*.gif*")])
         if file == "":
             mb.showerror("PandoOS","Vous avez sélectionner aucun fichier vidéo à lancer !")
-            readvideo()
+            videoplayer()
         else:
             mb.showinfo('PandoOS','Vous avez sélectionner avec succès le fichier vidéo nommé "' + file + '" !')
         vpoutput = Toplevel()
@@ -601,7 +602,7 @@ def codeeditor():
                 m.title("PandoCode - Information")
                 m.geometry("300x100")
                 m.resizable(False, False)
-                m.iconbitmap("img/info3.ico")
+                m.ipandconbitmap("img/info3.ico")
 
                 Label(m, text="Entrez le nom du dossier:").pack()
 
