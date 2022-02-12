@@ -37,6 +37,75 @@ PandoOS.config(bg="white")
 
 # App(s) and Tool(s) -->
 
+def appmaker():
+    appmaker1 = Toplevel()
+    appmaker1.title("AppMaker - Accueil")
+    appmaker1.geometry("1000x500")
+    appmaker1.resizable(False, False)
+    appmaker1.iconbitmap("img/appmaker/logo.ico")
+
+    def makecommandEvent():
+        def confirmToStep2AppMakerEvent():
+            nameofnewappGet = nameofapp.get()
+            appsMenu.add_command(label=f"{nameofnewappGet}")
+            c1.destroy()
+            # c2 = Toplevel()
+            # c2.title("AppMaker - Étape 2")
+            # c2.geometry("1000x500")
+            # c2.resizable(False, False)
+            # c2.iconbitmap("img/appmaker/logo.ico")
+            # c2.protocol("WM_DELETE_WINDOW", lambda: [c2.destroy(), appmaker()])
+            mb.showinfo("AppMaker","L'application est actuellement en développement, vous ne pouvez pas créer de réelle commande. Désolé pour la gêne occasionée.")
+
+        appmaker1.destroy()
+        c1 = Toplevel()
+        c1.title("AppMaker - Étape 1")
+        c1.geometry("1000x500")
+        c1.resizable(False, False)
+        c1.iconbitmap("img/appmaker/logo.ico")
+        c1.protocol("WM_DELETE_WINDOW", lambda: [c2.destroy(), appmaker()])
+
+        Label(c1, text="\n").pack()
+        Label(c1, text="Entrez le nom de votre application.").pack()
+        nameofapp = Entry(c1)
+        nameofapp.pack()
+
+        confirmToStep2AppMaker = Button(c1, text="Continuer", command=confirmToStep2AppMakerEvent)
+        confirmToStep2AppMaker.pack()
+
+    def deletecommandEvent():
+        def confirmDeleteCommandEvent():
+            nameofappGet = nameofapp.get()
+            c1.destroy()
+            mb.showwarning("AppMaker","Si vous avez rentrer le nom d'une application par défaut proposé par PandoOS, redémarrez PandoOS pour que l'application revient.")
+            appsMenu.delete(nameofappGet)
+            mb.showinfo("AppMaker",f"Vous avez supprimé l'objet {nameofappGet} des application !")
+            appmaker()
+
+        appmaker1.destroy()
+        c1 = Toplevel()
+        c1.title("AppMaker - Étape 1")
+        c1.geometry("1000x500")
+        c1.resizable(False, False)
+        c1.iconbitmap("img/appmaker/logo.ico")
+        c1.protocol("WM_DELETE_WINDOW", lambda: [c2.destroy(), appmaker()])
+
+        Label(c1, text="\n").pack()
+        Label(c1, text="Entrez le nom d'une application existante que vous souhaitez supprimer.").pack()
+        nameofapp = Entry(c1)
+        nameofapp.pack()
+
+        confirmDeleteCommand = Button(c1, text="Supprimer la commande", command=confirmDeleteCommandEvent)
+        confirmDeleteCommand.pack()
+
+    Label(appmaker1, text="\n").pack()
+    makecommandButton = Button(appmaker1, text="Créer une nouvelle application", command=makecommandEvent)
+    deletecommandButton = Button(appmaker1, text="Supprimer une application existante", command=deletecommandEvent)
+    Label(appmaker1, text="\n").pack()
+
+    makecommandButton.pack()
+    deletecommandButton.pack()
+
 def calculator():
     calculatorapp = Toplevel()
     calculatorapp.title("Calculatrice - Accueil")
@@ -1041,6 +1110,7 @@ appsMenu.add_command(label="Lecteur audio", command=audioplayer)
 appsMenu.add_command(label="Enregistreur de caméra", command=camerarecorder)
 appsMenu.add_command(label="PandoWeb", command=pandoweb)
 appsMenu.add_command(label="Calculatrice", command=calculator)
+appsMenu.add_command(label="AppMaker", command=appmaker)
 
 # Tools Menu
 
