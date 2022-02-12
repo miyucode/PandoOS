@@ -992,14 +992,6 @@ def shutdown():
 
 # --> 
 
-def cbg():
-    PandoOS.config(bg="gray")
-
-def cbd():
-    PandoOS.config(bg="white")
-
-# <-- end
-
 def settings():
     settingsGui = Toplevel()
     settingsGui.title("PandoOS - Paramètres")
@@ -1015,23 +1007,12 @@ def settings():
     def cbtogray():
         PandoOS.config(bg="gray")
 
-    def closepersonalizationoptionswindow():
-        settings()
-
-    def closesysteminformationswindow():
-        settings()
-
-    def closescreenoptionswindow():
-        settings()
-
     def systeminformationsevent():
-        settingsGui.destroy()
         systeminformationswindow = Toplevel()
         systeminformationswindow.geometry("500x500")
         systeminformationswindow.resizable(False, False)
         systeminformationswindow.title("PandoOS - Informations système")
         systeminformationswindow.iconbitmap("img/info3.ico")
-        systeminformationswindow.protocol("WM_DELETE_WINDOW", lambda: [systeminformationswindow.destroy(), closesysteminformationswindow()])
 
         system_ = platform.uname()
 
@@ -1050,11 +1031,7 @@ def settings():
         cpuinfos = Label(systeminformationswindow, text=f"Processeur: Non reconnu.")
         cpuinfos.pack()
 
-        closebtn = Button(systeminformationswindow, text="Revenir au menu de sélection", command=lambda: [systeminformationswindow.destroy(), closesysteminformationswindow()])
-        closebtn.pack(side="bottom")
-
     def personalizationevent():
-        settingsGui.destroy()
         personalizationoptionswindow = Toplevel()
         personalizationoptionswindow.geometry("950x500")
         personalizationoptionswindow.resizable(False, False)
@@ -1069,9 +1046,6 @@ def settings():
 
         changebackgroundbtn1.pack()
         changebackgroundbtn2.pack()
-
-        closebtn = Button(personalizationoptionswindow, text="Revenir au menu de sélection", command=lambda: [personalizationoptionswindow.destroy(), closepersonalizationoptionswindow()])
-        closebtn.pack(side="bottom")
 
     # --> UI
 
@@ -1088,8 +1062,6 @@ def settings():
     personalizationoptions.add_command(label="Personaliser PandoOS", command=personalizationevent)
     systeminformations.add_command(label="Informations système", command=systeminformationsevent)
     # screenoptions.add_command(label="Paramètres d'affichage", command=screenoptionsevent)
-
-    toolbar1.add_cascade(label="Affichage", menu=screenoptions)
     toolbar1.add_cascade(label="Infos systèmes", menu=systeminformations)
     toolbar1.add_cascade(label="Personalisation", menu=personalizationoptions)
 
