@@ -10,4 +10,3 @@ Modules que vous avez besoin:
 	- platform
 	- shutil
 	- tkinter.ttk
-	- tkinter.ImageTk
