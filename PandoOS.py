@@ -46,16 +46,58 @@ def appmaker():
 
     def makecommandEvent():
         def confirmToStep2AppMakerEvent():
+            def confirmToStep3AppMakerEvent():
+                a.pack_forget()
+                selectimage.pack_forget()
+                selectimage_ = filedialog.askopenfilename(initialdir = "/", title="Choissisez une image",filetype=(("Fichier .ICO","*.ico"),("Fichier .PNG","*.png")))
+                if selectimage_ == "":
+                    mb.showerror("AppMaker","Vous n'avez sélectionné aucun fichier .ICO ou .PNG ! Vous obligé de revenir au début, désolé pour cette gêne occasioné, ce bug sera résolu bientôt.")
+                    a.pack()
+                    selectimage.pack()
+                else:
+                    def cancelSelectImageEvent():
+                        a2.pack_forget()
+                        img.pack_forget()
+                        cancel.pack_forget()
+                        a.pack()
+                        selectimage.pack()
+                        confirmToStep3AppMaker.pack_forget()
+
+                    a2 = Label(c2, text="Logo choisi:")
+                    a2.pack()
+                    showimage = PhotoImage(file=selectimage_)
+                    img = Label(c2, image=showimage)
+                    img.pack()
+                    confirmToStep3AppMaker.pack()
+                    cancel = Button(c2, text="Annuler", command=cancelSelectImageEvent)
+                    cancel.pack()
+
             nameofnewappGet = nameofapp.get()
-            appsMenu.add_command(label=f"{nameofnewappGet}")
-            c1.destroy()
-            # c2 = Toplevel()
-            # c2.title("AppMaker - Étape 2")
-            # c2.geometry("1000x500")
-            # c2.resizable(False, False)
-            # c2.iconbitmap("img/appmaker/logo.ico")
-            # c2.protocol("WM_DELETE_WINDOW", lambda: [c2.destroy(), appmaker()])
-            mb.showinfo("AppMaker","L'application est actuellement en développement, vous ne pouvez pas créer de réelle commande. Désolé pour la gêne occasionée.")
+            if nameofnewappGet == "":
+                makecommandEvent()
+                mb.showerror("AppMaker","Merci de rentrer un nom d'application correct !")
+            else:
+                # appsMenu.add_command(label=f"{nameofnewappGet}")
+                c1.destroy()
+                c2 = Toplevel()
+                c2.title("AppMaker - Étape 2")
+                c2.geometry("1000x500")
+                c2.minsize(1000, 500)
+                c2.resizable(False, True)
+                c2.iconbitmap("img/appmaker/logo.ico")
+                c2.protocol("WM_DELETE_WINDOW", lambda: [c2.destroy(), appmaker()])
+
+                Label(c2, text="\n").pack()
+                a = Label(c2, text="Sélectionner un logo pour votre application.")
+                a.pack()
+
+                selectimage = Button(c2, text="Choisir une image", command=confirmToStep3AppMakerEvent)
+                selectimage.pack()
+
+                confirmToStep3AppMaker = Button(c2, text="Continuer")
+                confirmToStep3AppMaker.pack_forget()
+
+            # mb.showinfo("AppMaker","L'application est actuellement en développement, vous ne pouvez pas créer de réelle commande. Désolé pour la gêne occasionée.")
 
         appmaker1.destroy()
         c1 = Toplevel()
@@ -63,7 +105,7 @@ def appmaker():
         c1.geometry("1000x500")
         c1.resizable(False, False)
         c1.iconbitmap("img/appmaker/logo.ico")
-        c1.protocol("WM_DELETE_WINDOW", lambda: [c2.destroy(), appmaker()])
+        c1.protocol("WM_DELETE_WINDOW", lambda: [c1.destroy(), appmaker()])
 
         Label(c1, text="\n").pack()
         Label(c1, text="Entrez le nom de votre application.").pack()
@@ -995,9 +1037,22 @@ def shutdown():
 def settings():
     settingsGui = Toplevel()
     settingsGui.title("PandoOS - Paramètres")
-    settingsGui.geometry("950x500")
+    settingsGui.geometry("400x300")
     settingsGui.iconbitmap("img/settings.ico")
-    settingsGui.resizable(False, False)
+    settingsGui.resizable(True, True)
+    settingsGui.minsize(400, 280)
+
+    menu1 = Notebook(settingsGui)
+    menu1.pack(anchor="center", fill="both", expand=True)
+
+    sysinfoframe = Frame(menu1, width=400, height=280)
+    personalizationframe = Frame(menu1, width=400, height=280)
+
+    sysinfoframe.pack(fill='both', expand=True)
+    personalizationframe.pack(fill='both', expand=True)
+
+    menu1.add(sysinfoframe, text='Infos système')
+    menu1.add(personalizationframe, text='Personalisation')
 
     # --> Personalization Event
 
@@ -1007,65 +1062,36 @@ def settings():
     def cbtogray():
         PandoOS.config(bg="gray")
 
-    def systeminformationsevent():
-        systeminformationswindow = Toplevel()
-        systeminformationswindow.geometry("500x500")
-        systeminformationswindow.resizable(False, False)
-        systeminformationswindow.title("PandoOS - Informations système")
-        systeminformationswindow.iconbitmap("img/info3.ico")
+    system_ = platform.uname()
 
-        system_ = platform.uname()
-
-        versionos = Label(systeminformationswindow, text="Version: PandoOS v5.0")
-        versionos.pack()
+    versionos = Label(sysinfoframe, text="Version: PandoOS v5.0")
+    versionos.pack()
         
-        author = Label(systeminformationswindow, text="Auteur: MiyuCode (https://github.com/miyucode/PandoOS)")
-        author.pack()
+    author = Label(sysinfoframe, text="Auteur: MiyuCode (https://github.com/miyucode/PandoOS)")
+    author.pack()
 
-        latestversion = Label(systeminformationswindow, text="Dernière version de PandoOS: 5.0_official")
-        latestversion.pack()
+    latestversion = Label(sysinfoframe, text="Dernière version de PandoOS: 5.0_official")
+    latestversion.pack()
 
-        build = Label(systeminformationswindow, text="Build: build_5000")
-        build.pack()
+    build = Label(sysinfoframe, text="Build: build_5000")
+    build.pack()
 
-        cpuinfos = Label(systeminformationswindow, text=f"Processeur: Non reconnu.")
-        cpuinfos.pack()
-
-    def personalizationevent():
-        personalizationoptionswindow = Toplevel()
-        personalizationoptionswindow.geometry("950x500")
-        personalizationoptionswindow.resizable(False, False)
-        personalizationoptionswindow.title("PandoOS - Personalisation système")
-        personalizationoptionswindow.config(bg="white")
-        personalizationoptionswindow.iconbitmap("img/info3.ico")
+    cpuinfos = Label(sysinfoframe, text=f"Processeur: Non reconnu.")
+    cpuinfos.pack()
         
-        changebackgroundtext = Label(personalizationoptionswindow, text="Changez la couleur du fond d'écran")
-        changebackgroundtext.pack()
-        changebackgroundbtn1 = Button(personalizationoptionswindow, text="Mettre en blanc (Par défaut)", command=cbtowhite)
-        changebackgroundbtn2 = Button(personalizationoptionswindow, text="Mettre en gris", command=cbtogray)
+    changebackgroundtext = Label(personalizationframe, text="Changez la couleur du fond d'écran")
+    changebackgroundtext.pack()
+    changebackgroundbtn1 = Button(personalizationframe, text="Mettre en blanc (Par défaut)", command=cbtowhite)
+    changebackgroundbtn2 = Button(personalizationframe, text="Mettre en gris", command=cbtogray)
 
-        changebackgroundbtn1.pack()
-        changebackgroundbtn2.pack()
+    changebackgroundbtn1.pack()
+    changebackgroundbtn2.pack()
 
-    # --> UI
+    settingsGui.columnconfigure(0, weight=1)
+    settingsGui.rowconfigure(0, weight=1)
 
-    l = 0
-
-    # --> UI Config
-
-    toolbar1 = Menu(settingsGui)
-
-    screenoptions = Menu(toolbar1, tearoff=0)
-    systeminformations = Menu(toolbar1, tearoff=0)
-    personalizationoptions = Menu(toolbar1, tearoff=0)
-
-    personalizationoptions.add_command(label="Personaliser PandoOS", command=personalizationevent)
-    systeminformations.add_command(label="Informations système", command=systeminformationsevent)
-    # screenoptions.add_command(label="Paramètres d'affichage", command=screenoptionsevent)
-    toolbar1.add_cascade(label="Infos systèmes", menu=systeminformations)
-    toolbar1.add_cascade(label="Personalisation", menu=personalizationoptions)
-
-    settingsGui.config(bg="white", menu=toolbar1)
+    sg = Sizegrip(settingsGui)
+    sg.pack()
 
 # Toolbar
 
