@@ -4,8 +4,7 @@
 - Then, open a terminal in it and install the modules (The modules that you need to boot up PandoOS are in **requirements.txt**)
 
 ````txt
-Modules that you need to use PandoOS
-:
+Modules to install to use PandoOS:
 
 	- Tkinter
 	- PyGame
@@ -17,6 +16,7 @@ Modules that you need to use PandoOS
 	- platform
 	- shutil
 	- tkinter.ttk
+
 ````
 
 Thanks for using **PandoOS** ! ❤
