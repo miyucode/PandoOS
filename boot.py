@@ -13,17 +13,14 @@ root.bind("<Escape>", lambda e: root.destroy())
 root.resizable(False, False)
 root.withdraw()
 
-version = '5.0'
-
 # Boot (start)
 
 def boot():
     os.system('cls')
-    mb.showinfo("PandoOS","Boot successful, press ENTER for continue.")
+    mb.showinfo("PandoOS","Démarrage effectué, appuyez sur ENTRER pour continuer.")
     # root.destroy()
     os.system('cls')
-    print("PandoOS> Boot...")
-    print(f"PandoOS> Latest version: {version}")
+    print("PandoOS> Lancement...")
     pandoos = "PandoOS.py"
     os.system(pandoos)
 
