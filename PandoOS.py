@@ -3,11 +3,11 @@ from tkinter import filedialog
 from tkinter.ttk import *
 from time import *
 from time import strftime
-from subprocess import Popen, PIPE
 from tkvideo import *
 from pygame import mixer
 from tkinterweb import HtmlFrame
 from tkinter import ttk
+from apps import snake
 import tkinter as tk
 import numpy as np
 import cv2
@@ -911,11 +911,11 @@ def restart():
 
 def shutdown():
     sleep(0.5)
-    mb.showinfo("PandoOS","Shutdown successful, press ENTER for continue.")
+    mb.showinfo("PandoOS","Arrêt réussi avec succès, appuyez sur ENTRER pour continuer.")
     os.system('cls')
-    print("PandoOS> Shutdown...")
+    print("PandoOS> Arrêt en cours...")
     sleep(0.5)
-    mb.showinfo('PandoOS','See you a next time !')
+    mb.showinfo('PandoOS','A bientôt !')
     PandoOS.destroy()
     sleep(1)
 
@@ -986,6 +986,10 @@ def settings():
 
 menu = Menu(PandoOS)
 
+# Game Menu
+
+gameMenu = Menu(menu, tearoff=0)
+
 # Apps Menu
 
 appsMenu = Menu(menu, tearoff=0)
@@ -997,7 +1001,6 @@ appsMenu.add_command(label="Lecteur audio", command=audioplayer)
 appsMenu.add_command(label="Enregistreur de caméra", command=camerarecorder)
 appsMenu.add_command(label="PandoWeb", command=pandoweb)
 appsMenu.add_command(label="Calculatrice", command=calculator)
-appsMenu.add_command(label="AppMaker", command=appmaker)
 
 # Tools Menu
 
@@ -1017,6 +1020,7 @@ Start.add_command(label="Paramètres", command=settings)
 menu.add_cascade(label="Démarrer", menu=Start)
 menu.add_cascade(label="Outils", menu=ToolsMenu)
 menu.add_cascade(label="Applications", menu=appsMenu)
+menu.add_cascade(label="Jeux", menu=gameMenu)
 
 # UI
 
