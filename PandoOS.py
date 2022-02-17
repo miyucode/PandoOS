@@ -7,7 +7,6 @@ from tkvideo import *
 from pygame import mixer
 from tkinterweb import HtmlFrame
 from tkinter import ttk
-from apps import snake
 import tkinter as tk
 import numpy as np
 import cv2
