@@ -49,9 +49,9 @@ def appmaker():
             def confirmToStep3AppMakerEvent():
                 a.pack_forget()
                 selectimage.pack_forget()
-                selectimage_ = filedialog.askopenfilename(initialdir = "/", title="Choissisez une image",filetype=(("Fichier .ICO","*.ico"),("Fichier .PNG","*.png")))
-                if selectimage_ == "":
-                    mb.showerror("AppMaker","Vous n'avez sélectionné aucun fichier .ICO ou .PNG ! Vous obligé de revenir au début, désolé pour cette gêne occasioné, ce bug sera résolu bientôt.")
+                selectimageFile = filedialog.askopenfilename(initialdir = "/", title="Choissisez une image",filetype=(("Fichier .PNG","*.png"),("Fichier .ICO","*.ico")))
+                if selectimageFile == "":
+                    mb.showerror("AppMaker","Vous n'avez sélectionné aucun fichier .ICO ou .PNG !")
                     a.pack()
                     selectimage.pack()
                 else:
@@ -65,8 +65,10 @@ def appmaker():
 
                     a2 = Label(c2, text="Logo choisi:")
                     a2.pack()
-                    showimage = PhotoImage(file=selectimage_)
+                    path = selectimageFile
+                    showimage = PhotoImage(file=path + "")
                     img = Label(c2, image=showimage)
+                    img.image = showimage
                     img.pack()
                     confirmToStep3AppMaker.pack()
                     cancel = Button(c2, text="Annuler", command=cancelSelectImageEvent)
