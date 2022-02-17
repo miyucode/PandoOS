@@ -3,7 +3,6 @@ Modules que vous avez besoin:
 	- Tkinter
 	- PyGame
 	- Numpy
-	- subprocess
 	- tkvideo
 	- tkinterweb
 	- cv2
