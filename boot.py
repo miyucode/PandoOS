@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter.ttk import *
-import subprocess as sp
 import tkinter.messagebox as mb
 import os
 import random
