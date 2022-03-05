@@ -1,23 +1,7 @@
 ### Install PandoOS
 
 - Go in realease of the repository, install it and after, go in folder of PandoOS.
-- Then, open a terminal in it and install the modules (The modules that you need to boot up PandoOS are in **requirements.txt**)
-
-````txt
-Modules to install to use PandoOS:
-
-	- Tkinter
-	- PyGame
-	- Numpy
-	- subprocess
-	- tkvideo
-	- tkinterweb
-	- cv2
-	- platform
-	- shutil
-	- tkinter.ttk
-
-````
+- Then, open a terminal in it and install the modules by taping "**```py -m pip install -r requirements.txt```**"
 
 Thanks for using **PandoOS** ! ❤
 
