@@ -1,14 +1,7 @@
-tkinter
 pygame
 numpy
 tkvideo
 tkinterweb
 cv2
-platform
-shutil
-tkinter.ttk
-subprocess
-platform
 tkcalendar
-os
 requests
