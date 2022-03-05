@@ -10,6 +10,7 @@ from tkinterweb import HtmlFrame
 from tkinter import ttk
 import tkinter as tk
 import requests
+import sys
 import numpy as np
 import cv2
 import tkinter.messagebox as mb
@@ -1050,8 +1051,6 @@ gameMenu = Menu(menu, tearoff=0)
 
 appsMenu = Menu(menu, tearoff=0)
 appsMenu.add_command(label="Horloge", command=clock)
-appsMenu.add_command(label="PandoPad", command=notepad)
-appsMenu.add_command(label="PandoCode", command=codeeditor)
 appsMenu.add_command(label="Lecteur vidéo", command=videoplayer)
 appsMenu.add_command(label="Lecteur audio", command=audioplayer)
 appsMenu.add_command(label="Enregistreur de caméra", command=camerarecorder)
@@ -1064,6 +1063,8 @@ appsMenu.add_command(label="Météo", command=weather)
 
 ToolsMenu = Menu(menu, tearoff=0)
 ToolsMenu.add_command(label="Explorateur de fichiers", command=fileexplorer)
+ToolsMenu.add_command(label="PandoPad", command=notepad)
+ToolsMenu.add_command(label="PandoCode", command=codeeditor)
 
 # Start Menu
 
