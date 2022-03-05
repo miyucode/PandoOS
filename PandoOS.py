@@ -15,14 +15,6 @@ import os
 import platform
 import shutil
 
-# Folder verification
-
-try:
-    os.mkdir("root/Desktop")
-except FileExistsError:
-    # if "Desktop/" already exist
-    pass
-
 # UI Config
 
 PandoOS = Tk()
@@ -385,13 +377,17 @@ def camerarecorder():
     Button(camerarecorderwindow, text="Enregistrer votre caméra", command=continuer1).pack()
 
 def audioplayer():
+    def stopmusic():
+        try:
+            mixer.music.stop()
+        ap.destroy()
 
     ap = Toplevel()
     ap.title("Lecteur audio")
     ap.geometry("500x400")
     ap.resizable(False, False)
     ap.iconbitmap("img/audioplayer.ico")
-    ap.protocol("WM_DELETE_WINDOW", lambda: [mixer.music.stop(), ap.destroy()])
+    ap.protocol("WM_DELETE_WINDOW", lambda: stopmusic())
 
     def stopaudio():
         mixer.music.stop()
