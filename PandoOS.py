@@ -3,6 +3,7 @@ from tkinter import filedialog
 from tkinter.ttk import *
 from time import *
 from time import strftime
+from tkcalendar import *
 from tkvideo import *
 from pygame import mixer
 from tkinterweb import HtmlFrame
@@ -27,6 +28,26 @@ PandoOS.bind('<Escape>', lambda e: shutdown())
 PandoOS.config(bg="white")
 
 # App(s) and Tool(s) -->
+
+def calendar():
+    calendarapp = Toplevel()
+    calendarapp.title("Calendrier - Accueil")
+    calendarapp.geometry("300x350")
+    calendarapp.minsize(300, 350)
+    calendarapp.maxsize(350, 400)
+    calendarapp.iconbitmap("img/calendaricon.ico")
+
+    cal = Calendar(calendarapp, selectmode="day", year=2022, month=1, day=1)
+    cal.pack(pady=20)
+
+    def get_date():
+        label.config(text=cal.get_date())
+
+    button = Button(calendarapp, text="Sélectionner la date", command=get_date)
+    button.pack(pady=20)
+
+    label = Label(calendarapp, text="")
+    label.pack(pady=20)
 
 def calculator():
     calculatorapp = Toplevel()
@@ -998,6 +1019,7 @@ appsMenu.add_command(label="Lecteur audio", command=audioplayer)
 appsMenu.add_command(label="Enregistreur de caméra", command=camerarecorder)
 appsMenu.add_command(label="PandoWeb", command=pandoweb)
 appsMenu.add_command(label="Calculatrice", command=calculator)
+appsMenu.add_command(label="Calendrier", command=calendar)
 
 # Tools Menu
 
