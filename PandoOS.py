@@ -380,6 +380,8 @@ def audioplayer():
     def stopmusic():
         try:
             mixer.music.stop()
+        except:
+            l = 1
         ap.destroy()
 
     ap = Toplevel()
@@ -391,7 +393,7 @@ def audioplayer():
 
     def stopaudio():
         mixer.music.stop()
-        music.configure(text="??? - Aucune musique en cours.")
+        music.configure(text="... - Aucune musique en cours.")
         music.pack_forget()
         stopbutton.pack_forget()
         ap.title("Lecteur audio")
