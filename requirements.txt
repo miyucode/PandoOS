@@ -2,6 +2,6 @@ pygame
 numpy
 tkvideo
 tkinterweb
-cv2
+opencv-python
 tkcalendar
 requests
