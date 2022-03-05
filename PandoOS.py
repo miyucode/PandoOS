@@ -9,6 +9,7 @@ from pygame import mixer
 from tkinterweb import HtmlFrame
 from tkinter import ttk
 import tkinter as tk
+import requests
 import numpy as np
 import cv2
 import tkinter.messagebox as mb
@@ -28,6 +29,43 @@ PandoOS.bind('<Escape>', lambda e: shutdown())
 PandoOS.config(bg="white")
 
 # App(s) and Tool(s) -->
+
+def weather():
+    def getWeather(canvas):
+        city = namecity.get()
+        api = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=06c921750b9a82d8f5d1294e1586276f"
+
+        json_data = requests.get(api).json()
+        condition = json_data['weather'][0]['main']
+        temp = int(json_data['main']['temp'] - 273.15)
+        min_temp = int(json_data['main']['temp_min'] - 273.15)
+        max_temp = int(json_data['main']['temp_max'] - 273.15)
+        pressure = json_data['main']['pressure']
+        humidity = json_data['main']['humidity']
+        wind = json_data['wind']['speed']
+        final_info = condition + "\n" + str(temp) + "°C"
+        final_data = "\n" + "Température minimum: " + str(min_temp) + "°C" + "\n" + "Température maximal: " + str(max_temp) + "°C" + "\n" + "Pression: " + str(pressure) + "\n" + "Humidité: " + str(humidity) + "\n"
+        label1.config(text=final_info)
+        label2.config(text=final_data)
+
+    weatherapp = Toplevel()
+    weatherapp.title("Météo - Accueil")
+    weatherapp.geometry("600x500")
+    weatherapp.resizable(False, False)
+    weatherapp.iconbitmap("img/weathericon.ico")
+
+    f = ("poppins", 15, "bold")
+    t = ("poppins", 35, "bold")
+
+    namecity = Entry(weatherapp, justify='center', width=20, font=t)
+    namecity.pack(pady=20)
+    namecity.focus()
+    namecity.bind('<Return>', getWeather)
+
+    label1 = Label(weatherapp, font=t)
+    label1.pack()
+    label2 = Label(weatherapp, font=f)
+    label2.pack()
 
 def calendar():
     calendarapp = Toplevel()
@@ -1020,6 +1058,7 @@ appsMenu.add_command(label="Enregistreur de caméra", command=camerarecorder)
 appsMenu.add_command(label="PandoWeb", command=pandoweb)
 appsMenu.add_command(label="Calculatrice", command=calculator)
 appsMenu.add_command(label="Calendrier", command=calendar)
+appsMenu.add_command(label="Météo", command=weather)
 
 # Tools Menu
 
